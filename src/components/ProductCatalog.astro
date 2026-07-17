@@ -4,9 +4,9 @@ import type { Locale } from '../lib/site';
 const { locale = 'zh' } = Astro.props as { locale?: Locale };
 const isZh = locale === 'zh';
 const labels = isZh ? {
-  eyebrow: 'PRODUCT CATALOG', title: '商品目录', intro: '按明确主题筛选，点击任一商品可查看其特点并发起批发或定制咨询。', all: '全部商品', search: '搜索商品名称、主题或特点', details: '查看特点', inquiry: '询盘此商品', features: '产品特点', source: '图片来自当前淘宝店铺商品页截图。', emailSubject: 'DARK CASTLE 商品咨询'
+  eyebrow: 'PRODUCT CATALOG', title: '商品目录', intro: '按明确主题筛选，点击任一商品可查看其特点、真实商品图集并发起批发或定制咨询。', all: '全部商品', search: '搜索商品名称、主题或特点', details: '查看特点', inquiry: '询盘此商品', features: '产品特点', source: '全部图片由店主提供；规格、重量、包装与起订量将在下一次资料同步后补充。', emailSubject: 'DARK CASTLE 商品咨询'
 } : {
-  eyebrow: 'PRODUCT CATALOG', title: 'Product catalog', intro: 'Filter by a precise theme. Open any product to see its key features and start a wholesale or custom inquiry.', all: 'All products', search: 'Search name, theme, or feature', details: 'View details', inquiry: 'Inquire about this item', features: 'Key features', source: 'Images are sourced from the current Taobao store overview screenshot.', emailSubject: 'DARK CASTLE product inquiry'
+  eyebrow: 'PRODUCT CATALOG', title: 'Product catalog', intro: 'Filter by a precise theme. Open any product to see key features, a real product gallery, and start a wholesale or custom inquiry.', all: 'All products', search: 'Search name, theme, or feature', details: 'View details', inquiry: 'Inquire about this item', features: 'Key features', source: 'All images were supplied by the store owner. Specifications, packaging, and MOQ will be added with the next data sync.', emailSubject: 'DARK CASTLE product inquiry'
 };
 const name = (product: Product) => isZh ? product.nameZh : product.nameEn;
 const short = (product: Product) => isZh ? product.shortZh : product.shortEn;
@@ -15,9 +15,9 @@ const features = (product: Product) => isZh ? product.featuresZh : product.featu
 <section class="product-catalog" aria-labelledby="catalog-title">
   <div class="catalog-top"><div><p class="eyebrow">{labels.eyebrow}</p><h1 id="catalog-title">{labels.title}</h1></div><p>{labels.intro}</p></div>
   <div class="catalog-controls"><div class="filter-group" aria-label={isZh ? '商品分类' : 'Product categories'}><button class="filter-button is-active" data-filter="all">{labels.all}<span>{products.length}</span></button>{Object.entries(productCategories).map(([key, category]) => <button class="filter-button" data-filter={key}>{isZh ? category.zh : category.en}<span>{products.filter((product) => product.category === key).length}</span></button>)}</div><label class="catalog-search"><span class="sr-only">{labels.search}</span><input type="search" placeholder={labels.search} data-search /></label></div>
-  <div class="product-grid">{products.map((product) => <article class="product-card" data-product-card data-category={product.category} data-search-text={`${product.nameZh} ${product.nameEn} ${product.shortZh} ${product.shortEn} ${product.featuresZh.join(' ')} ${product.featuresEn.join(' ')}`.toLowerCase()}><button class="product-image" type="button" style={`--crop:${product.crop}`} data-open-product data-name={name(product)} data-sku={product.sku} data-description={short(product)} data-features={JSON.stringify(features(product))}><span>{labels.details} →</span></button><div class="product-card-copy"><p class="product-sku">{product.sku}</p><h2>{name(product)}</h2><p>{short(product)}</p><div class="product-tags">{features(product).slice(0, 2).map((feature) => <span>{feature}</span>)}</div><button class="product-link" type="button" data-open-product data-name={name(product)} data-sku={product.sku} data-description={short(product)} data-features={JSON.stringify(features(product))}>{labels.details} <span>→</span></button></div></article>)}</div>
+  <div class="product-grid">{products.map((product) => <article class="product-card" data-product-card data-category={product.category} data-search-text={`${product.nameZh} ${product.nameEn} ${product.shortZh} ${product.shortEn} ${product.featuresZh.join(' ')} ${product.featuresEn.join(' ')}`.toLowerCase()}><button class="product-image" type="button" data-open-product data-name={name(product)} data-sku={product.sku} data-description={short(product)} data-features={JSON.stringify(features(product))} data-images={JSON.stringify(product.images)}><img src={product.image} alt={name(product)} loading="lazy" /><span>{labels.details} →</span></button><div class="product-card-copy"><p class="product-sku">{product.sku}</p><h2>{name(product)}</h2><p>{short(product)}</p><div class="product-tags">{features(product).slice(0, 2).map((feature) => <span>{feature}</span>)}</div><button class="product-link" type="button" data-open-product data-name={name(product)} data-sku={product.sku} data-description={short(product)} data-features={JSON.stringify(features(product))} data-images={JSON.stringify(product.images)}>{labels.details} <span>→</span></button></div></article>)}</div>
   <p class="catalog-source">{labels.source}</p>
-  <dialog class="product-dialog" data-product-dialog><button class="dialog-close" type="button" aria-label={isZh ? '关闭' : 'Close'} data-dialog-close>×</button><p class="product-sku" data-dialog-sku></p><h2 data-dialog-name></h2><p class="dialog-description" data-dialog-description></p><h3>{labels.features}</h3><ul data-dialog-features></ul><a class="button" data-dialog-email href="#contact">{labels.inquiry}</a></dialog>
+  <dialog class="product-dialog" data-product-dialog><button class="dialog-close" type="button" aria-label={isZh ? '关闭' : 'Close'} data-dialog-close>×</button><div class="dialog-gallery" data-dialog-gallery></div><p class="product-sku" data-dialog-sku></p><h2 data-dialog-name></h2><p class="dialog-description" data-dialog-description></p><h3>{labels.features}</h3><ul data-dialog-features></ul><a class="button" data-dialog-email href="#contact">{labels.inquiry}</a></dialog>
 </section>
 <script is:inline define:vars={{ labels }}>
   const filters = document.querySelectorAll('[data-filter]');
@@ -28,6 +28,7 @@ const features = (product: Product) => isZh ? product.featuresZh : product.featu
   const skuNode = document.querySelector('[data-dialog-sku]');
   const descriptionNode = document.querySelector('[data-dialog-description]');
   const featuresNode = document.querySelector('[data-dialog-features]');
+  const galleryNode = document.querySelector('[data-dialog-gallery]');
   const emailNode = document.querySelector('[data-dialog-email]');
   let activeFilter = 'all';
   const updateCatalog = () => {
@@ -49,9 +50,13 @@ const features = (product: Product) => isZh ? product.featuresZh : product.featu
     skuNode.textContent = button.dataset.sku;
     descriptionNode.textContent = button.dataset.description;
     featuresNode.replaceChildren(...JSON.parse(button.dataset.features).map((feature) => { const item = document.createElement('li'); item.textContent = feature; return item; }));
+    galleryNode.replaceChildren(...JSON.parse(button.dataset.images).map((source, index) => { const image = document.createElement('img'); image.src = source; image.alt = `${button.dataset.name} ${index + 1}`; image.loading = index ? 'lazy' : 'eager'; return image; }));
     emailNode.href = `mailto:harleycheng0013@gmail.com?subject=${encodeURIComponent(`${labels.emailSubject}: ${button.dataset.sku} ${button.dataset.name}`)}`;
     dialog.showModal();
   }));
   document.querySelector('[data-dialog-close]')?.addEventListener('click', () => dialog.close());
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  const initialCategory = location.hash.slice(1);
+  const initialFilter = [...filters].find((button) => button.dataset.filter === initialCategory);
+  initialFilter?.click();
 </script>
