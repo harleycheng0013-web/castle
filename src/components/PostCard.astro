@@ -8,5 +8,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p class="post-meta">{formatDate(post.data.date, locale)}</p>
   <h2><a href={`${base}${localePath(locale, `/blog/${post.data.slug}`)}`}>{post.data.title}</a></h2>
   <p>{post.data.description}</p>
-  <div class="tag-list">{post.data.tags.map((tag: string) => <a href={`${base}${localePath(locale, `/tags/${encodeURIComponent(tag)}`)}>#{tag}</a>)}</div>
+  <div class="tag-list">{post.data.tags.map((tag: string) => <a href={`${base}${localePath(locale, `/tags/${encodeURIComponent(tag)}`)}`}>#{tag}</a>)}</div>
 </article>
