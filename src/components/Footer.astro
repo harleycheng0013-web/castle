@@ -1,0 +1,8 @@
+---
+import { site, type Locale } from '../lib/site';
+const { locale = 'zh' } = Astro.props as { locale?: Locale };
+---
+<footer class="site-footer">
+  <p>© {new Date().getFullYear()} {site.name}. {locale === 'zh' ? '用心记录。' : 'Made with care.'}</p>
+  <div>{site.links.map((link) => <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined}>{link.label}</a>)}</div>
+</footer>
