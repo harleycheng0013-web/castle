@@ -1,5 +1,5 @@
 ---
-import { copy, localePath, type Locale } from '../lib/site';
+import { copy, localePath, site, type Locale } from '../lib/site';
 import ThemeToggle from './ThemeToggle.astro';
 const { locale = 'zh' } = Astro.props as { locale?: Locale };
 const t = copy[locale];
@@ -8,10 +8,10 @@ const href = (path = '') => `${base.replace(/\/$/, '')}${localePath(locale, path
 const otherLocale = locale === 'zh' ? 'en' : 'zh';
 ---
 <header class="site-header">
-  <a class="brand" href={href()} aria-label="Home">LY<span>.</span></a>
+  <a class="brand" href={href()} aria-label="DARK CASTLE home">DARK <span>CASTLE</span></a>
   <nav aria-label="Primary navigation">
     <a href={href()}>{t.nav.home}</a>
-    <a href={href('/blog')}>{t.nav.writing}</a>
+    <a href={href('/#catalog')}>{t.nav.catalog}</a>
     <a href={href('/#contact')}>{t.nav.contact}</a>
   </nav>
   <div class="header-actions">
