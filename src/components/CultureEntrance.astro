@@ -3,8 +3,8 @@ import { chambers, type CultureLocale } from '../lib/culture';
 const { locale = 'zh' } = Astro.props as { locale?: CultureLocale };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const copy = locale === 'zh'
-  ? { eyebrow: 'THE CULTURE ROOMS', title: '从哪一扇门进入？', text: '四条文化线索，四种观看暗黑幻想的方式。先读故事，再遇见由它启发的藏品。', enter: '进入展厅 →' }
-  : { eyebrow: 'THE CULTURE ROOMS', title: 'Which door will you open?', text: 'Four cultural paths and four ways to read dark fantasy. Enter the story before meeting the objects it inspires.', enter: 'Enter the room →' };
+  ? { eyebrow: 'THE DARK CASTLE CULTURAL UNIVERSE', title: '从哪一扇门进入？', text: '四条文化长河，四种观看暗黑幻想的方式。先读故事，再遇见由它启发的藏品。', enter: '进入宇宙 →' }
+  : { eyebrow: 'THE DARK CASTLE CULTURAL UNIVERSE', title: 'Which door will you open?', text: 'Four cultural currents and four ways to read dark fantasy. Enter the story before meeting the objects it inspires.', enter: 'Enter the universe →' };
 ---
 <section class="culture-entrance">
   <div class="culture-entrance-heading">

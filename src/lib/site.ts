@@ -19,7 +19,7 @@ export const collections = [
 
 export const copy = {
   zh: {
-    nav: { home: '首页', culture: '文化展厅', catalog: '产品系列', writing: '灵感志', contact: '合作咨询' },
+    nav: { home: '首页', culture: '文化宇宙', catalog: '产品系列', writing: '灵感志', contact: '合作咨询' },
     heroEyebrow: 'DARK FANTASY RESIN DÉCOR',
     heroTitle: '让每一处角落，\n都有自己的传说。',
     heroText: 'DARK CASTLE™ 创作暗黑奇幻树脂摆件：为家居陈列、节日礼赠与独立零售而生，支持批发与定制合作。',
@@ -33,7 +33,7 @@ export const copy = {
     catalogButton: '查看系列', contactButton: '开始咨询'
   },
   en: {
-    nav: { home: 'Home', culture: 'Culture', catalog: 'Collections', writing: 'Journal', contact: 'Wholesale' },
+    nav: { home: 'Home', culture: 'Universe', catalog: 'Collections', writing: 'Journal', contact: 'Wholesale' },
     heroEyebrow: 'DARK FANTASY RESIN DÉCOR',
     heroTitle: 'Give every corner\nits own legend.',
     heroText: 'DARK CASTLE™ creates dark fantasy resin décor for interiors, gifting, and independent retail. Wholesale and custom partnerships welcome.',

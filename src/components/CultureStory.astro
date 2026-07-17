@@ -8,8 +8,8 @@ const localizedCatalog = locale === 'en' ? '/en/catalog' : '/catalog';
 const localizedCulture = locale === 'en' ? '/en/culture' : '/culture';
 const related = chamber.productIds.map((sku) => products.find((product) => product.sku === sku)).filter(Boolean);
 const labels = locale === 'zh'
-  ? { return: '返回四扇门', timeline: '文化时间线', symbols: '进入这间展厅的四把钥匙', objects: '藏品在故事之后出现', catalog: '查看全部商品目录', provenance: '内容与文化来源' }
-  : { return: 'Return to the four doors', timeline: 'Cultural timeline', symbols: 'Four keys to this room', objects: 'Objects appear after the story', catalog: 'View the full catalog', provenance: 'Content & cultural sources' };
+  ? { return: '返回文化宇宙', timeline: '文化时间线', archives: '原典、传说与史料档案', symbols: '进入这个宇宙的四把钥匙', objects: '藏品在故事之后出现', catalog: '查看全部商品目录', provenance: '内容与文化来源' }
+  : { return: 'Return to the cultural universe', timeline: 'Cultural timeline', archives: 'Texts, legends & historical records', symbols: 'Four keys to this universe', objects: 'Objects appear after the story', catalog: 'View the full catalog', provenance: 'Content & cultural sources' };
 ---
 <article class={`culture-story culture-story-${chamber.tone}`}>
   <section class="culture-story-hero">
@@ -23,6 +23,8 @@ const labels = locale === 'zh'
   <section class="culture-timeline"><div class="culture-section-heading"><p class="eyebrow">{labels.timeline}</p><h2>{c.title}</h2></div><ol>{c.timeline.map((event) => <li><p>{event.date}</p><div><h3>{event.title}</h3><p>{event.text}</p></div></li>)}</ol></section>
 
   <section class="culture-chapters">{c.chapters.map((chapter, index) => <div class="culture-chapter"><span>0{index + 1}</span><div><p class="eyebrow">{chapter.eyebrow}</p><h2>{chapter.title}</h2><p>{chapter.text}</p></div></div>)}</section>
+
+  <section class="culture-archives"><div class="culture-archives-heading"><p class="eyebrow">{labels.archives}</p><h2>{c.title}</h2><p>{locale === 'zh' ? '这里将可考的历史材料、明确标注的文学虚构与民间传说并排呈现。传说的价值在于被长期讲述，而不在于被误当作考古事实。' : 'Here, historical records, literary invention, and folk tradition are shown side by side and clearly labelled. A legend matters because it has been told, not because it is mistaken for archaeology.'}</p></div><div class="culture-archive-grid">{c.archives.map((archive, index) => <article><span>0{index + 1}</span><p>{archive.kind}</p><h3>{archive.title}</h3><p>{archive.text}</p><a href={archive.sourceHref} target="_blank" rel="noreferrer">{archive.sourceLabel} ↗</a></article>)}</div></section>
 
   <section class="culture-symbols"><p class="eyebrow">{labels.symbols}</p><div>{c.symbols.map((symbol, index) => <span><b>0{index + 1}</b>{symbol}</span>)}</div></section>
 
