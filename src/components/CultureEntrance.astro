@@ -20,3 +20,16 @@ const copy = locale === 'zh'
     })}
   </div>
 </section>
+<section class="universe-manifesto">
+  <div class="universe-manifesto-title"><p class="eyebrow">EDITORIAL PRINCIPLES</p><h2>{locale === 'zh' ? '让每一个故事，知道自己从哪里来。' : 'Every story should know where it came from.'}</h2></div>
+  <div class="universe-manifesto-copy"><p>{locale === 'zh' ? '文化宇宙不是传说堆砌，也不是把商品包装成“神秘真相”。我们把内容分为四类，让读者始终知道正在阅读的是哪一种证据。' : 'The cultural universe is neither a pile of legends nor a claim of mysterious truth. We separate four kinds of material so readers always know what kind of evidence they are reading.'}</p></div>
+  <div class="universe-methods">
+    {[
+      locale === 'zh' ? ['01','历史与考古','博物馆藏品、年代、手稿与可核查历史背景。'] : ['01','History & archaeology','Museum objects, dates, manuscripts, and checkable context.'],
+      locale === 'zh' ? ['02','民间传说','明确标注地域、记录来源与版本差异。'] : ['02','Folk tradition','Region, recorded source, and variant are identified.'],
+      locale === 'zh' ? ['03','文学虚构','作者、作品、出版时间与后世改写清楚分开。'] : ['03','Literary fiction','Author, work, publication, and later adaptation are separated.'],
+      locale === 'zh' ? ['04','当代再创造','说明现代影视、游戏、设计与商品如何重新使用符号。'] : ['04','Contemporary remaking','How film, games, design, and objects reuse symbols today.']
+    ].map((method) => <div><span>{method[0]}</span><h3>{method[1]}</h3><p>{method[2]}</p></div>)}
+  </div>
+  <p class="universe-count">{locale === 'zh' ? '第一卷现已收录：4 个文化宇宙 · 12 个叙事章节 · 24 篇史料与传说档案 · 13 件对应藏品' : 'Volume I now contains 4 universes · 12 narrative chapters · 24 source and legend archives · 13 related objects'}</p>
+</section>
