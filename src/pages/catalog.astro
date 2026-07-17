@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCatalog from '../components/ProductCatalog.astro';
+import { site } from '../lib/site';
+---
+<BaseLayout title={`商品目录 | ${site.name}`} description="DARK CASTLE™ 树脂摆件商品目录：神话人物、哥特骷髅、克苏鲁秘仪与花园趣物。">
+  <ProductCatalog locale="zh" />
+</BaseLayout>

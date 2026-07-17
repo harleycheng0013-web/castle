@@ -1,20 +1,20 @@
 export const site = {
   name: 'DARK CASTLE™',
   role: 'Dark Fantasy Resin Décor',
-  email: 'hello@example.com',
+  email: 'harleycheng0013@gmail.com',
   description: 'Dark fantasy resin décor, collectible figurines, and wholesale-ready gifts from DARK CASTLE™.',
   avatar: '/avatar.svg',
   links: [
     { label: 'Taobao Store', href: 'https://shop356594748.taobao.com/category.htm?spm=a21n57.shop_search.0.0.3391HQQAHQQAxU' },
-    { label: 'Email', href: 'mailto:hello@example.com' }
+    { label: 'Email', href: 'mailto:harleycheng0013@gmail.com' }
   ]
 } as const;
 
 export const collections = [
-  { key: 'occult', zh: '秘仪遗物', en: 'Occult Relics', descriptionZh: '克苏鲁、神祇与秘仪灵感的桌面陈设。', descriptionEn: 'Tabletop relics inspired by ancient gods, ritual symbols, and the unknown.' },
-  { key: 'gothic', zh: '哥特塑像', en: 'Gothic Figures', descriptionZh: '暗黑人物、守夜者与中世纪式装饰雕像。', descriptionEn: 'Dark figures, silent guardians, and medieval-inspired decorative statues.' },
-  { key: 'seasonal', zh: '节日奇物', en: 'Seasonal Curios', descriptionZh: '万圣节、圣诞节与主题礼赠摆件。', descriptionEn: 'Seasonal pieces for Halloween, Christmas, and themed gifting.' },
-  { key: 'creatures', zh: '异想生灵', en: 'Curious Creatures', descriptionZh: '猫头鹰、乌鸦、触手与带故事感的动物摆件。', descriptionEn: 'Owls, ravens, tentacles, and creatures made to start a story.' }
+  { key: 'mythic', zh: '神话人物与女神雕像', en: 'Mythic Figures & Goddesses', descriptionZh: '古典人物、凯尔特神话与女神主题的装饰雕像。', descriptionEn: 'Classical figures, Celtic mythology, and goddess-inspired décor.' },
+  { key: 'gothic', zh: '哥特死神与骷髅雕像', en: 'Gothic Reapers & Skulls', descriptionZh: '死神、羊角骷髅与暗黑风格的人物摆件。', descriptionEn: 'Reapers, horned skulls, and dark character sculptures.' },
+  { key: 'occult', zh: '克苏鲁与秘仪烛台', en: 'Eldritch Icons & Ritual Candleware', descriptionZh: '克苏鲁、五芒星与兼具烛台功能的仪式陈设。', descriptionEn: 'Cthulhu-inspired icons, pentagrams, and ritual candleware.' },
+  { key: 'curios', zh: '花园、动物与复古趣物', en: 'Garden Creatures & Retro Curios', descriptionZh: '火箭、猫头鹰与适合花园、桌面陈列的创意摆件。', descriptionEn: 'Rockets, owls, and creative pieces for gardens and desks.' }
 ] as const;
 
 export const copy = {

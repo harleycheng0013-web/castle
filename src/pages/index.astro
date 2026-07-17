@@ -16,8 +16,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </section>
   <section id="catalog" class="catalog-section">
     <div class="catalog-heading"><p class="eyebrow">{t.collectionEyebrow}</p><h2>{t.collectionTitle}</h2><p>{t.collectionText}</p></div>
-    <div class="collection-grid">{collections.map((collection, index) => <article class={`collection-card card-${index + 1}`}><p>0{index + 1}</p><h3>{collection.zh}</h3><span>{collection.en}</span><div class="collection-card-bottom"><small>{collection.descriptionZh}</small><a href="#contact" aria-label={`咨询${collection.zh}`}>{t.catalogButton} →</a></div></article>)}</div>
+    <div class="collection-grid">{collections.map((collection, index) => <article id={collection.key} class={`collection-card card-${index + 1}`}><p>0{index + 1}</p><h3>{collection.zh}</h3><span>{collection.en}</span><div class="collection-card-bottom"><small>{collection.descriptionZh}</small><a href={`${base}/catalog#${collection.key}`} aria-label={`查看${collection.zh}商品`}>{t.catalogButton} →</a></div></article>)}</div>
   </section>
   <section class="retail-proof"><div><p class="eyebrow">{t.whyEyebrow}</p><h2>{t.whyTitle}</h2></div><ul>{t.points.map((point, index) => <li><span>0{index + 1}</span>{point}</li>)}</ul></section>
-  <section id="contact" class="contact store-contact"><p class="eyebrow">WHOLESALE / CUSTOM</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a class="email" href={`mailto:${site.email}`}>{site.email}</a><p class="contact-note">邮箱为展示占位内容，请在 <code>src/lib/site.ts</code> 中替换为你的商务邮箱与 WhatsApp。</p></section>
+  <section id="contact" class="contact store-contact"><p class="eyebrow">WHOLESALE / CUSTOM</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a class="email" href={`mailto:${site.email}`}>{site.email}</a><p class="contact-note">商品页可直接发起邮件询盘；WhatsApp 将在你提供号码后加入。</p></section>
 </BaseLayout>

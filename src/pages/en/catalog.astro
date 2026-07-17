@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCatalog from '../../components/ProductCatalog.astro';
+import { site } from '../../lib/site';
+---
+<BaseLayout title={`Catalog | ${site.name}`} description="DARK CASTLE™ resin décor catalog: mythic figures, gothic skulls, eldritch ritual pieces, and garden curios." locale="en">
+  <ProductCatalog locale="en" />
+</BaseLayout>
