@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { copy, site } from '../../lib/site';
+const t = copy.en;
+const posts = (await getCollection('blog', ({ data }) => data.lang === 'en' && !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<BaseLayout title={`${site.name} — ${site.role}`} description={site.description} locale="en">
+  <section class="hero"><div class="hero-copy"><p class="eyebrow">{t.heroEyebrow} <strong>{site.name}</strong></p><h1>{t.heroTitle.split('\n').map((line) => <>{line}<br /></>)}</h1><p class="lede">{t.heroText}</p><a class="button" href="#contact">{t.nav.contact}</a></div><div class="hero-visual"><img class="hero-art" src={`${base}/images/hero-art.png`} alt="Abstract still life of paper, glass, and a leaf" /><img class="avatar profile-badge" src={`${base}${site.avatar}`} alt={`${site.name}'s portrait`} /></div></section>
+  <section class="content-section"><div class="section-heading"><h2>{t.latest}</h2><a href={`${base}/en/blog`}>{t.allPosts} →</a></div>{posts.length ? <div class="post-list">{posts.map((post) => <PostCard post={post} locale="en" />)}</div> : <p>{t.noPosts}</p>}</section>
+  <section id="contact" class="contact"><p class="eyebrow">CONTACT</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a class="email" href={`mailto:${site.email}`}>{site.email}</a><div class="social-links">{site.links.filter((link) => link.label !== 'Email').map((link) => <a href={link.href} target="_blank">{link.label} ↗</a>)}</div></section>
+</BaseLayout>
