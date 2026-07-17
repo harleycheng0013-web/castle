@@ -1,0 +1,12 @@
+---
+import { formatDate, localePath, type Locale } from '../lib/site';
+const { post, locale } = Astro.props as { post: any; locale: Locale };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<article class="post-card">
+  {post.data.cover && <img class="post-cover" src={`${base}${post.data.cover}`} alt="" loading="lazy" />}
+  <p class="post-meta">{formatDate(post.data.date, locale)}</p>
+  <h2><a href={`${base}${localePath(locale, `/blog/${post.data.slug}`)}`}>{post.data.title}</a></h2>
+  <p>{post.data.description}</p>
+  <div class="tag-list">{post.data.tags.map((tag: string) => <a href={`${base}${localePath(locale, `/tags/${encodeURIComponent(tag)}`)}>#{tag}</a>)}</div>
+</article>
