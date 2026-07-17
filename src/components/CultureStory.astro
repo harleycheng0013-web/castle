@@ -1,0 +1,32 @@
+---
+import { chambers, type CultureChamber, type CultureLocale } from '../lib/culture';
+import { products } from '../lib/products';
+const { chamber, locale = 'zh' } = Astro.props as { chamber: CultureChamber; locale?: CultureLocale };
+const c = chamber[locale];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const localizedCatalog = locale === 'en' ? '/en/catalog' : '/catalog';
+const localizedCulture = locale === 'en' ? '/en/culture' : '/culture';
+const related = chamber.productIds.map((sku) => products.find((product) => product.sku === sku)).filter(Boolean);
+const labels = locale === 'zh'
+  ? { return: '返回四扇门', timeline: '文化时间线', symbols: '进入这间展厅的四把钥匙', objects: '藏品在故事之后出现', catalog: '查看全部商品目录', provenance: '内容与文化来源' }
+  : { return: 'Return to the four doors', timeline: 'Cultural timeline', symbols: 'Four keys to this room', objects: 'Objects appear after the story', catalog: 'View the full catalog', provenance: 'Content & cultural sources' };
+---
+<article class={`culture-story culture-story-${chamber.tone}`}>
+  <section class="culture-story-hero">
+    <div class="culture-story-orbit" aria-hidden="true"></div>
+    <a class="culture-back" href={`${base}${localizedCulture}`}>← {labels.return}</a>
+    <p class="eyebrow">CHAMBER {chamber.number} / {c.doorTitle}</p>
+    <h1>{c.title}</h1><p class="culture-subtitle">{c.subtitle}</p><p class="culture-summary">{c.summary}</p>
+    <p class="culture-note">{c.note}</p>
+  </section>
+
+  <section class="culture-timeline"><div class="culture-section-heading"><p class="eyebrow">{labels.timeline}</p><h2>{c.title}</h2></div><ol>{c.timeline.map((event) => <li><p>{event.date}</p><div><h3>{event.title}</h3><p>{event.text}</p></div></li>)}</ol></section>
+
+  <section class="culture-chapters">{c.chapters.map((chapter, index) => <div class="culture-chapter"><span>0{index + 1}</span><div><p class="eyebrow">{chapter.eyebrow}</p><h2>{chapter.title}</h2><p>{chapter.text}</p></div></div>)}</section>
+
+  <section class="culture-symbols"><p class="eyebrow">{labels.symbols}</p><div>{c.symbols.map((symbol, index) => <span><b>0{index + 1}</b>{symbol}</span>)}</div></section>
+
+  <section class="culture-source-note"><p class="eyebrow">{labels.provenance}</p><p>{c.note}</p><div>{chamber.sources.map((source) => <a href={source.href} target="_blank" rel="noreferrer">{source.label} ↗</a>)}</div></section>
+
+  <section class="culture-objects"><div class="culture-objects-heading"><div><p class="eyebrow">{labels.objects}</p><h2>{c.productTitle}</h2></div><a href={`${base}${localizedCatalog}`}>{labels.catalog} →</a></div><div class="culture-product-grid">{related.map((product) => product && <a href={`${base}${localizedCatalog}#${product.category}`} class="culture-product-card"><img src={`${base}${product.image}`} alt={locale === 'zh' ? product.nameZh : product.nameEn} /><div><p>{product.sku}</p><h3>{locale === 'zh' ? product.nameZh : product.nameEn}</h3><span>{locale === 'zh' ? product.shortZh : product.shortEn}</span></div></a>)}</div></section>
+</article>

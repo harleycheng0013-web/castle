@@ -1,0 +1,22 @@
+---
+import { chambers, type CultureLocale } from '../lib/culture';
+const { locale = 'zh' } = Astro.props as { locale?: CultureLocale };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const copy = locale === 'zh'
+  ? { eyebrow: 'THE CULTURE ROOMS', title: '从哪一扇门进入？', text: '四条文化线索，四种观看暗黑幻想的方式。先读故事，再遇见由它启发的藏品。', enter: '进入展厅 →' }
+  : { eyebrow: 'THE CULTURE ROOMS', title: 'Which door will you open?', text: 'Four cultural paths and four ways to read dark fantasy. Enter the story before meeting the objects it inspires.', enter: 'Enter the room →' };
+---
+<section class="culture-entrance">
+  <div class="culture-entrance-heading">
+    <div><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1></div>
+    <p>{copy.text}</p>
+  </div>
+  <div class="culture-doors-grid">
+    {chambers.map((chamber) => {
+      const c = chamber[locale];
+      return <a href={`${base}${locale === 'en' ? '/en' : ''}/culture/${chamber.slug}`} class={`culture-door culture-door-${chamber.tone}`}>
+        <span>{chamber.number}</span><div><p>{c.doorTitle}</p><h2>{c.title}</h2><small>{c.subtitle}</small></div><i>{copy.enter}</i>
+      </a>;
+    })}
+  </div>
+</section>

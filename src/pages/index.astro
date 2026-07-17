@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { collections, copy, site } from '../lib/site';
+import { copy, site } from '../lib/site';
+import { chambers } from '../lib/culture';
 import { products } from '../lib/products';
 const t = copy.zh;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -18,6 +19,6 @@ const featured = products.filter((product) => ['DC-006', 'DC-008', 'DC-009'].inc
   <section id="atelier" class="atelier-intro"><div><p class="eyebrow">THE DARK CASTLE ATELIER</p><h2>不是普通摆件，<br />而是<strong>一件可收藏的世界观。</strong></h2></div><div class="atelier-copy"><p>每个作品从一个可辨认的符号出发：森林守护者、翼骨、旧日支配者、羊角与玫瑰。你看到的是摆件，也是一段等待被摆放的叙事。</p><div class="atelier-stats"><span><b>13</b>现有系列</span><span><b>34</b>真实产品图</span><span><b>04</b>清晰主题馆</span></div></div></section>
   <section class="relic-feature"><div class="relic-feature-image"><img src={picture('witch-hands-crystal.jpg')} alt="女巫之手水晶球座" /></div><div class="relic-feature-copy"><p class="eyebrow">THE FEATURED RELIC / DC–013</p><h2>握住一颗<br /><em>未知的星球。</em></h2><p>女巫之手系列可作书挡、水晶球座与陈列托盘。黑色指甲、青铜饰带与骨纹底座，让每一个角落都有进入仪式的理由。</p><a class="button" href={`${base}/catalog#occult`}>探索秘仪陈设</a></div></section>
   <section class="curated-section"><div class="section-lead"><p class="eyebrow">CURATED FOR THE CURIOUS</p><h2>三件值得先带回家的暗影。</h2><a href={`${base}/catalog`}>全部商品目录 →</a></div><div class="curated-grid">{featured.map((product, index) => <a class={`curated-card curated-${index + 1}`} href={`${base}/catalog#${product.category}`}><img src={`${base}${product.image}`} alt={product.nameZh} /><div><p>{product.sku}</p><h3>{product.nameZh}</h3><span>{product.nameEn} →</span></div></a>)}</div></section>
-  <section class="collection-doors"><div class="doors-heading"><p class="eyebrow">CHOOSE YOUR CHAMBER</p><h2>从哪一扇门进入？</h2></div><div class="doors-grid">{collections.map((collection, index) => <a href={`${base}/catalog#${collection.key}`} class={`door door-${index + 1}`}><span>0{index + 1}</span><h3>{collection.zh}</h3><p>{collection.descriptionZh}</p><i>进入系列 →</i></a>)}</div></section>
+  <section class="collection-doors"><div class="doors-heading"><p class="eyebrow">CHOOSE YOUR CHAMBER</p><h2>从哪一扇门进入？</h2></div><p class="doors-intro">先进入一段文化故事，再遇见由它启发的藏品。</p><div class="doors-grid">{chambers.map((chamber) => <a href={`${base}/culture/${chamber.slug}`} class={`door door-${chamber.tone}`}><span>{chamber.number}</span><h3>{chamber.zh.doorTitle}</h3><p>{chamber.zh.subtitle}</p><i>进入展厅 →</i></a>)}</div></section>
   <section id="contact" class="home-contact"><p class="eyebrow">WHOLESALE / CUSTOM / COLLABORATION</p><h2>为你的店铺，<br />开启另一道门。</h2><p>面向独立零售、主题礼品、空间陈列与小批量定制。告诉我们想要的系列、数量与目的地。</p><a class="button button-light" href={`mailto:${site.email}`}>联系 DARK CASTLE</a><span>{site.email}</span></section>
 </BaseLayout>

@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CultureStory from '../../components/CultureStory.astro';
+import { chambers } from '../../lib/culture';
+import { site } from '../../lib/site';
+export function getStaticPaths() { return chambers.map((chamber) => ({ params: { slug: chamber.slug }, props: { chamber } })); }
+const { chamber } = Astro.props;
+---
+<BaseLayout title={`${chamber.zh.title} | ${site.name}`} description={chamber.zh.summary}><CultureStory chamber={chamber} locale="zh" /></BaseLayout>
