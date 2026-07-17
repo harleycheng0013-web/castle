@@ -1,0 +1,34 @@
+---
+import type { UniverseStory } from '../lib/stories';
+import { universeStories } from '../lib/stories';
+import { findChamber, type CultureLocale } from '../lib/culture';
+import { products } from '../lib/products';
+const { story, locale = 'zh' } = Astro.props as { story: UniverseStory; locale?: CultureLocale };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const langBase = locale === 'en' ? '/en' : '';
+const chamber = findChamber(story.chamber)!;
+const sections = locale === 'zh' ? story.sectionsZh : story.sectionsEn;
+const relatedStories = universeStories.filter((item) => item.chamber === story.chamber && item.slug !== story.slug).slice(0, 2);
+const relatedProducts = story.productIds.map((sku) => products.find((product) => product.sku === sku)).filter(Boolean);
+const title = locale === 'zh' ? story.titleZh : story.titleEn;
+const dek = locale === 'zh' ? story.dekZh : story.dekEn;
+---
+<article class={`story-reader story-reader-${chamber.tone}`}>
+  <div class="story-progress" aria-hidden="true"><span></span></div>
+  <header class="story-reader-hero">
+    <img src={`${base}${story.image}`} alt="" /><div class="story-reader-overlay"></div>
+    <a class="story-reader-back" href={`${base}${langBase}/culture/${story.chamber}`}>← {locale === 'zh' ? `返回${chamber.zh.title}` : `Back to ${chamber.en.title}`}</a>
+    <div><p>{locale === 'zh' ? story.categoryZh : story.categoryEn} · {locale === 'zh' ? story.eraZh : story.eraEn}</p><h1>{title}</h1><span>{dek}</span><small>{story.readTime} MIN READ · DARK CASTLE CULTURAL UNIVERSE</small></div>
+  </header>
+  <div class="story-reader-layout">
+    <aside><p>{locale === 'zh' ? '本篇目录' : 'IN THIS STORY'}</p>{sections.map((section,index) => <a href={`#section-${index + 1}`}><span>0{index + 1}</span>{section.title}</a>)}<div><p>{locale === 'zh' ? '所属宇宙' : 'WORLD'}</p><a href={`${base}${langBase}/culture/${story.chamber}`}>{locale === 'zh' ? chamber.zh.title : chamber.en.title} →</a></div></aside>
+    <main class="story-prose"><p class="story-dropcap">{dek}</p>{sections.map((section,index) => <section id={`section-${index + 1}`}><p class="eyebrow">CHAPTER {String(index + 1).padStart(2,'0')}</p><h2>{section.title}</h2>{section.text.map((paragraph) => <p>{paragraph}</p>)}</section>)}<section class="story-sources"><p class="eyebrow">{locale === 'zh' ? '资料来源与继续阅读' : 'SOURCES & FURTHER READING'}</p><h2>{locale === 'zh' ? '故事结束，证据仍在。' : 'The story ends. The evidence remains.'}</h2>{story.sources.map((source) => <a href={source.href} target="_blank" rel="noreferrer">{source.label} ↗</a>)}</section></main>
+  </div>
+  <section class="story-related"><div><p class="eyebrow">{locale === 'zh' ? '继续探索' : 'KEEP EXPLORING'}</p><h2>{locale === 'zh' ? '同一宇宙的其他故事' : 'More stories from this world'}</h2></div><div class="story-related-grid">{relatedStories.map((item) => <a href={`${base}${langBase}/culture/stories/${item.slug}`}><img src={`${base}${item.image}`} alt="" /><p>{locale === 'zh' ? item.categoryZh : item.categoryEn}</p><h3>{locale === 'zh' ? item.titleZh : item.titleEn}</h3></a>)}</div></section>
+  <section class="story-object-bridge"><div><p class="eyebrow">OBJECTS FROM THE STORY WORLD</p><h2>{locale === 'zh' ? '让故事成为可以触摸的陈设。' : 'Let the story become an object.'}</h2></div><div>{relatedProducts.map((product) => product && <a href={`${base}${langBase}/catalog#${product.category}`}><img src={`${base}${product.image}`} alt={locale === 'zh' ? product.nameZh : product.nameEn} /><span>{product.sku}</span><h3>{locale === 'zh' ? product.nameZh : product.nameEn}</h3></a>)}</div></section>
+</article>
+<script>
+  const progress = document.querySelector('.story-progress span') as HTMLElement | null;
+  const updateProgress = () => { if (!progress) return; const max = document.documentElement.scrollHeight - innerHeight; progress.style.width = `${max > 0 ? Math.min(100, scrollY / max * 100) : 0}%`; };
+  addEventListener('scroll', updateProgress, { passive: true }); updateProgress();
+</script>

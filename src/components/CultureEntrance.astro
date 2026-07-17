@@ -1,16 +1,25 @@
 ---
 import { chambers, type CultureLocale } from '../lib/culture';
+import { universeStories } from '../lib/stories';
 const { locale = 'zh' } = Astro.props as { locale?: CultureLocale };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const copy = locale === 'zh'
   ? { eyebrow: 'THE DARK CASTLE CULTURAL UNIVERSE', title: '从哪一扇门进入？', text: '四条文化长河，四种观看暗黑幻想的方式。先读故事，再遇见由它启发的藏品。', enter: '进入宇宙 →' }
   : { eyebrow: 'THE DARK CASTLE CULTURAL UNIVERSE', title: 'Which door will you open?', text: 'Four cultural currents and four ways to read dark fantasy. Enter the story before meeting the objects it inspires.', enter: 'Enter the universe →' };
+const featured = universeStories.find((story) => story.featured) ?? universeStories[0];
+const storyHref = (slug: string) => `${base}${locale === 'en' ? '/en' : ''}/culture/stories/${slug}`;
 ---
 <section class="culture-entrance">
   <div class="culture-entrance-heading">
     <div><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1></div>
     <p>{copy.text}</p>
   </div>
+  <a class="universe-feature" href={storyHref(featured.slug)}>
+    <img src={`${base}${featured.image}`} alt="" />
+    <div class="universe-feature-shade"></div>
+    <div class="universe-feature-copy"><p>{locale === 'zh' ? '本期主打故事' : 'FEATURED STORY'} · {locale === 'zh' ? featured.categoryZh : featured.categoryEn}</p><h2>{locale === 'zh' ? featured.titleZh : featured.titleEn}</h2><span>{locale === 'zh' ? featured.dekZh : featured.dekEn}</span><i>{locale === 'zh' ? '开始阅读' : 'Read story'} · {featured.readTime} MIN →</i></div>
+  </a>
+  <div class="universe-section-label"><p class="eyebrow">{locale === 'zh' ? '探索四个世界' : 'EXPLORE FOUR WORLDS'}</p><span>{locale === 'zh' ? '选择世界，进入它的历史、人物与故事。' : 'Choose a world and enter its history, figures, and stories.'}</span></div>
   <div class="culture-doors-grid">
     {chambers.map((chamber) => {
       const c = chamber[locale];
@@ -19,6 +28,10 @@ const copy = locale === 'zh'
       </a>;
     })}
   </div>
+</section>
+<section class="universe-library">
+  <div class="universe-library-heading"><p class="eyebrow">STORIES / LEGENDS / RECORDS</p><h2>{locale === 'zh' ? '故事已经开始。' : 'The stories have begun.'}</h2><p>{locale === 'zh' ? '全部正文都在 DARK CASTLE 内阅读。来源链接只用于核查，不再把读者送走才能了解故事。' : 'Every full story is read inside DARK CASTLE. External links are kept only for source verification.'}</p></div>
+  <div class="universe-story-grid">{universeStories.map((story, index) => <a class={`universe-story-card ${index === 0 ? 'is-lead' : ''}`} href={storyHref(story.slug)}><div class="universe-story-image"><img src={`${base}${story.image}`} alt="" /><span>{String(index + 1).padStart(2,'0')}</span></div><div class="universe-story-card-copy"><p>{locale === 'zh' ? story.categoryZh : story.categoryEn} · {story.readTime} MIN</p><h3>{locale === 'zh' ? story.titleZh : story.titleEn}</h3><span>{locale === 'zh' ? story.dekZh : story.dekEn}</span><i>{locale === 'zh' ? '阅读完整故事 →' : 'Read full story →'}</i></div></a>)}</div>
 </section>
 <section class="universe-manifesto">
   <div class="universe-manifesto-title"><p class="eyebrow">EDITORIAL PRINCIPLES</p><h2>{locale === 'zh' ? '让每一个故事，知道自己从哪里来。' : 'Every story should know where it came from.'}</h2></div>

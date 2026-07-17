@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import StoryArticle from '../../../components/StoryArticle.astro';
+import { universeStories } from '../../../lib/stories';
+import { site } from '../../../lib/site';
+export function getStaticPaths() { return universeStories.map((story) => ({ params: { slug: story.slug }, props: { story } })); }
+const { story } = Astro.props;
+---
+<BaseLayout title={`${story.titleZh} | ${site.name}`} description={story.dekZh}><StoryArticle story={story} locale="zh" /></BaseLayout>
