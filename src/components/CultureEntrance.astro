@@ -1,48 +1,17 @@
 ---
-import { chambers, type CultureLocale } from '../lib/culture';
+import { chambers, universeEpoch, type CultureLocale } from '../lib/culture';
 import { universeStories } from '../lib/stories';
 const { locale = 'zh' } = Astro.props as { locale?: CultureLocale };
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const copy = locale === 'zh'
-  ? { eyebrow: 'THE DARK CASTLE CULTURAL UNIVERSE', title: '从哪一扇门进入？', text: '四条文化长河，四种观看暗黑幻想的方式。先读故事，再遇见由它启发的藏品。', enter: '进入宇宙 →' }
-  : { eyebrow: 'THE DARK CASTLE CULTURAL UNIVERSE', title: 'Which door will you open?', text: 'Four cultural currents and four ways to read dark fantasy. Enter the story before meeting the objects it inspires.', enter: 'Enter the universe →' };
-const featured = universeStories.find((story) => story.featured) ?? universeStories[0];
-const storyHref = (slug: string) => `${base}${locale === 'en' ? '/en' : ''}/culture/stories/${slug}`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, ''); const lang = locale === 'en' ? '/en' : '';
+const href = (value: string) => `${base}${lang}${value}`;
+const t = locale === 'zh' ? { title:'文化宇宙', intro:'这里没有现实历史的复述。四境、人物、纪年与故事共同组成 DARK CASTLE 的原创世界。', atlas:'选择地区', atlasText:'沿着四条道路进入世界，也可以直接从下方故事开始。', stories:'故事档案', storyText:'八篇长故事已经开放。每一个结尾都会带你进入下一篇故事、相关地区或对应遗物。', read:'阅读全文' } : { title:'Cultural Universe', intro:'Not a retelling of real history. Four realms, characters, chronologies, and stories form the original world of DARK CASTLE.', atlas:'Choose a region', atlasText:'Follow one of four roads, or begin with any story below.', stories:'Story archive', storyText:'Eight complete stories are open. Every ending leads toward another story, region, or relic.', read:'Read full story' };
 ---
-<section class="culture-entrance">
-  <div class="culture-entrance-heading">
-    <div><p class="eyebrow">{copy.eyebrow}</p><h1>{copy.title}</h1></div>
-    <p>{copy.text}</p>
-  </div>
-  <a class="universe-feature" href={storyHref(featured.slug)}>
-    <img src={`${base}${featured.image}`} alt="" />
-    <div class="universe-feature-shade"></div>
-    <div class="universe-feature-copy"><p>{locale === 'zh' ? '本期主打故事' : 'FEATURED STORY'} · {locale === 'zh' ? featured.categoryZh : featured.categoryEn}</p><h2>{locale === 'zh' ? featured.titleZh : featured.titleEn}</h2><span>{locale === 'zh' ? featured.dekZh : featured.dekEn}</span><i>{locale === 'zh' ? '开始阅读' : 'Read story'} · {featured.readTime} MIN →</i></div>
-  </a>
-  <div class="universe-section-label"><p class="eyebrow">{locale === 'zh' ? '探索四个世界' : 'EXPLORE FOUR WORLDS'}</p><span>{locale === 'zh' ? '选择世界，进入它的历史、人物与故事。' : 'Choose a world and enter its history, figures, and stories.'}</span></div>
-  <div class="culture-doors-grid">
-    {chambers.map((chamber) => {
-      const c = chamber[locale];
-      return <a href={`${base}${locale === 'en' ? '/en' : ''}/culture/${chamber.slug}`} class={`culture-door culture-door-${chamber.tone}`}>
-        <span>{chamber.number}</span><div><p>{c.doorTitle}</p><h2>{c.title}</h2><small>{c.subtitle}</small></div><i>{copy.enter}</i>
-      </a>;
-    })}
-  </div>
-</section>
-<section class="universe-library">
-  <div class="universe-library-heading"><p class="eyebrow">STORIES / LEGENDS / RECORDS</p><h2>{locale === 'zh' ? '故事已经开始。' : 'The stories have begun.'}</h2><p>{locale === 'zh' ? '全部正文都在 DARK CASTLE 内阅读。来源链接只用于核查，不再把读者送走才能了解故事。' : 'Every full story is read inside DARK CASTLE. External links are kept only for source verification.'}</p></div>
-  <div class="universe-story-grid">{universeStories.map((story, index) => <a class={`universe-story-card ${index === 0 ? 'is-lead' : ''}`} href={storyHref(story.slug)}><div class="universe-story-image"><img src={`${base}${story.image}`} alt="" /><span>{String(index + 1).padStart(2,'0')}</span></div><div class="universe-story-card-copy"><p>{locale === 'zh' ? story.categoryZh : story.categoryEn} · {story.readTime} MIN</p><h3>{locale === 'zh' ? story.titleZh : story.titleEn}</h3><span>{locale === 'zh' ? story.dekZh : story.dekEn}</span><i>{locale === 'zh' ? '阅读完整故事 →' : 'Read full story →'}</i></div></a>)}</div>
-</section>
-<section class="universe-manifesto">
-  <div class="universe-manifesto-title"><p class="eyebrow">EDITORIAL PRINCIPLES</p><h2>{locale === 'zh' ? '让每一个故事，知道自己从哪里来。' : 'Every story should know where it came from.'}</h2></div>
-  <div class="universe-manifesto-copy"><p>{locale === 'zh' ? '文化宇宙不是传说堆砌，也不是把商品包装成“神秘真相”。我们把内容分为四类，让读者始终知道正在阅读的是哪一种证据。' : 'The cultural universe is neither a pile of legends nor a claim of mysterious truth. We separate four kinds of material so readers always know what kind of evidence they are reading.'}</p></div>
-  <div class="universe-methods">
-    {[
-      locale === 'zh' ? ['01','历史与考古','博物馆藏品、年代、手稿与可核查历史背景。'] : ['01','History & archaeology','Museum objects, dates, manuscripts, and checkable context.'],
-      locale === 'zh' ? ['02','民间传说','明确标注地域、记录来源与版本差异。'] : ['02','Folk tradition','Region, recorded source, and variant are identified.'],
-      locale === 'zh' ? ['03','文学虚构','作者、作品、出版时间与后世改写清楚分开。'] : ['03','Literary fiction','Author, work, publication, and later adaptation are separated.'],
-      locale === 'zh' ? ['04','当代再创造','说明现代影视、游戏、设计与商品如何重新使用符号。'] : ['04','Contemporary remaking','How film, games, design, and objects reuse symbols today.']
-    ].map((method) => <div><span>{method[0]}</span><h3>{method[1]}</h3><p>{method[2]}</p></div>)}
-  </div>
-  <p class="universe-count">{locale === 'zh' ? '第一卷现已收录：4 个文化宇宙 · 12 个叙事章节 · 24 篇史料与传说档案 · 13 件对应藏品' : 'Volume I now contains 4 universes · 12 narrative chapters · 24 source and legend archives · 13 related objects'}</p>
-</section>
+<main class="culture-index-v3">
+  <header class="culture-index-hero"><img src={`${base}/images/dark-castle-hero-atmosphere.png`} alt="" /><div><p class="dc-kicker">DARK CASTLE · ORIGINAL UNIVERSE</p><h1>{t.title}</h1><p>{t.intro}</p><span>{universeEpoch[locale]}</span></div></header>
+  <section class="culture-region-browser"><div class="dc-section-head"><div><p class="dc-kicker">REGIONS</p><h2>{t.atlas}</h2></div><p>{t.atlasText}</p></div><div>{chambers.map((chamber) => <a class={`realm-${chamber.tone}`} href={href(`/culture/${chamber.slug}`)}><span>{chamber.glyph}</span><small>REGION {chamber.number}</small><h3>{chamber[locale].name}</h3><p>{chamber[locale].epithet}</p><i>EXPLORE →</i></a>)}</div></section>
+  <section class="culture-story-index"><div class="dc-section-head"><div><p class="dc-kicker">ALL FICTION</p><h2>{t.stories}</h2></div><p>{t.storyText}</p></div><div class="culture-story-filter" role="group"><button class="is-active" data-filter="all">ALL · {universeStories.length}</button>{chambers.map((chamber) => <button data-filter={chamber.slug}>{chamber[locale].name}</button>)}</div><div class="culture-story-list">{universeStories.map((story,index) => <a href={href(`/culture/stories/${story.slug}`)} data-story-chamber={story.chamber}><div class="culture-story-thumb"><img src={`${base}${story.image}`} alt="" /><span>0{index + 1}</span></div><div><p>{locale === 'zh' ? story.categoryZh : story.categoryEn} · {story.readTime} MIN</p><h3>{locale === 'zh' ? story.titleZh : story.titleEn}</h3><span>{locale === 'zh' ? story.dekZh : story.dekEn}</span><i>{t.read} →</i></div></a>)}</div></section>
+</main>
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]'); const stories = document.querySelectorAll<HTMLElement>('[data-story-chamber]');
+  buttons.forEach((button) => button.addEventListener('click', () => { buttons.forEach((item) => item.classList.toggle('is-active', item === button)); const filter = button.dataset.filter; stories.forEach((story) => story.hidden = filter !== 'all' && story.dataset.storyChamber !== filter); }));
+</script>

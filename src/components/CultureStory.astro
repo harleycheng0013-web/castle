@@ -1,38 +1,17 @@
 ---
-import { chambers, type CultureChamber, type CultureLocale } from '../lib/culture';
-import { products } from '../lib/products';
-import { universeStories } from '../lib/stories';
+import type { CultureChamber, CultureLocale } from '../lib/culture';
+import { products } from '../lib/products'; import { universeStories } from '../lib/stories';
 const { chamber, locale = 'zh' } = Astro.props as { chamber: CultureChamber; locale?: CultureLocale };
-const c = chamber[locale];
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const localizedCatalog = locale === 'en' ? '/en/catalog' : '/catalog';
-const localizedCulture = locale === 'en' ? '/en/culture' : '/culture';
-const related = chamber.productIds.map((sku) => products.find((product) => product.sku === sku)).filter(Boolean);
-const worldStories = universeStories.filter((story) => story.chamber === chamber.slug);
-const labels = locale === 'zh'
-  ? { return: '返回文化宇宙', timeline: '文化时间线', archives: '原典、传说与史料档案', symbols: '进入这个宇宙的四把钥匙', objects: '藏品在故事之后出现', catalog: '查看全部商品目录', provenance: '内容与文化来源' }
-  : { return: 'Return to the cultural universe', timeline: 'Cultural timeline', archives: 'Texts, legends & historical records', symbols: 'Four keys to this universe', objects: 'Objects appear after the story', catalog: 'View the full catalog', provenance: 'Content & cultural sources' };
+const c = chamber[locale]; const base = import.meta.env.BASE_URL.replace(/\/$/, ''); const lang = locale === 'en' ? '/en' : '';
+const path = (value:string) => `${base}${lang}${value}`; const stories = universeStories.filter((story) => story.chamber === chamber.slug); const related = chamber.productIds.map((sku) => products.find((p) => p.sku === sku)).filter(Boolean);
+const t = locale === 'zh' ? { back:'返回文化宇宙', stories:'本地区故事', chronology:'地区纪年', places:'地标与势力', relics:'地区遗物', read:'阅读故事' } : { back:'Back to universe', stories:'Stories of this region', chronology:'Regional chronology', places:'Places & factions', relics:'Regional relics', read:'Read story' };
 ---
-<article class={`culture-story culture-story-${chamber.tone}`}>
-  <section class="culture-story-hero">
-    <div class="culture-story-orbit" aria-hidden="true"></div>
-    <a class="culture-back" href={`${base}${localizedCulture}`}>← {labels.return}</a>
-    <p class="eyebrow">CHAMBER {chamber.number} / {c.doorTitle}</p>
-    <h1>{c.title}</h1><p class="culture-subtitle">{c.subtitle}</p><p class="culture-summary">{c.summary}</p>
-    <p class="culture-note">{c.note}</p>
-  </section>
-
-  <section class="culture-timeline"><div class="culture-section-heading"><p class="eyebrow">{labels.timeline}</p><h2>{c.title}</h2></div><ol>{c.timeline.map((event) => <li><p>{event.date}</p><div><h3>{event.title}</h3><p>{event.text}</p></div></li>)}</ol></section>
-
-  <section class="culture-chapters">{c.chapters.map((chapter, index) => <div class="culture-chapter"><span>0{index + 1}</span><div><p class="eyebrow">{chapter.eyebrow}</p><h2>{chapter.title}</h2><p>{chapter.text}</p></div></div>)}</section>
-
-  <section class="world-story-shelf"><div class="world-story-shelf-heading"><p class="eyebrow">{locale === 'zh' ? '这个宇宙的完整故事' : 'FULL STORIES FROM THIS WORLD'}</p><h2>{locale === 'zh' ? '从档案，进入叙事。' : 'Step from archive into narrative.'}</h2></div><div>{worldStories.map((story) => <a href={`${base}${locale === 'en' ? '/en' : ''}/culture/stories/${story.slug}`}><img src={`${base}${story.image}`} alt="" /><p>{locale === 'zh' ? story.categoryZh : story.categoryEn} · {story.readTime} MIN</p><h3>{locale === 'zh' ? story.titleZh : story.titleEn}</h3><span>{locale === 'zh' ? story.dekZh : story.dekEn}</span><i>{locale === 'zh' ? '阅读故事 →' : 'Read story →'}</i></a>)}</div></section>
-
-  <section class="culture-archives"><div class="culture-archives-heading"><p class="eyebrow">{labels.archives}</p><h2>{c.title}</h2><p>{locale === 'zh' ? '这里将可考的历史材料、明确标注的文学虚构与民间传说并排呈现。传说的价值在于被长期讲述，而不在于被误当作考古事实。' : 'Here, historical records, literary invention, and folk tradition are shown side by side and clearly labelled. A legend matters because it has been told, not because it is mistaken for archaeology.'}</p></div><div class="culture-archive-grid">{c.archives.map((archive, index) => <article><span>0{index + 1}</span><p>{archive.kind}</p><h3>{archive.title}</h3><p>{archive.text}</p><a href={archive.sourceHref} target="_blank" rel="noreferrer">{archive.sourceLabel} ↗</a></article>)}</div></section>
-
-  <section class="culture-symbols"><p class="eyebrow">{labels.symbols}</p><div>{c.symbols.map((symbol, index) => <span><b>0{index + 1}</b>{symbol}</span>)}</div></section>
-
-  <section class="culture-source-note"><p class="eyebrow">{labels.provenance}</p><p>{c.note}</p><div>{chamber.sources.map((source) => <a href={source.href} target="_blank" rel="noreferrer">{source.label} ↗</a>)}</div></section>
-
-  <section class="culture-objects"><div class="culture-objects-heading"><div><p class="eyebrow">{labels.objects}</p><h2>{c.productTitle}</h2></div><a href={`${base}${localizedCatalog}`}>{labels.catalog} →</a></div><div class="culture-product-grid">{related.map((product) => product && <a href={`${base}${localizedCatalog}#${product.category}`} class="culture-product-card"><img src={`${base}${product.image}`} alt={locale === 'zh' ? product.nameZh : product.nameEn} /><div><p>{product.sku}</p><h3>{locale === 'zh' ? product.nameZh : product.nameEn}</h3><span>{locale === 'zh' ? product.shortZh : product.shortEn}</span></div></a>)}</div></section>
-</article>
+<main class={`culture-world-v3 world-${chamber.tone}`}>
+  <header class="world-v3-hero"><img src={`${base}${stories[0]?.image}`} alt="" /><div class="world-v3-shade"></div><a href={path('/culture')}>← {t.back}</a><div><p class="dc-kicker">REGION {chamber.number}</p><span class="world-glyph">{chamber.glyph}</span><h1>{c.name}</h1><h2>{c.epithet}</h2><p>{c.intro}</p></div></header>
+  <nav class="world-v3-nav"><a href="#stories">{t.stories}</a><a href="#chronology">{t.chronology}</a><a href="#places">{t.places}</a><a href="#relics">{t.relics}</a></nav>
+  <section class="world-v3-legend"><p class="dc-kicker">THE PRESENT CONFLICT</p><blockquote>{c.legend}</blockquote></section>
+  <section class="world-v3-stories" id="stories"><div class="dc-section-head"><div><p class="dc-kicker">FICTION</p><h2>{t.stories}</h2></div></div><div>{stories.map((story,index) => <a href={path(`/culture/stories/${story.slug}`)}><img src={`${base}${story.image}`} alt="" /><span>0{index + 1} · {story.readTime} MIN</span><h3>{locale === 'zh' ? story.titleZh : story.titleEn}</h3><p>{locale === 'zh' ? story.dekZh : story.dekEn}</p><i>{t.read} →</i></a>)}</div></section>
+  <section class="world-v3-chronology" id="chronology"><div><p class="dc-kicker">TIMELINE</p><h2>{t.chronology}</h2></div><ol>{c.timeline.map((event) => <li><span>{event.date}</span><div><h3>{event.title}</h3><p>{event.text}</p></div></li>)}</ol></section>
+  <section class="world-v3-places" id="places"><div class="dc-section-head"><div><p class="dc-kicker">ATLAS & FACTIONS</p><h2>{t.places}</h2></div></div><div class="world-lore-grid">{c.landmarks.map((item,index) => <article><span>0{index + 1}</span><small>LANDMARK</small><h3>{item.name}</h3><p>{item.text}</p></article>)}{c.factions.map((item,index) => <article><span>0{index + 4}</span><small>FACTION</small><h3>{item.name}</h3><p>{item.text}</p></article>)}</div></section>
+  <section class="world-v3-relics" id="relics"><div class="dc-section-head"><div><p class="dc-kicker">OBJECT ARCHIVE</p><h2>{c.productTitle}</h2></div><a href={path('/catalog')}>{t.relics} →</a></div><div>{related.map((product) => product && <a href={path(`/catalog#${product.category}`)}><img src={`${base}${product.image}`} alt={locale === 'zh' ? product.nameZh : product.nameEn} /><span>{product.sku}</span><h3>{locale === 'zh' ? product.nameZh : product.nameEn}</h3></a>)}</div></section>
+</main>

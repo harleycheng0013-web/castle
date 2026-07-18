@@ -1,0 +1,75 @@
+---
+import { chambers, universeEpoch, type CultureLocale } from '../lib/culture';
+import { universeStories } from '../lib/stories';
+import { products } from '../lib/products';
+import { site } from '../lib/site';
+const { locale = 'zh' } = Astro.props as { locale?: CultureLocale };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const lang = locale === 'en' ? '/en' : '';
+const path = (value: string) => `${base}${lang}${value}`;
+const heroStories = universeStories.filter((story) => story.featured).slice(0, 3);
+const featuredProducts = products.filter((product) => ['DC-006','DC-013','DC-008','DC-002'].includes(product.sku));
+const t = locale === 'zh' ? {
+  universe: 'DARK CASTLE 原创文化宇宙', explore: '探索宇宙', catalog: '查看遗物目录', atlas: '四境星图',
+  atlasText: '四条失落道路在黑城堡交汇。选择一个坐标，进入它的地点、人物与故事。', enter: '进入地区',
+  latest: '最新故事', latestText: '所有故事都发生于同一个世界，并通过人物、地点与遗物彼此连接。', allStories: '查看全部故事', read: '阅读故事',
+  worlds: '四境档案', worldsText: '每个地区都有自己的法则、纪年、势力与冲突。', relics: '从故事中带回的遗物',
+  relicText: '商品是世界观里的物证：钟、王冠、容器、守护者与无法归档的造像。', viewRelic: '查看遗物',
+  contact: '让你的店铺成为第五个入口', contactText: '批发、主题陈列、小批量定制与跨境合作。'
+} : {
+  universe: 'THE ORIGINAL DARK CASTLE UNIVERSE', explore: 'Explore universe', catalog: 'View relic catalog', atlas: 'Atlas of Four Realms',
+  atlasText: 'Four lost roads meet at the Dark Castle. Choose a coordinate to enter its places, people, and stories.', enter: 'Enter region',
+  latest: 'Latest stories', latestText: 'Every story belongs to one world and connects through characters, places, and relics.', allStories: 'View all stories', read: 'Read story',
+  worlds: 'Four realm archive', worldsText: 'Each region has its own law, chronology, factions, and conflict.', relics: 'Relics returned from the stories',
+  relicText: 'Objects become evidence: bells, crowns, vessels, guardians, and uncatalogued figures.', viewRelic: 'View relic',
+  contact: 'Make your store the fifth entrance', contactText: 'Wholesale, themed display, small-batch custom work, and global collaboration.'
+};
+---
+<div class="dc-home-v3">
+  <section class="dc-spotlight" aria-label={t.latest}>
+    <div class="dc-spotlight-track">
+      {heroStories.map((story, index) => <article class:list={['dc-slide', { 'is-active': index === 0 }]} data-slide={index}>
+        <img src={`${base}${story.image}`} alt="" /><div class="dc-slide-wash"></div>
+        <div class="dc-slide-content"><p class="dc-kicker">{locale === 'zh' ? story.categoryZh : story.categoryEn} · {story.readTime} MIN</p><h1>{locale === 'zh' ? story.titleZh : story.titleEn}</h1><p>{locale === 'zh' ? story.dekZh : story.dekEn}</p><div><a class="dc-gold-button" href={path(`/culture/stories/${story.slug}`)}>{t.read}</a><a href={path(`/culture/${story.chamber}`)}>{t.explore} →</a></div></div>
+        <div class="dc-slide-region">{chambers.find((c) => c.slug === story.chamber)?.[locale].name}</div>
+      </article>)}
+    </div>
+    <div class="dc-slider-controls"><button type="button" data-dir="-1" aria-label="Previous">←</button><span><b>01</b> / 0{heroStories.length}</span><button type="button" data-dir="1" aria-label="Next">→</button></div>
+    <div class="dc-spotlight-caption"><span>{t.universe}</span><p>{universeEpoch[locale]}</p></div>
+  </section>
+
+  <section class="dc-atlas" id="atlas">
+    <img class="dc-atlas-bg" src={`${base}/images/dark-castle-atlas-v1.png`} alt="" /><div class="dc-atlas-grid"></div>
+    <header><p class="dc-kicker">EXPLORE THE REALMS</p><h2>{t.atlas}</h2><p>{t.atlasText}</p></header>
+    <div class="dc-map">
+      <div class="dc-map-orbit"></div>
+      {chambers.map((chamber, index) => <a class:list={['dc-map-node', `node-${index + 1}`, { 'is-active': index === 0 }]} href={path(`/culture/${chamber.slug}`)} data-map-node={index} style={`--x:${chamber.position.x}%;--y:${chamber.position.y}%`}><i>{chamber.glyph}</i><span>{chamber[locale].name}</span><small>0{index + 1}</small></a>)}
+      <div class="dc-map-card">{chambers.map((chamber, index) => <div class:list={{ 'is-active': index === 0 }} data-map-card={index}><p>REGION 0{index + 1}</p><h3>{chamber[locale].name}</h3><strong>{chamber[locale].epithet}</strong><span>{chamber[locale].legend}</span><a href={path(`/culture/${chamber.slug}`)}>{t.enter} →</a></div>)}</div>
+    </div>
+  </section>
+
+  <section class="dc-story-hub">
+    <div class="dc-section-head"><div><p class="dc-kicker">FEATURED FICTION</p><h2>{t.latest}</h2></div><p>{t.latestText}</p><a href={path('/culture')}>{t.allStories} →</a></div>
+    <div class="dc-story-mosaic">{universeStories.slice(0, 7).map((story, index) => <a class:list={['dc-story-tile', { 'is-main': index === 0 }]} href={path(`/culture/stories/${story.slug}`)}><img src={`${base}${story.image}`} alt="" /><div><p>{locale === 'zh' ? story.categoryZh : story.categoryEn}</p><h3>{locale === 'zh' ? story.titleZh : story.titleEn}</h3><span>{story.readTime} MIN · {locale === 'zh' ? story.eraZh : story.eraEn}</span></div></a>)}</div>
+  </section>
+
+  <section class="dc-realm-index">
+    <div class="dc-section-head"><div><p class="dc-kicker">REGIONS</p><h2>{t.worlds}</h2></div><p>{t.worldsText}</p></div>
+    <div class="dc-realm-grid">{chambers.map((chamber) => <a href={path(`/culture/${chamber.slug}`)} class={`realm-${chamber.tone}`}><span>{chamber.glyph}</span><p>{chamber.number}</p><h3>{chamber[locale].name}</h3><strong>{chamber[locale].epithet}</strong><i>EXPLORE →</i></a>)}</div>
+  </section>
+
+  <section class="dc-relic-shelf">
+    <div class="dc-section-head"><div><p class="dc-kicker">OBJECT ARCHIVE</p><h2>{t.relics}</h2></div><p>{t.relicText}</p><a href={path('/catalog')}>{t.catalog} →</a></div>
+    <div>{featuredProducts.map((product) => <a href={path(`/catalog#${product.category}`)}><div><img src={`${base}${product.image}`} alt={locale === 'zh' ? product.nameZh : product.nameEn} /><span>{product.sku}</span></div><h3>{locale === 'zh' ? product.nameZh : product.nameEn}</h3><p>{locale === 'zh' ? product.shortZh : product.shortEn}</p><i>{t.viewRelic} →</i></a>)}</div>
+  </section>
+
+  <section class="dc-contact-v3" id="contact"><p class="dc-kicker">WHOLESALE · CUSTOM · COLLABORATION</p><h2>{t.contact}</h2><p>{t.contactText}</p><a href={`mailto:${site.email}`}>{site.email} →</a></section>
+</div>
+<script>
+  const slides = [...document.querySelectorAll<HTMLElement>('.dc-slide')]; const count = document.querySelector<HTMLElement>('.dc-slider-controls b'); let current = 0;
+  const show = (next: number) => { current = (next + slides.length) % slides.length; slides.forEach((el, i) => el.classList.toggle('is-active', i === current)); if (count) count.textContent = `0${current + 1}`; };
+  document.querySelectorAll<HTMLButtonElement>('.dc-slider-controls button').forEach((button) => button.addEventListener('click', () => show(current + Number(button.dataset.dir))));
+  let timer = window.setInterval(() => show(current + 1), 6500); document.querySelector('.dc-spotlight')?.addEventListener('pointerenter', () => clearInterval(timer)); document.querySelector('.dc-spotlight')?.addEventListener('pointerleave', () => { timer = window.setInterval(() => show(current + 1), 6500); });
+  const activateMap = (index: number) => { document.querySelectorAll<HTMLElement>('[data-map-node]').forEach((el, i) => el.classList.toggle('is-active', i === index)); document.querySelectorAll<HTMLElement>('[data-map-card]').forEach((el, i) => el.classList.toggle('is-active', i === index)); };
+  document.querySelectorAll<HTMLElement>('[data-map-node]').forEach((node) => { const index = Number(node.dataset.mapNode); node.addEventListener('pointerenter', () => activateMap(index)); node.addEventListener('focus', () => activateMap(index)); });
+</script>

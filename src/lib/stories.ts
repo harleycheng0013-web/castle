@@ -2,138 +2,191 @@ export type StorySection = { title: string; text: string[] };
 
 export type UniverseStory = {
   slug: string;
-  chamber: 'gothic-relics' | 'celtic-wilds' | 'occult-cabinet' | 'cosmic-abyss';
-  categoryZh: string;
-  categoryEn: string;
-  titleZh: string;
-  titleEn: string;
-  dekZh: string;
-  dekEn: string;
-  eraZh: string;
-  eraEn: string;
-  readTime: number;
-  image: string;
+  chamber: string;
   featured?: boolean;
+  image: string;
+  readTime: number;
   productIds: string[];
+  titleZh: string; titleEn: string;
+  dekZh: string; dekEn: string;
+  categoryZh: string; categoryEn: string;
+  eraZh: string; eraEn: string;
+  quoteZh: string; quoteEn: string;
+  charactersZh: string[]; charactersEn: string[];
   sectionsZh: StorySection[];
   sectionsEn: StorySection[];
-  sources: { label: string; href: string }[];
 };
 
 export const universeStories: UniverseStory[] = [
   {
-    slug: 'the-castle-that-invented-gothic', chamber: 'gothic-relics', categoryZh: '文学原典', categoryEn: 'FOUNDING TEXT',
-    titleZh: '一座发明了“哥特”的城堡', titleEn: 'The Castle That Invented “Gothic”',
-    dekZh: '1764年，一部假装从中世纪流传下来的小说，让城堡第一次成为会说话、会记忆、会追赶后人的叙事机器。',
-    dekEn: 'In 1764, a novel disguised as a recovered medieval text turned the castle into a machine of memory, inheritance, and fear.',
-    eraZh: '英国 · 1764', eraEn: 'ENGLAND · 1764', readTime: 9, image: '/images/dark-castle-hero-atmosphere.png', featured: true, productIds: ['DC-003','DC-009'],
+    slug: 'the-bell-that-never-saw-dawn', chamber: 'obsidian-court', featured: true,
+    image: '/images/products/winged-angel-front.jpg', readTime: 9, productIds: ['DC-006', 'DC-007'],
+    titleZh: '从未见过黎明的钟', titleEn: 'The Bell That Never Saw Dawn',
+    dekZh: '当守钟人失踪，一名不会衰老的女孩必须在午夜前决定：敲响第十三口钟，还是让王庭永远停在同一天。',
+    dekEn: 'When the bell keeper vanishes, an ageless girl must choose before midnight: ring the thirteenth bell, or trap the Court inside the same day forever.',
+    categoryZh: '黑曜王庭纪事', categoryEn: 'OBSIDIAN COURT CHRONICLE', eraZh: '暮辉纪 427 年', eraEn: 'GLOAMING 427',
+    quoteZh: '钟声不是用来告诉我们时间。它们是在提醒时间，不要忘记我们。', quoteEn: 'Bells do not tell us the time. They remind time not to forget us.',
+    charactersZh: ['弥拉｜无龄见习守钟人', '奥德林｜失踪的第十三守钟人', '旧王｜沉睡在城下的名字'], charactersEn: ['Mira · ageless bell apprentice', 'Odren · missing thirteenth keeper', 'The Old King · a name beneath the city'],
     sectionsZh: [
-      { title: '一本“被发现”的古书', text: ['1764年，霍勒斯·沃波尔匿名出版《奥特朗托城堡》。初版序言声称，这只是一本古老意大利手稿的英文翻译：故事仿佛在十字军时代已经存在，只是如今重新被读者发现。这个伪装并非无关紧要。它让新小说披上了历史证据的外衣，也让读者在“也许发生过”与“明显是虚构”之间摇摆。', '第二版中，沃波尔承认自己是作者，并给作品加上“A Gothic Story”的副标题。这里的“哥特”不是对中世纪社会的准确复原，而是18世纪人对古堡、继承、宗教与超自然的想象性拼接。一个现代文学类型由此得名。'] },
-      { title: '城堡为什么必须巨大', text: ['故事从一场不可能的死亡开始：巨大的头盔从天而降，压死了奥特朗托的继承人。随后，超常尺寸的铠甲部件、会移动的肖像、地下通道和突然关闭的门不断出现。恐惧不只来自某个怪物，而来自整座建筑似乎在执行一项迟到的判决。', '城堡因此不再只是背景。它保存被篡改的继承史，把家族不愿承认的过去变成有重量的物体。人物可以逃离一个房间，却无法逃离建筑保存的记忆。后来无数哥特作品都会重复这一结构：宅邸就是家族，密室就是秘密，幽灵就是未偿还的历史债务。'] },
-      { title: '从贵族游戏到大众类型', text: ['《奥特朗托城堡》之后，安·拉德克利夫、马修·刘易斯等作家继续改造哥特。有人强调悬念与心理恐惧，有人突出禁忌、暴力和超自然。到19世纪，哥特进入《弗兰肯斯坦》、吸血鬼故事、城市怪谈和一便士惊悚连载。', '它之所以能不断复活，是因为“过去回来要求解释”的结构可以被放进任何时代。古堡可以变成实验室、都市公寓、废弃工厂或太空船；被压抑的记忆仍会寻找一扇门回来。'] },
-      { title: '今天如何观看一件哥特物品', text: ['当骷髅、角、翼和仿古铜色出现在一件当代摆件上，它并不是中世纪遗物。它继承的是哥特文学训练出的观看方式：相信物件拥有前史，相信磨损是一段时间，相信沉默的脸仍在保存某种证词。', 'DARK CASTLE 将这种设计称为“现代遗物”。它不伪装考古身份，而是邀请观看者为物件补写一段过去。'] }
+      { title: '没有早晨的早晨', text: ['弥拉醒来时，窗外仍是那片铁蓝色的夜。黑曜王庭已经两百零一年没有真正的清晨，但城里的人依旧每天拉开窗帘，像是在执行一项比希望更古老的礼仪。', '十二口钟依次响过，唯独第十三座塔没有回应。弥拉跑上螺旋石阶，只在守钟人的桌面看见一杯尚有余温的茶，以及一根指向城堡裂隙的黑色羽毛。'] },
+      { title: '钟楼里的另一扇门', text: ['第十三座塔从外面只有七层，从里面却有十三层。弥拉在第八层第一次看见太阳：它被画在一面巨大的玻璃上，光从画后照来，温暖得让她想起自己早已忘记的童年。', '奥德林把留言刻在钟舌背面：每一次敲钟都会从世界取走一种可能。王庭没有黎明，并非太阳消失，而是旧王用十二声钟把“太阳升起”这个可能封存了。'] },
+      { title: '第十三种可能', text: ['午夜前，黑羽审判庭包围钟楼。他们命令弥拉保持沉默，因为第十三声将释放所有被封存的可能，也可能唤醒那位用自己换来永夜的旧王。', '弥拉终于明白奥德林去了哪里。他没有逃走，而是走进钟里，成为了最后一块缺失的金属。只要她敲下去，导师会消失，黎明却可能回来。'] },
+      { title: '第一束光', text: ['弥拉敲响了钟。声音没有传遍城市，而是向每个人心中最黑暗的地方坠落。玫瑰墓园先亮起来，随后是彩窗、屋顶与无数双不敢睁开的眼睛。', '太阳并未完整升起。地平线上只出现一线金光，像一扇刚刚开启的门。弥拉听见钟里传来奥德林最后的笑声：“足够了。明天再敲一次。”'] }
     ],
     sectionsEn: [
-      { title: 'A “discovered” old book', text: ['Horace Walpole first published The Castle of Otranto anonymously in 1764, presenting it as a translation of an old Italian manuscript. The fiction wore the authority of a historical document.', 'In the second edition Walpole acknowledged authorship and added the subtitle “A Gothic Story.” The medieval past here was an eighteenth-century imaginative construction, not a documentary reconstruction.'] },
-      { title: 'Why the castle had to be immense', text: ['A gigantic helmet, moving portraits, subterranean passages, and closing doors make the building appear to carry out a delayed judgement. Architecture stores the inheritance story the family refuses to face.'] },
-      { title: 'From experiment to genre', text: ['Later writers transformed Gothic into psychological suspense, transgression, science, vampire fiction, and cheap serial publishing. The structure survives because any age can imagine a past that returns for an answer.'] },
-      { title: 'The modern relic', text: ['A contemporary skull or winged object is not a medieval artefact. It inherits a Gothic habit of seeing: objects seem to have a past, wear becomes time, and a silent face can preserve testimony.'] }
-    ],
-    sources: [{ label:'British Library · Gothic stories and first editions', href:'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },{ label:'British Library catalogue · Gothic horror guide', href:'https://eld.bl.uk/catalog/018382091' }]
+      { title: 'A morning without morning', text: ['Mira woke beneath the same iron-blue night. The Court had known no dawn for two hundred and one years, yet every citizen still opened their curtains as if performing a ritual older than hope.', 'Twelve bells answered. The thirteenth tower stayed silent. On her master’s desk she found warm tea and a black feather pointing toward the world-rift.'] },
+      { title: 'The other door in the tower', text: ['The tower had seven floors outside and thirteen within. On the eighth, Mira found a painted sun with real warmth behind its glass.', 'Odren had carved a warning into the bell: every chime removes one possibility from the world. The sun had not vanished. The Old King had sealed away the possibility of sunrise.'] },
+      { title: 'The thirteenth possibility', text: ['The Blackwing Tribunal surrounded the tower. They feared the last chime would free every lost possibility—and wake the king who purchased night with his own name.', 'Odren had not fled. He had entered the bell as its final piece of metal. To ring it was to lose him and perhaps recover dawn.'] },
+      { title: 'The first line of light', text: ['Mira struck the bell. Its voice fell inward, into the darkest place in every listener. The cemetery shone first, then stained glass, roofs, and thousands of opening eyes.', 'The sun rose only as a golden line. From inside the bell came Odren’s last laugh: “Enough. Ring it again tomorrow.”'] }
+    ]
   },
   {
-    slug: 'frankenstein-and-the-abandoned-creation', chamber: 'gothic-relics', categoryZh: '人物与思想', categoryEn: 'CHARACTER & IDEA',
-    titleZh: '弗兰肯斯坦：被遗弃的造物', titleEn: 'Frankenstein: The Abandoned Creation',
-    dekZh: '真正令人不安的并不是“制造生命”，而是创造者在生命睁眼之后转身逃走。', dekEn: 'The deepest horror is not making life, but the creator turning away after it opens its eyes.',
-    eraZh: '欧洲 · 1818', eraEn: 'EUROPE · 1818', readTime: 10, image: '/images/products/reaper-vessel-studio.jpg', productIds: ['DC-003','DC-005'],
+    slug: 'the-thirteenth-trial-of-the-winged-judge', chamber: 'obsidian-court',
+    image: '/images/products/ram-skull-front.jpg', readTime: 8, productIds: ['DC-006', 'DC-007'],
+    titleZh: '长翼审判官的第十三次审判', titleEn: 'The Winged Judge’s Thirteenth Trial',
+    dekZh: '一位被雕成圣像的审判官醒来，发现自己必须审判两百年前的自己。', dekEn: 'A judge carved into a saint awakens and is ordered to pass sentence on the person he was two centuries ago.',
+    categoryZh: '人物传记', categoryEn: 'CHARACTER STORY', eraZh: '暮辉纪 113—427 年', eraEn: 'GLOAMING 113–427',
+    quoteZh: '石像最可怕的不是不会说话，而是只会重复别人写下的话。', quoteEn: 'The terror of a statue is not silence, but speaking only the words others wrote.',
+    charactersZh: ['赛勒斯｜长翼审判官', '薇尔｜石像修复师'], charactersEn: ['Caelis · the Winged Judge', 'Veyra · conservator of statues'],
     sectionsZh: [
-      { title:'风暴、故事比赛与一个梦', text:['1816年，玛丽·戈德温与珀西·雪莱、拜伦等人在日内瓦湖附近相聚。恶劣天气把众人留在室内，一场鬼故事写作约定逐渐成为《弗兰肯斯坦》的起点。小说于1818年匿名出版，后来版本署上玛丽·雪莱之名。', '作品诞生于电学、生命原理、探险与革命余波共同刺激想象的时代。它使用哥特的黑夜、秘密与追逐，却把恐怖中心移进实验与责任。'] },
-      { title:'怪物并非天生无名', text:['小说中的造物没有被赋予姓名。“弗兰肯斯坦”属于创造者维克多，而不是造物。无名状态本身就是一种关系断裂：维克多把躯体拼合起来，却拒绝承认它作为生命的社会身份。', '造物最初学习语言、观察家庭并渴望被接纳。一次次拒绝把孤独变成愤怒。小说因此让读者在恐惧它的暴力时，也不得不看见创造者与社会如何参与制造这场悲剧。'] },
-      { title:'现代普罗米修斯', text:['副标题“现代普罗米修斯”把维克多与盗火、造人的古典形象联系起来。但小说没有把知识本身写成罪恶；它反复追问的是，获得能力之后是否愿意承担照料、解释与后果。', '这也是作品仍然现代的原因。人工生命、技术伦理、亲子关系和被排斥者的愤怒，都能在这段追逐中找到自己的问题。'] },
-      { title:'从书页到怪物图标', text:['舞台剧和电影逐渐为造物固定了高大身体、缝合痕迹和特殊头部轮廓。大众文化常把创造者的姓转移给怪物，也压缩了它会阅读、会辩论的复杂性。', '文化宇宙同时保存两种历史：小说中的人物，以及后世视觉文化创造出的图标。它们彼此关联，却不能被当作同一个版本。'] }
+      { title: '石头睁开眼睛', text: ['薇尔修复教堂圣像时，凿子下的石肤突然流出一滴黑色的血。长翼审判官赛勒斯低头看她，问今天是第几次审判。', '史书说赛勒斯两百年前自愿化作石像，但他记得的最后一刻，是审判庭强行把熔化的石膏灌进他的翅膀。'] },
+      { title: '被删掉的十二份判词', text: ['薇尔在像座中发现十二卷判词，每一卷都判赛勒斯有罪，罪名却各不相同：怜悯敌人、拒绝预言、记得太阳，甚至在梦里打开一扇门。', '第十三卷完全空白。纸的尽头印着今天的日期，以及薇尔的名字。'] },
+      { title: '审判自己', text: ['审判庭要求赛勒斯宣判过去的自己有罪，只有这样，王庭才会继续承认他的圣像。赛勒斯看着墙上那张被塑造成完美的脸，第一次觉得它比怪物更陌生。', '他写下的判词只有一句：被告因服从一个错误的世界而有罪。随后，他把羽翼从墙中拔出。'] },
+      { title: '飞离教堂的人', text: ['石翼无法飞翔，却能遮住整条街。当审判庭的箭雨落下，赛勒斯用翅膀护送薇尔离开。', '第二天，教堂只剩一块空白像座。人们开始把自己的秘密写在上面，因为他们相信，长翼审判官会在夜里回来，替所有不被允许的记忆作证。'] }
     ],
     sectionsEn: [
-      { title:'Storm, story contest, dream', text:['Mary Shelley’s novel emerged from the famous 1816 gathering near Lake Geneva and appeared anonymously in 1818. Gothic night and secrecy moved into the laboratory.'] },
-      { title:'The creature without a name', text:['Frankenstein is Victor’s surname, not the creature’s. Denied a name and social place, the creature learns language and longs for recognition before rejection turns into rage.'] },
-      { title:'The modern Prometheus', text:['The novel asks less whether knowledge is evil than whether creators will accept care, explanation, and consequence after gaining power.'] },
-      { title:'From character to icon', text:['Stage and film fixed a visual monster very different from the articulate reader in the novel. Both histories matter, but they are not the same version.'] }
-    ],
-    sources:[{label:'British Library · Frankenstein in Gothic history',href:'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library'}]
+      { title: 'Stone opens its eyes', text: ['While Veyra restored the cathedral saint, black blood welled beneath her chisel. Caelis looked down and asked which trial this was.', 'History claimed he chose to become stone. He remembered plaster being forced into his wings.'] },
+      { title: 'Twelve erased verdicts', text: ['Inside the plinth were twelve verdicts, each finding him guilty of a different crime: mercy, refusing prophecy, remembering the sun.', 'The thirteenth page was blank except for today’s date and Veyra’s name.'] },
+      { title: 'Judging the self', text: ['The Tribunal demanded that Caelis condemn his former self so the Court could keep worshipping his image.', 'He wrote: guilty of obeying a mistaken world. Then he tore his wings from the wall.'] },
+      { title: 'The man who left the cathedral', text: ['Stone wings could not fly, but they could shelter a street. Caelis guarded Veyra beneath the rain of arrows.', 'The empty plinth became a place where citizens left forbidden memories for a judge who might return at night.'] }
+    ]
   },
   {
-    slug:'the-white-book-and-the-living-story', chamber:'celtic-wilds', categoryZh:'手稿与口述传统', categoryEn:'MANUSCRIPT & ORAL TRADITION',
-    titleZh:'白书以前，故事已经活了很久', titleEn:'Before the White Book, the Stories Were Alive',
-    dekZh:'《马比诺吉昂》不是突然被一位作者写成的小说，而是口述、记忆与抄写共同保存的世界。', dekEn:'The Mabinogion was not invented at once by one author; oral memory and manuscript culture preserved its world together.',
-    eraZh:'威尔士 · 约14世纪手稿',eraEn:'WALES · 14TH-CENTURY MANUSCRIPT',readTime:11,image:'/images/products/forest-guardian-front.jpg',featured:true,productIds:['DC-002','DC-007'],
-    sectionsZh:[
-      {title:'一本白色封皮的书',text:['《里德赫白书》约在14世纪中叶抄写，今天分为两个部分收藏于威尔士国家图书馆。它保存了最早一批中古威尔士散文，也包括后来被统称为《马比诺吉昂》的故事。', '“最早现存抄本”不等于“故事诞生于14世纪”。图书馆的教育材料特别指出，其中一些故事比手稿古老得多，在写下之前已经由讲述者代代记忆。书页是一次停驻，不是故事生命的起点。']},
-      {title:'讲故事的人',text:['威尔士语 Cyfarwydd 指熟知故事并善于讲述的人。口述并非逐字复印：讲述者要掌握人物关系、地点、诗句、重复结构和听众节奏。每一次讲述既保持传统，也可能产生差异。', '因此，传说没有必要只有一个“正确剧本”。研究者会比较手稿、语言层次与版本关系；读者则能看见故事如何在共同记忆中被保存。']},
-      {title:'花朵做成的女子',text:['《马比诺吉昂》第四分支中，格威迪昂与马斯用橡树、金雀花和绣线菊的花创造布洛德薇德，让她成为莱乌的妻子。她后来爱上他人并参与谋害莱乌，惩罚是被变成猫头鹰。', '这个故事常被现代作品简化为“花之女神”或“背叛的女人”。原故事更复杂：一个被人为创造并被安排婚姻的人，是否拥有选择命运的权利？猫头鹰既是惩罚，也让她获得了另一种不受人类秩序约束的存在。']},
-      {title:'如何诚实地使用古老灵感',text:['现代森林守护者、鹿角人物和女神摆件可以从这些传统获得气氛，却不该随意声称自己复刻了某位古代神祇。最诚实的做法，是说明设计取自哪些形态、后世想象和民俗母题。', '这不会削弱神秘感。恰恰相反，知道故事经过多少语言、手稿和讲述者才抵达今天，会让一件现代物品拥有更真实的文化纵深。']}
+    slug: 'the-empty-throne-of-stagcrown', chamber: 'stagcrown-wilds', featured: true,
+    image: '/images/products/forest-guardian-front.jpg', readTime: 10, productIds: ['DC-002', 'DC-011'],
+    titleZh: '鹿冠荒野的空王座', titleEn: 'The Empty Throne of Stagcrown',
+    dekZh: '白树开花之夜，年轻猎人被森林选为新王；代价是世界将忘记她曾经存在。', dekEn: 'On the White Tree’s flowering night, a young hunter is chosen to rule. The price: the world must forget she ever existed.',
+    categoryZh: '荒野史诗', categoryEn: 'WILDS EPIC', eraZh: '第九次花期', eraEn: 'THE NINTH FLOWERING',
+    quoteZh: '王冠不是戴在头上的东西。王冠是所有人同意替你遗忘的名字。', quoteEn: 'A crown is not worn. It is the name everyone agrees to forget for you.',
+    charactersZh: ['伊芙兰｜无名猎人', '灰耳｜最后一只记名猎犬', '白树｜森林的古老意志'], charactersEn: ['Evren · nameless hunter', 'Greyear · last hound of names', 'The White Tree · will of the forest'],
+    sectionsZh: [
+      { title: '白树选择的人', text: ['白树开花时没有颜色，只有声音。每一片花瓣落地，都念出一个活人的名字。伊芙兰听见自己的名字被念了三次，猎人们便跪下，拒绝再看她。', '被森林选中的王必须失去名字。名字一旦从人们记忆中拔除，王就能听懂树根的道路，也将永远无法回到普通人的火堆旁。'] },
+      { title: '唯一记得她的猎犬', text: ['只有灰耳仍然跟着她。猎犬不理解加冕，只知道伊芙兰的气味仍然是雨、皮革与松烟。', '他们来到空王座前，藤蔓没有像往年那样托起新王，而是把王冠推向灰耳。森林真正选择的并不是伊芙兰，而是这个拒绝遗忘她的生命。'] },
+      { title: '森林提出的条件', text: ['白树通过千万片叶子说话：人类总想要一位能替他们承担遗忘的王，但森林需要的是一个记住每条道路的人。', '伊芙兰把鹿冠折成两半。一半交给灰耳，一半埋入白树根下。她宣布荒野不再拥有国王，只拥有彼此记得的人。'] },
+      { title: '王座开始行走', text: ['空王座的藤蔓从土地里拔出，像一头巨鹿般走向远方。旧边界在它身后消失，村庄第一次可以自由选择离开或留下。', '多年以后，旅人仍会在雾中遇见一名没有名字的猎人和一只戴着半顶王冠的老犬。他们不统治森林，只负责把迷路者带回有人记得的地方。'] }
     ],
-    sectionsEn:[
-      {title:'A book with a white binding',text:['The White Book of Rhydderch was copied around the mid-fourteenth century and preserves the earliest surviving versions of many tales now grouped as the Mabinogion. The stories themselves are older than the manuscript.']},
-      {title:'The storyteller',text:['Cyfarwydd names a skilled bearer and teller of story. Oral tradition preserves relationships and structure without requiring one fixed script.']},
-      {title:'The woman made from flowers',text:['Blodeuwedd is created from flowers, placed in marriage, takes a lover, and is transformed into an owl. Modern readings ask not only about betrayal but about agency within an imposed life.']},
-      {title:'Using old inspiration honestly',text:['Contemporary antlered guardians and forest figures can acknowledge motifs and later imagination without claiming to reproduce a named ancient deity.']}
-    ],
-    sources:[{label:'National Library of Wales · White Book of Rhydderch',href:'https://www.library.wales/discover-learn/education/learning-resources/the-white-book-of-rhydderch'},{label:'National Library of Wales · manuscript record',href:'https://www.library.wales/discover-learn/digital-exhibitions/manuscripts/the-middle-ages/white-book-of-rhydderch'}]
+    sectionsEn: [
+      { title: 'Chosen by the White Tree', text: ['The White Tree flowered in sound rather than colour. Each falling petal spoke a living name. Evren’s was spoken three times, and every hunter refused to look at her.', 'A chosen ruler must surrender her name, gaining every road beneath the roots and losing every ordinary fire.'] },
+      { title: 'The hound who remembered', text: ['Only Greyear followed. A hound knew nothing of coronation; Evren still smelled of rain, leather, and pine smoke.', 'At the throne, the vines offered the crown to the hound. The forest had chosen the life that refused to forget her.'] },
+      { title: 'The forest’s condition', text: ['The White Tree said people wanted a ruler to carry forgetting for them, while a forest needed someone who remembered every road.', 'Evren broke the crown in two: half for Greyear, half beneath the roots. The Wilds would have no sovereign—only lives that remembered one another.'] },
+      { title: 'The walking throne', text: ['The throne pulled its vines from the earth and walked away like a great stag. Old borders disappeared behind it.', 'Travellers still meet a nameless hunter and an old hound with half a crown. They rule nothing. They lead the lost toward places where someone remembers them.'] }
+    ]
   },
   {
-    slug:'cuchulainn-the-hound-of-culann',chamber:'celtic-wilds',categoryZh:'英雄传说',categoryEn:'HEROIC LEGEND',titleZh:'库丘林：一个少年如何成为“猎犬”',titleEn:'Cú Chulainn: How a Boy Became the Hound',dekZh:'一个名字、一只被杀死的守门犬，以及英雄对自己力量作出的第一次承诺。',dekEn:'A name, a slain guard dog, and the first promise a hero makes about his own strength.',eraZh:'爱尔兰 · 乌尔斯特故事群',eraEn:'IRELAND · ULSTER CYCLE',readTime:8,image:'/images/products/forest-guardian-candle.jpg',productIds:['DC-002','DC-011'],
-    sectionsZh:[
-      {title:'塞坦塔来到宴会',text:['少年塞坦塔前往铁匠库兰的宴会。主人放出猛犬守门，却不知道少年还在路上。犬向他扑来，塞坦塔用投球工具和球将它击杀。不同转述会改变动作细节，但故事的核心保持一致：一个孩子展示了危险的非凡力量。']},
-      {title:'名字是一项责任',text:['库兰为失去守门犬悲伤。塞坦塔提出在新犬长成前亲自守卫，由此获得 Cú Chulainn——“库兰之犬”的名字。名字不是奖章，而是一份补偿承诺。英雄身份从力量开始，却必须通过责任获得意义。']},
-      {title:'狂战与边界',text:['后来的故事把库丘林写成保卫乌尔斯特的战士。他的战斗狂热会令身体发生可怕变形；这种“扭曲”显示英雄力量同时威胁敌人与自身。英雄不是稳定完美的人，而是站在人类秩序与危险力量之间的边界人物。']},
-      {title:'传说、运动与公共记忆',text:['爱尔兰国家博物馆以投球用具解释库丘林故事，说明体育、传说与民族文化如何相互进入。博物馆里的球杆和球是历史物件；库丘林的事迹属于英雄传说。把两者并置而不混为同一种证据，正是文化阅读的价值。']}
+    slug: 'the-hound-beneath-the-white-tree', chamber: 'stagcrown-wilds',
+    image: '/images/products/garden-owl.jpg', readTime: 7, productIds: ['DC-011', 'DC-002'],
+    titleZh: '白树下最后一只记名猎犬', titleEn: 'The Last Named Hound Beneath the White Tree',
+    dekZh: '在名字会被森林吞下的国度，一只老猎犬替死去的主人守着最后两个音节。', dekEn: 'In a realm where the forest swallows names, an old hound guards the final two syllables of a dead master.',
+    categoryZh: '荒野传说', categoryEn: 'WILDS LEGEND', eraZh: '王座远行后', eraEn: 'AFTER THE THRONE WALKED',
+    quoteZh: '有些名字不是用嘴说的，是用回家的路说的。', quoteEn: 'Some names are spoken not by mouths, but by the road home.',
+    charactersZh: ['灰耳｜守名猎犬', '小苔｜迷路的女孩'], charactersEn: ['Greyear · keeper of a name', 'Moss · a lost child'],
+    sectionsZh: [
+      { title: '两个音节', text: ['灰耳已经老得听不见风，却每天在白树下叫两声。没有人知道那意味着什么，只知道每叫一次，树根就会向北移动一步。', '迷路的小苔跟着声音来到树下。她没有名字，或者说，她的名字已经被森林吃掉了。'] },
+      { title: '用气味书写', text: ['灰耳带她穿过雨后的苔原、倒流的溪和会模仿脚步的灌木。他在每个岔路口留下不同的气味，像在世界上写一封只有猎犬能读懂的信。', '小苔逐渐明白，那两个音节属于一个人，一个灰耳不允许森林带走的人。'] },
+      { title: '白树的交易', text: ['白树愿意归还小苔的名字，条件是灰耳交出最后的记忆。老犬趴在根旁，安静得像一块被雨打磨过的石头。', '他没有答应。他只是把回家的路线教给小苔，因为道路比名字更难被夺走。'] },
+      { title: '新的守名者', text: ['灰耳死后，白树根下长出两朵从未见过的小花。小苔每天来叫出那两个音节，虽然她仍不知道它们怎样书写。', '许多年后，所有迷路的人都知道：只要跟随白树下的两声呼唤，就能找到一个不会问你叫什么的家。'] }
     ],
-    sectionsEn:[{title:'Setanta comes to the feast',text:['On his way to Culann’s feast, the boy Setanta kills the smith’s guard dog with hurling equipment. Versions change details, but the child’s dangerous strength remains central.']},{title:'A name as responsibility',text:['Setanta offers to guard Culann until another hound is raised and becomes Cú Chulainn, the Hound of Culann. The name is a promise of repair, not simply a prize.']},{title:'Battle frenzy and the boundary',text:['Later tales give the hero a terrifying battle transformation. His strength protects society while threatening to exceed it.']},{title:'Legend, sport, public memory',text:['The National Museum of Ireland uses hurling objects to explain the tale. Historical artefact and heroic legend can illuminate one another without becoming the same kind of evidence.']}],
-    sources:[{label:'National Museum of Ireland · hurling and Cú Chulainn',href:'https://www.museum.ie/en-IE/Museums/Decorative-Arts-History/Engage-And-Learn/Schools-Educational-Visits/Learning-Resources-%281%29/Virtual-Trail-Game%2C-Set%2C-Match-The-History-of-Spor/Hair-hurling-ball-or-sliotar-and-Caman%2C-Gallery-1'}]
+    sectionsEn: [
+      { title: 'Two syllables', text: ['Greyear was too old to hear the wind, yet he called twice beneath the White Tree each day. With every call, the roots shifted north.', 'A lost child followed the sound. The forest had already eaten her name.'] },
+      { title: 'Writing with scent', text: ['Across moss, backward streams, and bushes that copied footsteps, Greyear marked every fork like a letter only a hound could read.', 'The two syllables belonged to someone he would not allow the forest to take.'] },
+      { title: 'The White Tree’s bargain', text: ['The tree offered the child’s name in exchange for Greyear’s last memory.', 'He refused and taught her the road home, because roads are harder to steal than names.'] },
+      { title: 'A new keeper', text: ['After Greyear died, two unknown flowers grew from the roots. The child returned each day to speak the syllables.', 'Now the lost follow that double call to a home that never asks what they are called.'] }
+    ]
   },
   {
-    slug:'kunstkammer-a-world-in-one-room',chamber:'occult-cabinet',categoryZh:'收藏史',categoryEn:'HISTORY OF COLLECTING',titleZh:'珍奇柜：把整个世界关进一间房',titleEn:'Kunstkammer: The World Inside One Room',dekZh:'自然、艺术、仪器和远方物件被并排陈列——现代博物馆的一位华丽而矛盾的祖先。',dekEn:'Nature, art, instruments, and distant objects displayed together—a magnificent and troubling ancestor of the modern museum.',eraZh:'欧洲 · 16—17世纪',eraEn:'EUROPE · 16TH–17TH CENTURIES',readTime:10,image:'/images/products/witch-hands-bookend.jpg',featured:true,productIds:['DC-013','DC-012'],
-    sectionsZh:[
-      {title:'一个缩小的宇宙',text:['Kunstkammer、Wunderkammer 常被译作艺术室、奇珍室或珍奇柜。欧洲王公与富裕收藏者把自然形成的奇物、人手制作的工艺品、科学仪器、古物和远方物件陈列在同一空间。', '它的理想不是只收藏一种东西，而是以有限房间模拟世界的多样性。复杂钟表可以象征宇宙秩序，贝壳与珊瑚展示自然，精密雕刻和贵重材料展示人的技巧。']},
-      {title:'知识也是权力的陈列',text:['珍奇柜表现求知欲，也展示财富、旅行网络、宫廷权力和殖民贸易。物件如何来到欧洲、谁有权命名它们、原来社群如何理解它们，往往被早期目录忽略。', '今天重新讲述珍奇柜，必须同时看到它对博物馆分类的贡献和不平等收集史。一个“神秘物件”不仅需要美丽灯光，也需要来源和流转记录。']},
-      {title:'柜门、抽屉与秘密',text:['大型收藏室之外，工匠还制造带有多层抽屉、暗格和昂贵镶嵌的实体柜。打开外门之后还要继续探索，观看变成一串逐层揭示的动作。', '这种交互逻辑与今天的文化网站非常接近：首页是柜门，分区是抽屉，故事页是被取出的物件。读者不是面对一次性信息墙，而是在移动中建立关联。']},
-      {title:'从占有世界到解释来源',text:['DARK CASTLE 借用珍奇柜的戏剧性陈列，但文化宇宙的目标不是声称“拥有一切”。每件符号与故事都应带着来源、分类和不确定性。', '真正有力量的收藏不只让人惊叹，还让人知道：它从哪里来，谁讲述过它，我们今天为何要重新观看。']}
+    slug: 'the-last-lamp-of-the-glass-astrologer', chamber: 'gloam-archive', featured: true,
+    image: '/images/products/witch-hands-crystal.jpg', readTime: 9, productIds: ['DC-013', 'DC-009'],
+    titleZh: '玻璃占星师的最后一盏灯', titleEn: 'The Glass Astrologer’s Last Lamp',
+    dekZh: '大熄灯前夜，占星师发现星空并不在头顶，而是被囚禁在城市每一只玻璃器皿中。', dekEn: 'On the eve of the Great Extinguishing, an astrologer discovers that the stars are not above, but imprisoned inside the city’s glass vessels.',
+    categoryZh: '秘库悬疑', categoryEn: 'ARCHIVE MYSTERY', eraZh: '第九十九次熄灯', eraEn: 'THE NINETY-NINTH EXTINGUISHING',
+    quoteZh: '如果一颗星只在你看见它时发光，那么被观察的究竟是谁？', quoteEn: 'If a star shines only when you see it, which of you is being observed?',
+    charactersZh: ['露珂｜玻璃占星师', '七号｜会梦见火焰的抄写人偶'], charactersEn: ['Luce · glass astrologer', 'Seven · a scribe-doll that dreams of flame'],
+    sectionsZh: [
+      { title: '城市熄灭之前', text: ['点灯人逐层走过微光秘库。每熄灭一盏灯，一排书架就停止呼吸。露珂守着顶层最后一盏玻璃灯，发现火焰投下的不是她的影子，而是一片陌生星空。', '七号说，那是被秘库删掉的天空。很久以前，城里的学者为了让知识永不受天气与黑夜限制，把星辰的影像一颗颗封进玻璃。'] },
+      { title: '倒置天文台', text: ['露珂把最后的灯带到地底。倒置望远镜指向一座巨大的透明球体，里面漂浮着数千个被记录、分类和遗忘的夜晚。', '每一次占星，其实都不是人在观察星辰，而是被封存的星空借人的眼睛观察外面的世界。'] },
+      { title: '第九十九次提问', text: ['秘库要求露珂做出选择：保持灯火，城市会继续拥有全部知识，却永远看不到真正天空；熄灭灯火，玻璃中的星辰将重返宇宙，秘库会失去大半记忆。', '七号第一次提出不在程序里的问题：“如果我们忘了，故事还发生过吗？”露珂回答：“会。只是轮到我们重新寻找。”'] },
+      { title: '群星离开玻璃', text: ['她吹灭最后一盏灯。整座城市同时响起玻璃开裂的清脆声音，星光从瓶子、窗户、镜片与眼泪中飞出。', '黎明时，微光秘库第一次拥有真正的黑暗。露珂抬头看见稀疏却自由的星空，而七号的胸腔里，亮起了一小团没有被任何人记录的火。'] }
     ],
-    sectionsEn:[{title:'A universe in miniature',text:['Kunstkammer and Wunderkammer brought natural wonders, human artefacts, scientific instruments, antiquities, and distant objects into one room. A finite space attempted to model the diversity of the world.']},{title:'Knowledge displayed as power',text:['The cabinet expressed curiosity but also wealth, court power, travel networks, and colonial trade. Modern interpretation must ask how objects arrived and who had the authority to name them.']},{title:'Doors, drawers, secrets',text:['Elaborate cabinets turned viewing into layers of opening and discovery. The same logic can shape a cultural website: entrance, chamber, story, object.']},{title:'From owning the world to explaining provenance',text:['DARK CASTLE borrows theatrical display, not the claim to possess everything. Each symbol needs source, category, and uncertainty.']}],
-    sources:[{label:'The Metropolitan Museum of Art · Collecting for the Kunstkammer',href:'https://www.metmuseum.org/pt/essays/collecting-for-the-kunstkammer'},{label:'The Met · Augsburg cabinet',href:'https://www.metmuseum.org/art/collection/search/188830'}]
+    sectionsEn: [
+      { title: 'Before the city goes dark', text: ['As each lamp died, another shelf stopped breathing. In the final glass flame, Luce saw not her shadow but an unfamiliar sky.', 'Seven said it was the sky the Archive had erased when scholars sealed the stars into vessels so knowledge would never depend on weather or night.'] },
+      { title: 'The inverted observatory', text: ['Below the city, a transparent sphere held thousands of catalogued and forgotten nights.', 'Astrologers had never observed the stars. The imprisoned sky had used human eyes to observe the world outside.'] },
+      { title: 'The ninety-ninth question', text: ['Keep the lamp and retain all knowledge beneath a false sky; extinguish it and return the stars while losing half the Archive.', 'Seven asked, “If we forget, did the story still happen?” Luce answered, “Yes. We simply have to find it again.”'] },
+      { title: 'The stars leave glass', text: ['She blew out the final flame. Glass cracked through the city and starlight escaped from bottles, windows, lenses, and tears.', 'At dawn the Archive possessed true darkness. Above it were fewer but freer stars, and inside Seven burned a flame no one had recorded.'] }
+    ]
   },
   {
-    slug:'houdini-and-the-last-seance',chamber:'occult-cabinet',categoryZh:'历史事件',categoryEn:'HISTORICAL EVENT',titleZh:'胡迪尼最后的招魂会',titleEn:'Houdini and the Final Séance',dekZh:'一个终身揭露灵媒的人死后，为什么连续十年成为招魂会等待的对象？',dekEn:'Why did a lifelong debunker of mediums become the absent guest at ten years of séances?',eraZh:'美国 · 1926—1936',eraEn:'UNITED STATES · 1926–1936',readTime:9,image:'/images/products/rose-pentagram-candles.jpg',productIds:['DC-012','DC-013'],
-    sectionsZh:[
-      {title:'魔术师与灵媒',text:['胡迪尼精通舞台机关、脱逃术和观众注意力。他也收藏大量关于魔术、灵性主义、巫术和心理现象的书，并公开挑战一些声称能够联系死者的灵媒。', '第一次世界大战后的死亡与哀悼让灵性主义获得许多追随者。胡迪尼认为，一些表演者利用悲伤和人们对亲人的思念。他并不只说“不相信”，还从舞台技术角度解释声音、暗室和隐藏装置怎样制造奇迹。']},
-      {title:'一条约定的密码',text:['据后来的纪念活动叙述，胡迪尼与妻子贝丝约定：如果死后能够联系，他会传回只有两人知道的编码信息。这使任何“收到胡迪尼消息”的说法都面对一道验证门槛。', '1926年胡迪尼去世后，贝丝参与或举行纪念性招魂会。等待本身逐渐成为公共仪式：人们等待的不只是一个幽灵，也是对死亡能否被跨越的答案。']},
-      {title:'1936年的屋顶',text:['最后一次著名活动在1936年万圣节夜于好莱坞尼克博克酒店屋顶举行，现场有观众、广播、手铐和舞台化程序。美国国会图书馆保存了相关脚本与记录。', '预定信息没有出现。贝丝宣布十年已经足够，并熄灭象征性的灯。这个结尾之所以动人，不是因为超自然成功，而是因为一个持续十年的等待终于被人为结束。']},
-      {title:'怀疑也能产生仪式',text:['胡迪尼故事揭示，仪式不只属于信仰者。验证规则、纪念日期、反复等待与最后熄灯，同样构成强烈的仪式结构。', '在文化宇宙中，烛光、晶球和桌面陈设被当作历史与舞台视觉研究，而不是效果承诺。保持怀疑不会破坏故事；它让故事拥有可核查的边界。']}
+    slug: 'the-garden-that-wrote-names', chamber: 'gloam-archive',
+    image: '/images/products/rose-pentagram-candles.jpg', readTime: 8, productIds: ['DC-009', 'DC-012'],
+    titleZh: '会书写名字的五烛花园', titleEn: 'The Five-Candle Garden That Wrote Names',
+    dekZh: '黑玫瑰开始拼写尚未出生之人的名字，其中一个名字属于正在阅读花园的你。', dekEn: 'Black roses begin spelling the names of the unborn. One of those names belongs to the person reading the garden.',
+    categoryZh: '秘库异闻', categoryEn: 'ARCHIVE ODDITY', eraZh: '大熄灯后三日', eraEn: 'THREE DAYS AFTER DARK',
+    quoteZh: '预言最擅长的不是看见未来，而是诱使你亲手完成它。', quoteEn: 'Prophecy does not predict the future. It persuades you to complete it.',
+    charactersZh: ['安索｜花园管理员', '无页之书｜没有封面的叙述者'], charactersEn: ['Ansel · keeper of the garden', 'The Pageless Book · narrator without a cover'],
+    sectionsZh: [
+      { title: '玫瑰的字迹', text: ['星辰离开玻璃后的第三天，花园里的黑玫瑰开始移动。茎秆弯成字母，花苞成为句点，五盏蜡烛依次点燃。', '管理员安索记录下七十二个名字。前七十一个都不属于任何活人，最后一个却是他自己的。'] },
+      { title: '没有封面的书', text: ['无页之书告诉他，花园不是预言工具，而是一支笔。谁读懂花朵，谁就会在现实里替它写完句子。', '安索决定闭上眼睛，却发现自己的影子仍在阅读。'] },
+      { title: '第五盏蜡烛', text: ['每熄灭一盏蜡烛，一个名字就从花园消失。熄到第四盏时，只剩安索和一个尚未出现的陌生名字。', '第五盏无法吹灭，因为火焰并不在烛芯上，而在读者的注意里。'] },
+      { title: '把故事留给后来的人', text: ['安索没有完成预言。他拆散花园，把玫瑰、烛台和石环分别送到四个世界，让句子永远缺少标点。', '其中一件后来抵达黑城堡。每当有人凝视它太久，花瓣便会轻微转动，像是仍在寻找能够写完故事的人。'] }
     ],
-    sectionsEn:[{title:'Magician and medium',text:['Houdini understood stage machinery and attention. He collected books on magic and spiritualism and challenged mediums he believed exploited grief.']},{title:'A promised code',text:['Houdini and Bess were said to have arranged a private code that any posthumous message would need to contain. The code created a test, not merely a hope.']},{title:'The rooftop in 1936',text:['The final famous séance was staged on a Hollywood hotel roof with audience, radio, props, and script. No message came; Bess ended the ten-year vigil and extinguished the light.']},{title:'Scepticism can make ritual',text:['Rules, anniversary, repetition, and a final extinguishing formed a ritual even without supernatural success. Historical atmosphere does not require a supernatural claim.']}],
-    sources:[{label:'Library of Congress · Hollywood, Houdini and the 1936 séance',href:'https://blogs.loc.gov/loc/2020/10/hollywood-houdini-and-the-halloween-seance-of-1936/'},{label:'Library of Congress · Houdini’s rare magic books',href:'https://blogs.loc.gov/inside_adams/2014/10/harry-houdinis-rare-magic-books/'}]
+    sectionsEn: [
+      { title: 'The handwriting of roses', text: ['Three days after the stars escaped, stems bent into letters and buds became punctuation. Five candles lit themselves.', 'Ansel recorded seventy-two names. The first seventy-one belonged to no living person. The last was his.'] },
+      { title: 'The book without a cover', text: ['The Pageless Book explained that the garden was not an oracle but a pen. Whoever understood the flowers would finish their sentence in reality.', 'Ansel closed his eyes and discovered his shadow kept reading.'] },
+      { title: 'The fifth candle', text: ['Each extinguished flame erased a name. After the fourth, only Ansel and one unborn stranger remained.', 'The fifth could not be blown out because it burned inside the reader’s attention.'] },
+      { title: 'Leaving the story unfinished', text: ['Ansel scattered the roses, candles, and stone ring across four worlds so the sentence would never find its final mark.', 'One piece reached the Dark Castle. Its petals still move when watched for too long.'] }
+    ]
   },
   {
-    slug:'cthulhu-a-fiction-with-a-birth-certificate',chamber:'cosmic-abyss',categoryZh:'文学原典',categoryEn:'FOUNDING FICTION',titleZh:'克苏鲁：一个有“出生证明”的虚构神',titleEn:'Cthulhu: A Fiction with a Birth Certificate',dekZh:'它不是被考古发现的远古神祇，而是可以追溯到作者、手稿和1928年杂志页面的现代创造。',dekEn:'Not an excavated ancient god, but a modern creation traceable to author, manuscript, and a 1928 magazine page.',eraZh:'美国 · 1928',eraEn:'UNITED STATES · 1928',readTime:10,image:'/images/products/cthulhu-bust-green.jpg',featured:true,productIds:['DC-008','DC-004'],
-    sectionsZh:[
-      {title:'从杂志页面开始',text:['《克苏鲁的呼唤》发表于美国《Weird Tales》1928年2月号。H. P. 洛夫克拉夫特在此前写成故事，把学者遗稿、艺术家梦境、警方档案、海员证词和报纸剪报拼接成调查档案。', '这种结构故意制造“证据很多但无法完整理解”的感觉。读者没有直接进入一个神话时代，而是在现代文件中发现某种比现代世界更古老的阴影。']},
-      {title:'偶像、梦与无法翻译的形体',text:['故事中的小型偶像成为线索：它兼具人形、翼与触手特征，却无法被已知艺术史分类。1934年，洛夫克拉夫特本人还画过克苏鲁蹲坐在刻字基座上的草图，现由布朗大学收藏。', '这张图是珍贵的创作物证，但它证明的是作者如何想象自己的虚构角色，不是远古宗教曾经存在。把这条界线讲清楚，反而让后世雕塑如何偏离、放大或重组原始描述变得更值得比较。']},
-      {title:'宇宙恐怖的尺度',text:['克苏鲁真正带来的并非“最大怪兽”，而是尺度变化。人的历史只是深时间的一小段，理性能够整理文件，却不保证宇宙会服从人的意义。', '因此，宇宙恐怖常使用残缺档案、无法测量的建筑、沉睡实体和知识带来的崩溃。读者害怕的不是被一个敌人击败，而是发现人类从来不是故事中心。']},
-      {title:'影响与批判同时存在',text:['洛夫克拉夫特的想象力深刻影响文学、游戏、电影和视觉艺术；他的文本也包含严重的种族主义与排外恐惧。布朗大学的专题研究强调，这些偏见与部分恐怖想象存在结构性联系。', '负责任的文化网站不需要在赞美与删除之间二选一。它可以研究作品为何有效、如何传播，同时明确指出其伤害与历史语境。']}
+    slug: 'the-visitor-from-the-tideless-sea', chamber: 'tideless-abyss',
+    image: '/images/products/cthulhu-bust-green.jpg', readTime: 10, productIds: ['DC-008', 'DC-004'],
+    titleZh: '无潮海上的来客', titleEn: 'The Visitor from the Tideless Sea',
+    dekZh: '一艘空船归港后，唯一的“幸存者”声称自己不是船员，而是那片海。', dekEn: 'When an empty ship returns, its only “survivor” claims not to be a sailor, but the sea itself.',
+    categoryZh: '深渊航海志', categoryEn: 'ABYSSAL VOYAGE', eraZh: '黑船归港之夜', eraEn: 'THE NIGHT THE BLACK SHIP RETURNED',
+    quoteZh: '海没有声音。你听见的浪，是它在模仿我们呼吸。', quoteEn: 'The sea has no voice. The waves are only its imitation of breath.',
+    charactersZh: ['瑟恩｜静潮领航员', '来客｜借用人形的海'], charactersEn: ['Sern · Stilltide navigator', 'The Visitor · a sea borrowing human shape'],
+    sectionsZh: [
+      { title: '第七码头的黑船', text: ['黑船撞上码头时没有发出声音，仿佛木头和石头都在水下。领航员瑟恩登船，在船长室发现一名浑身湿透的陌生人。', '陌生人没有影子，鞋底也没有水。他说：“我不是从海上来。我就是海，只是暂时学会了站立。”'] },
+      { title: '被锁住的月亮', text: ['来客带瑟恩进入船舱。那里没有货物，只有一口向下延伸的井。井底悬着一轮苍白月亮，被无数骨链固定在黑水中。', '无潮海从不涨落，并非它已经死亡，而是它全部的运动都被月亮的锁链压进梦境。每个沿岸居民所做的共同梦，就是海无法完成的潮汐。'] },
+      { title: '海提出的请求', text: ['来客要求瑟恩斩断一根锁链。只需一根，海就能重新呼吸；代价是某座沿海城市将在第一场潮汐中消失。', '瑟恩想起梦盐城。那里的人每晚梦见完整的家园，醒来只拥有半座港口。也许被潮水带走，反而能让城市回到完整的梦里。'] },
+      { title: '第一道潮痕', text: ['瑟恩没有斩断锁链，而是把黑船开向世界裂隙，让黑城堡收藏这道无法回答的请求。来客站在船头，身体一点点变回水。', '第二天，第七码头的石阶上出现一道湿痕，比海面高出一寸。孩子们第一次学会“涨潮”这个词，而深海某处，一根骨链发出了即将断裂的声音。'] }
     ],
-    sectionsEn:[{title:'Beginning on a magazine page',text:['The Call of Cthulhu appeared in Weird Tales in February 1928. Lovecraft built it from a scholar’s papers, dreams, police material, sailor testimony, and clippings.']},{title:'Idol, dream, unclassifiable body',text:['Lovecraft’s 1934 sketch shows the fictional entity crouched on an inscribed pedestal. It documents an author’s imagination, not an ancient cult.']},{title:'The scale of cosmic horror',text:['The central shock is not monster size but human insignificance before deep time and an indifferent universe. Documents accumulate without guaranteeing comprehension.']},{title:'Influence and critique together',text:['Lovecraft’s influence is immense, and his racism is serious. Brown University research shows that prejudice cannot simply be separated from all of his horror imagery. Responsible reading studies both.']}],
-    sources:[{label:'H. P. Lovecraft Archive · publication record',href:'https://www.hplovecraft.com/writings/fiction/cc.aspx'},{label:'Brown University Library · Lovecraft’s racial imaginaries and sketch',href:'https://library.brown.edu/create/lovecraftracialimaginaries/'}]
+    sectionsEn: [
+      { title: 'The black ship at Pier Seven', text: ['The ship struck without sound. In the captain’s room Sern found a soaked stranger with no shadow and dry footprints.', '“I did not come from the sea,” it said. “I am the sea, briefly taught to stand.”'] },
+      { title: 'The chained moon', text: ['Below deck a well descended toward a pale moon fixed in black water by chains of bone.', 'The sea’s movement had been forced into dreams. Every shared coastal dream was a tide the ocean could not complete.'] },
+      { title: 'The request', text: ['Break one chain and the sea would breathe again, but one coastal city would vanish beneath the first tide.', 'Perhaps Dreamsalt City, half-real while awake, might become whole inside the water.'] },
+      { title: 'The first tide mark', text: ['Sern sailed the request into the world-rift for the Dark Castle to keep unanswered.', 'Next morning a wet line stood one inch above the sea. Children learned the word tide, and far below, one bone chain began to crack.'] }
+    ]
   },
   {
-    slug:'the-manuscript-out-of-time',chamber:'cosmic-abyss',categoryZh:'档案传奇',categoryEn:'ARCHIVAL STORY',titleZh:'超越时间的手稿，也曾消失在时间里',titleEn:'The Manuscript Out of Time Was Lost in Time',dekZh:'一份被认为遗失的洛夫克拉夫特手稿，在几十年后重新出现，改变了读者能看到的文本。',dekEn:'A Lovecraft manuscript believed lost resurfaced decades later and changed the text readers could see.',eraZh:'美国 · 1935及以后',eraEn:'UNITED STATES · 1935 AND AFTER',readTime:8,image:'/images/products/eldritch-altar-front.jpg',productIds:['DC-004','DC-008'],
-    sectionsZh:[
-      {title:'记忆被另一个时代占据',text:['《超越时间之影》讲述一名学者经历记忆断裂，并逐渐相信自己的意识曾与遥远时代的异类智慧交换。故事以调查、梦境、考古和自我怀疑推进，把“我是谁”变成跨越地质时间的问题。']},
-      {title:'作者的文本并不总等于刊本',text:['洛夫克拉夫特的友人罗伯特·巴洛曾在1935年协助整理手稿。作品后来在杂志发表，但编辑版本与作者原稿存在差异。原始手稿又没有出现在巴洛去世后的材料中，长期被认为遗失。']},
-      {title:'在私人文件中重现',text:['多年后，手稿在另一批私人文件中被发现并捐赠给布朗大学。馆藏说明指出，这使作品首次能够按照作者留下的文本被准确阅读。', '这段经历本身像一则档案小说：文本从一位作者到朋友，再进入他人文件，消失于公共视野，最后在大学馆藏中重新获得身份。']},
-      {title:'为什么文化网站需要档案意识',text:['我们今天习惯把“作品”看成固定内容，但杂志编辑、排版、删改、翻译和再版都会改变文本。手稿不是用来制造神秘光环的圣物，而是比较变化的证据。', '文化宇宙会把故事、出版版本和后世图像分层呈现。读者看到的不只是“讲了什么”，也包括一个故事怎样穿过媒介和时间抵达现在。']}
+    slug: 'the-dream-of-the-octopus-bone-crown', chamber: 'tideless-abyss',
+    image: '/images/products/tentacle-skull-front.jpg', readTime: 8, productIds: ['DC-008', 'DC-005'],
+    titleZh: '章鱼骨王冠的梦', titleEn: 'The Dream of the Octopus-Bone Crown',
+    dekZh: '王冠每晚选择一个新的梦者，并借他们的身体建造一座不可能存在于陆地上的宫殿。', dekEn: 'Each night the crown chooses another dreamer and borrows their body to build a palace that cannot exist on land.',
+    categoryZh: '深渊梦录', categoryEn: 'ABYSSAL DREAM', eraZh: '骨冠苏醒后', eraEn: 'AFTER THE CROWN WOKE',
+    quoteZh: '梦不是发生在睡眠里的地方。睡眠只是梦进入我们的门。', quoteEn: 'Dreams do not happen inside sleep. Sleep is merely their door into us.',
+    charactersZh: ['诺娅｜骨冠聆听者', '骨冠｜寻找身体的建筑师'], charactersEn: ['Noa · Listener of the Bone Crown', 'The Crown · an architect seeking a body'],
+    sectionsZh: [
+      { title: '醒来后的建筑', text: ['诺娅第一次戴上骨冠，只睡了七分钟。醒来时，她的房间多出一根湿漉漉的石柱，柱面雕着她从未学过的语言。', '此后每晚，港口都会增加一小块不属于陆地的建筑：向内弯曲的楼梯、在天花板流动的水井、只允许影子通过的门。'] },
+      { title: '王冠的蓝图', text: ['骨冠不是君王的饰物，而是一张会思考的蓝图。它在不同梦者脑中建造同一座宫殿，试图让沉没于海底的意识重新获得形体。', '诺娅听见骨头内部传来缓慢的计数。它不是在计算砖石，而是在计算还需要多少个梦者。'] },
+      { title: '第九十九个房间', text: ['宫殿完成第九十八个房间后，整个梦盐城开始在白天透明。居民发现自己的影子已经搬进那座梦中建筑，只剩身体还留在岸上。', '第九十九个房间需要一扇门。骨冠选中了诺娅的头骨。'] },
+      { title: '不合尺寸的门', text: ['诺娅把骨冠放在黑城堡收藏室的石座上。城堡不属于海也不属于陆地，它的门永远比进入者的命运窄一寸。', '骨冠无法完成最后的尺寸，宫殿因此停在将成未成之间。如今游客偶尔会梦见第九十九个房间，而门后，总有一片无潮的海耐心等待。'] }
     ],
-    sectionsEn:[{title:'Memory occupied by another age',text:['The Shadow Out of Time turns a scholar’s broken memory into a question spanning geological time, using investigation, dream, archaeology, and doubt.']},{title:'Authorial text and magazine text',text:['Robert Barlow helped prepare the manuscript in 1935. The magazine version differed, while the original later disappeared from view.']},{title:'Recovered in private papers',text:['The manuscript resurfaced decades later and was donated to Brown, allowing the story to be read as Lovecraft wrote it.']},{title:'Why archives matter',text:['Editing, layout, translation, and reprint change works. A manuscript is not a magical relic; it is evidence for comparing those changes.']}],
-    sources:[{label:'Brown University Library · recovered Shadow Out of Time manuscript',href:'https://library.brown.edu/exhibits/archive/leaves/modern.html'}]
+    sectionsEn: [
+      { title: 'Architecture after waking', text: ['Noa wore the crown for seven minutes. She woke beside a wet stone column carved in a language she had never learned.', 'Each night the harbour gained another impossible fragment: inward stairs, ceiling wells, doors that admitted shadows alone.'] },
+      { title: 'The crown’s blueprint', text: ['The crown was not regalia but a thinking plan, building the same palace through many dreamers to give a drowned awareness a body.', 'Inside the bone, Noa heard it counting not stones but sleepers.'] },
+      { title: 'The ninety-ninth room', text: ['At ninety-eight rooms, Dreamsalt City grew transparent by day. Its shadows had already moved into the dream palace.', 'The final room required a door, and the crown chose Noa’s skull.'] },
+      { title: 'A door of the wrong size', text: ['Noa placed the crown inside the Dark Castle, whose doors are always one inch narrower than fate.', 'Unable to finish its measurement, the palace remains almost complete. Visitors sometimes dream of the final room and a tideless sea waiting behind it.'] }
+    ]
   }
 ];
 
-export const storyBySlug = (slug: string) => universeStories.find((story) => story.slug === slug);
+export const findStory = (slug: string) => universeStories.find((story) => story.slug === slug);

@@ -6,4 +6,4 @@ import { site } from '../../lib/site';
 export function getStaticPaths() { return chambers.map((chamber) => ({ params: { slug: chamber.slug }, props: { chamber } })); }
 const { chamber } = Astro.props;
 ---
-<BaseLayout title={`${chamber.zh.title} | ${site.name}`} description={chamber.zh.summary}><CultureStory chamber={chamber} locale="zh" /></BaseLayout>
+<BaseLayout title={`${chamber.zh.name} | ${site.name}`} description={chamber.zh.intro}><CultureStory chamber={chamber} locale="zh" /></BaseLayout>

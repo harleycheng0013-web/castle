@@ -1,247 +1,196 @@
 export type CultureLocale = 'zh' | 'en';
 
+type LocalText = {
+  name: string;
+  epithet: string;
+  intro: string;
+  legend: string;
+  landmarks: { name: string; text: string }[];
+  factions: { name: string; text: string }[];
+  timeline: { date: string; title: string; text: string }[];
+  productTitle: string;
+};
+
 export type CultureChamber = {
   slug: string;
   number: string;
-  tone: string;
+  tone: 'gothic' | 'wild' | 'occult' | 'cosmic';
+  glyph: string;
+  position: { x: number; y: number };
   productIds: string[];
-  zh: {
-    doorTitle: string;
-    title: string;
-    subtitle: string;
-    summary: string;
-    note: string;
-    timeline: { date: string; title: string; text: string }[];
-    chapters: { eyebrow: string; title: string; text: string }[];
-    archives: { kind: string; title: string; text: string; sourceLabel: string; sourceHref: string }[];
-    symbols: string[];
-    productTitle: string;
-    sourceTitle: string;
-  };
-  en: {
-    doorTitle: string;
-    title: string;
-    subtitle: string;
-    summary: string;
-    note: string;
-    timeline: { date: string; title: string; text: string }[];
-    chapters: { eyebrow: string; title: string; text: string }[];
-    archives: { kind: string; title: string; text: string; sourceLabel: string; sourceHref: string }[];
-    symbols: string[];
-    productTitle: string;
-    sourceTitle: string;
-  };
-  sources: { label: string; href: string }[];
+  zh: LocalText;
+  en: LocalText;
+};
+
+export const universeEpoch = {
+  zh: '暮辉纪 427 年。四轮暗月同时升起，失落的道路重新连接。矗立于世界裂隙中央的黑城堡再次开门，收容从四境带回的故事与遗物。',
+  en: 'Year 427 of the Gloaming Age. Four dark moons rise together and the lost roads reconnect. At the world-rift, the Dark Castle opens again to receive stories and relics from four realms.'
 };
 
 export const chambers: CultureChamber[] = [
   {
-    slug: 'gothic-relics', number: '01', tone: 'gothic', productIds: ['DC-003', 'DC-005', 'DC-009'],
+    slug: 'obsidian-court', number: '01', tone: 'gothic', glyph: '✦', position: { x: 27, y: 38 }, productIds: ['DC-006', 'DC-007', 'DC-010'],
     zh: {
-      doorTitle: '哥特遗物室', title: '哥特遗物室', subtitle: '从中世纪遗迹到暗黑浪漫主义：一门关于阴影、记忆与崇高感的语言。',
-      summary: '这不是“黑色装饰”的简单代称。哥特是一种把废墟、尖拱、幽灵、死亡与欲望编织在一起的叙事美学；它让恐惧成为观看世界的另一种方式。',
-      note: '本展厅讨论的是哥特艺术与文学的视觉遗产，不把任何符号等同于真实宗教或仪式。',
+      name: '黑曜王庭', epithet: '永夜钟声统治的山脊之国',
+      intro: '这里的太阳在两百年前停止升起。贵族用钟声计算时间，石像替死者保存记忆，而每一扇彩窗都映出一个尚未发生的葬礼。',
+      legend: '王庭相信，只要第十三口钟仍然沉默，埋在城下的旧王就不会醒来。如今，守钟人失踪了。',
+      landmarks: [
+        { name: '无晨大教堂', text: '十三座钟塔围绕一口从未敲响的黑钟。' },
+        { name: '羽骨长廊', text: '历代审判官的翼骨被铸入墙中，夜里仍会低语。' },
+        { name: '玫瑰墓园', text: '花朵从石棺里生长，每一朵都记得死者最后一句话。' }
+      ],
+      factions: [
+        { name: '守钟修会', text: '守护时间秩序与十三口钟的沉默誓言。' },
+        { name: '黑羽审判庭', text: '佩戴金翼面具，追捕从未来逃回的人。' }
+      ],
       timeline: [
-        { date: '12–15 世纪', title: '石头、尖拱与彩窗', text: '“Gothic”最初指向欧洲中世纪建筑。高耸的拱顶、深邃的回廊与彩色光线，建立了后来哥特视觉中“庄严而不安”的空间感。' },
-        { date: '1764 以后', title: '城堡开始说话', text: '霍勒斯·沃波尔的《奥特朗托城堡》把中古城堡、秘密、家族阴影和超自然威胁带入小说；哥特小说由此成为一个持续演化的类型。' },
-        { date: '19 世纪至今', title: '浪漫主义的暗面', text: '从《弗兰肯斯坦》到维多利亚时期的通俗惊悚，再到今日的电影、时装与收藏文化，哥特不断把“美”与“不安”并置。' }
-      ],
-      chapters: [
-        { eyebrow: 'THE RUIN', title: '废墟不是终点，而是叙事的入口。', text: '哥特空间从不只是一座旧建筑。门、走廊、地下室、墓园与被遮蔽的肖像，都是等待被打开的记忆容器。我们的骷髅、翼骨与死神造型借用的正是这种“物件仿佛拥有过去”的观看方式。' },
-        { eyebrow: 'THE SUBLIME', title: '在宏大与脆弱之间停留。', text: '哥特的魅力不在于单纯吓人，而在于让人同时感到渺小、好奇与被吸引。厚重的轮廓、古铜色磨损、夸张的角与骨骼，让一件桌面摆件也能像从更大故事中被带出的遗物。' },
-        { eyebrow: 'THE MODERN RELIC', title: '把阴影放进日常。', text: '今天的哥特收藏不需要一座城堡才能成立。一盏灯、一本书旁的器物、一个具有戏剧性剪影的摆件，就足以让空间拥有自己的叙事节奏。' }
-      ],
-      archives: [
-        { kind: '文学原典 / 1764', title: '《奥特朗托城堡》：一座被伪装成古稿的城堡', text: '沃波尔在 1764 年匿名出版这部小说，最初把它伪装成“重新发现的中世纪故事”。城堡、失落的继承权、秘密通道与超自然征兆由此组成了后来哥特小说反复调用的叙事机器。它不是中世纪民间传说，而是18世纪作家对“中世纪感”的有意识发明。', sourceLabel: '英国图书馆：哥特小说的起点', sourceHref: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },
-        { kind: '文学史 / 1818', title: '《弗兰肯斯坦》：哥特与现代性的相遇', text: '玛丽·雪莱让实验、身体、造物责任与恐惧进入哥特传统。怪物并非来自遥远的古堡，而是来自一个现代人试图突破界限的实验室。它提醒读者：哥特并不只回望过去，也持续追问科学、伦理与人的孤独。', sourceLabel: '英国图书馆：哥特文本与《弗兰肯斯坦》', sourceHref: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },
-        { kind: '民俗到流行文化', title: '“黑犬”“幽灵”与地方传说', text: '英国及爱尔兰的怪谈传统常把道路、荒地、墓园和夜行者变为叙事地点。不同地区的黑犬、精灵或归来者传说没有一部统一的“正典”；它们在口述、地方记录、诗歌与后来的小说中不断变形。这里展示的是这种传播方式，不把任何单一版本宣称为唯一真实。', sourceLabel: '英国图书馆：民间故事与怪诞爱尔兰选集', sourceHref: 'https://shop.bl.uk/products/uncanny-ireland-otherworldly-tales-of-the-strange-and-sublime' },
-        { kind: '出版文化 / 19 世纪', title: '一便士惊悚：城市读者的连续噩梦', text: '维多利亚时期的 penny dreadful 以低价、连载和强烈情节吸引大众读者。罪案、幽灵、怪物与都市危险不再只属于昂贵精装书；哥特由此进入通俗出版、街头销售与每周追读的节奏，也为后来的类型杂志和连续剧提供了文化土壤。', sourceLabel: '英国图书馆：维多利亚通俗惊悚馆藏', sourceHref: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },
-        { kind: '文化方法', title: '建筑史的“哥特”与小说的“哥特”并不相同', text: '中世纪教堂与后世哥特小说共享尖拱、阴影、崇高感等视觉联想，却属于不同历史对象。18、19世纪创作者重新想象中世纪，形成哥特复兴与文学类型。把二者区分开，能看见“真实遗迹”怎样被后世转化为想象资源。', sourceLabel: '英国图书馆：哥特文学发展的文献线索', sourceHref: 'https://eld.bl.uk/catalog/018382091' },
-        { kind: '阅读线索', title: '哥特为何总在讨论家族与秘密？', text: '继承权、被隐瞒的身世、封闭宅邸与无法安葬的过去，反复出现在哥特文本中。它们把社会秩序变成空间：家族秘密藏进房间，历史债务变成幽灵。读者面对的因此不只是怪物，也是一个共同体不愿公开的记忆。', sourceLabel: '英国图书馆：哥特恐怖阅读指南馆藏', sourceHref: 'https://eld.bl.uk/catalog/018382091' }
-      ],
-      symbols: ['城堡与废墟', '拱门与幽暗回廊', '骨骼、角与翼', '古铜、黑金与磨损质感'], productTitle: '从遗物室带走的藏品', sourceTitle: '继续阅读：文化来源'
+        { date: '暮辉前 02 年', title: '最后一次日出', text: '太阳停在地平线下，王庭开始用钟声划分昼夜。' },
+        { date: '暮辉纪 113 年', title: '羽骨审判', text: '第一位长翼者被判无罪，却自愿留在教堂守门。' },
+        { date: '暮辉纪 427 年', title: '第十三钟失窃', text: '一口从未存在于名册上的小钟出现在黑城堡。' }
+      ], productTitle: '来自黑曜王庭的遗物'
     },
     en: {
-      doorTitle: 'Gothic Relic Room', title: 'Gothic Relic Room', subtitle: 'From medieval ruins to dark romanticism: a language of shadow, memory, and the sublime.',
-      summary: 'Gothic is more than black décor. It is a narrative aesthetic that binds ruins, arches, ghosts, death, and desire—and makes unease another way of seeing.',
-      note: 'This room explores the visual legacy of Gothic art and literature. It does not equate decorative symbols with real religious practice.',
+      name: 'The Obsidian Court', epithet: 'A ridge kingdom ruled by bells of endless night',
+      intro: 'The sun stopped rising two centuries ago. Nobles measure time by bells, statues preserve the dead, and every stained window reflects a funeral yet to happen.',
+      legend: 'The Court believes the buried king will sleep while the thirteenth bell remains silent. Now the bell keeper is missing.',
+      landmarks: [
+        { name: 'Cathedral of No Dawn', text: 'Thirteen towers surround a black bell that has never rung.' },
+        { name: 'Gallery of Wingbone', text: 'The judges’ wings were cast into its walls and still whisper.' },
+        { name: 'The Rose Necropolis', text: 'Flowers grow from sarcophagi and remember each final word.' }
+      ],
+      factions: [
+        { name: 'The Bellward Order', text: 'Keepers of measured time and the vow of thirteen silences.' },
+        { name: 'The Blackwing Tribunal', text: 'Gold-masked hunters of those who flee backward from the future.' }
+      ],
       timeline: [
-        { date: '12th–15th c.', title: 'Stone, arches, and coloured light', text: 'The word Gothic first points to medieval European architecture. Vaults, shadowed cloisters, and stained light established a space that feels both solemn and unsettled.' },
-        { date: 'From 1764', title: 'The castle begins to speak', text: 'Horace Walpole’s The Castle of Otranto brought castles, secrets, family shadows, and supernatural threat into fiction, launching a genre that kept changing.' },
-        { date: '19th c. to now', title: 'The dark side of romanticism', text: 'From Frankenstein and Victorian sensation stories to cinema, fashion, and collecting today, Gothic keeps placing beauty beside unease.' }
-      ],
-      chapters: [
-        { eyebrow: 'THE RUIN', title: 'A ruin is not an ending; it is an entrance.', text: 'In Gothic space, a door, corridor, cellar, graveyard, or covered portrait can hold memory. Our skulls, bone wings, and reapers borrow this sense that an object has arrived from a larger past.' },
-        { eyebrow: 'THE SUBLIME', title: 'Stay between grandeur and fragility.', text: 'Gothic is not simply about fright. It makes us feel small, curious, and drawn in at once. Heavy silhouettes, aged bronze, horns, and bone let a tabletop object read like a recovered relic.' },
-        { eyebrow: 'THE MODERN RELIC', title: 'Bring shadow into the everyday.', text: 'A Gothic collection does not require a castle. A lamp, a shelf, or one dramatic silhouette can give an ordinary room its own narrative rhythm.' }
-      ],
-      archives: [
-        { kind: 'LITERARY ORIGIN / 1764', title: 'The Castle of Otranto: a castle disguised as a recovered text', text: 'Walpole first published the novel anonymously and presented it as a rediscovered medieval story. Castle, inheritance, secret passage, and supernatural sign became an engine for later Gothic fiction—not a medieval folk tale, but an eighteenth-century invention of medieval feeling.', sourceLabel: 'British Library · Gothic origins', sourceHref: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },
-        { kind: 'LITERARY HISTORY / 1818', title: 'Frankenstein: Gothic meets modernity', text: 'Mary Shelley brought experiment, bodies, responsibility, and fear into the Gothic tradition. Her creature comes not from a distant castle but from a modern boundary-crossing laboratory.', sourceLabel: 'British Library · Gothic texts', sourceHref: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },
-        { kind: 'FOLK TRADITION', title: 'Black dogs, ghosts, and local tales', text: 'British and Irish uncanny traditions turn roads, moorland, graveyards, and night travellers into story places. There is no single canonical version: tales shifted through oral tradition, local record, poetry, and later fiction.', sourceLabel: 'British Library · Uncanny Ireland', sourceHref: 'https://shop.bl.uk/products/uncanny-ireland-otherworldly-tales-of-the-strange-and-sublime' },
-        { kind: 'PUBLISHING / 19th c.', title: 'Penny dreadfuls: the serial nightmare', text: 'Cheap weekly serials brought crime, ghosts, monsters, and urban danger to a mass readership. Gothic entered street sale and cliff-hanger rhythm, preparing the ground for later genre magazines and serial media.', sourceLabel: 'British Library · Victorian sensational print', sourceHref: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' },
-        { kind: 'METHOD', title: 'Architectural Gothic is not the same as Gothic fiction', text: 'Medieval buildings and later fiction share visual associations, but they are different historical objects. Revivalists and writers transformed real remains into imaginative resources.', sourceLabel: 'British Library · Gothic history guide', sourceHref: 'https://eld.bl.uk/catalog/018382091' },
-        { kind: 'READING KEY', title: 'Why family secrets return', text: 'Inheritance, concealed birth, closed houses, and unburied pasts turn social order into space. A room holds the family secret; a ghost becomes historical debt.', sourceLabel: 'British Library · Gothic horror guide', sourceHref: 'https://eld.bl.uk/catalog/018382091' }
-      ],
-      symbols: ['Castles and ruins', 'Arches and shadowed cloisters', 'Bone, horn, and wings', 'Aged bronze, black, and gold'], productTitle: 'Relics from this room', sourceTitle: 'Read the sources'
-    },
-    sources: [{ label: 'British Library · Gothic stories and The Castle of Otranto', href: 'https://www.bl.uk/stories/blogs/posts/spine-tingling-stories-in-the-blood-curdling-british-library' }]
+        { date: '2 Before Gloaming', title: 'The final sunrise', text: 'The sun stops below the ridge and bells divide night from night.' },
+        { date: 'Gloaming 113', title: 'The Wingbone Trial', text: 'The first winged one is acquitted, yet remains to guard the door.' },
+        { date: 'Gloaming 427', title: 'The stolen thirteenth bell', text: 'A bell absent from every record appears inside the Dark Castle.' }
+      ], productTitle: 'Relics of the Obsidian Court'
+    }
   },
   {
-    slug: 'celtic-wilds', number: '02', tone: 'celtic', productIds: ['DC-002', 'DC-007', 'DC-011'],
+    slug: 'stagcrown-wilds', number: '02', tone: 'wild', glyph: '♜', position: { x: 67, y: 27 }, productIds: ['DC-002', 'DC-011', 'DC-003'],
     zh: {
-      doorTitle: '凯尔特荒野室', title: '凯尔特荒野室', subtitle: '从铁器时代纹样到现代森林想象：相连、变化，而非一块静止的“古老标签”。',
-      summary: '“凯尔特”并不是单一民族、单一神话或一组万能符号。它连接着横跨欧洲的多种社群、语言与艺术传统，也在后来被不断重新想象。',
-      note: '本系列使用“凯尔特灵感”而非“古代凯尔特原物”来描述森林、角与交织纹样的现代创作。',
+      name: '鹿冠荒野', epithet: '森林会移动，名字会生根',
+      intro: '荒野没有固定边界。古树在雾中迁徙，河流选择自己的源头，戴鹿角王冠的人必须每年把一个名字归还给森林。',
+      legend: '白树即将第九次开花。传说花开之夜，森林会挑选新王；被挑中的人，将被所有人遗忘。',
+      landmarks: [
+        { name: '白根圣林', text: '树根像道路一样通往每一个做过同样梦的人。' },
+        { name: '空王座', text: '由活藤编成，拒绝承认任何永久的主人。' },
+        { name: '猫眼沼泽', text: '数百双琥珀色眼睛在水下替森林守夜。' }
+      ],
+      factions: [
+        { name: '鹿冠守望者', text: '维持人类聚落与迁徙森林之间的古老契约。' },
+        { name: '无名猎团', text: '主动舍弃名字，以换取穿越树根道路的能力。' }
+      ],
       timeline: [
-        { date: '约公元前 800–50 年', title: '铁器时代的流动网络', text: '欧洲多地发展出常被称作“凯尔特艺术”的装饰语言。考古发现强调：这些社群彼此关联，却有清晰的地方差异。' },
-        { date: '罗马扩张之后', title: '边界中的混合与延续', text: '罗马影响改变了许多地区的日常与物质文化；爱尔兰和苏格兰北部等地区则以各自方式回应与延续本地传统。' },
-        { date: '中世纪至现代', title: '结饰、手稿与复兴想象', text: '爱尔兰、苏格兰、威尔士与康沃尔的艺术传统在手稿、金工和石雕中继续发展；近现代又形成了丰富的“凯尔特”视觉复兴。' }
-      ],
-      chapters: [
-        { eyebrow: 'THE LIVING LINE', title: '交织纹样是一种“不断继续”的线。', text: '环绕、回旋、动物形与植物形的线条会引导眼睛持续移动。它并不需要被解释成单一神秘密码：它首先是一种高度成熟、充满节奏感的造型语言。' },
-        { eyebrow: 'THE WILD', title: '森林不是背景，而是角色。', text: '鹿角、树冠、鸟与守护者在当代幻想作品中经常共同出现。我们将它们作为“荒野与守望”的视觉主题，而不宣称某一尊树脂人物就是特定历史神祇。' },
-        { eyebrow: 'THE HONEST INSPIRATION', title: '灵感可以明确地说明来处。', text: 'DARK CASTLE 的森林人物、女神与猫头鹰更接近当代凯尔特灵感和民俗幻想的融合。保留这条界线，才让审美、历史与设计各自都更完整。' }
-      ],
-      archives: [
-        { kind: '考古材料 / 铁器时代', title: '旋涡、枝蔓与会变形的动物', text: '约公元前500年后，阿尔卑斯山以北出现了高度抽象的装饰语言。英国博物馆指出，弯曲线条在观看角度变化时会像枝蔓、鸟或兽；这种“可变形”的视觉趣味，是理解凯尔特艺术的重要入口，而不是一张可以逐项翻译的神秘密码表。', sourceLabel: '大英博物馆：凯尔特人的艺术与身份', sourceHref: 'https://www.britishmuseum.org/blog/who-were-celts' },
-        { kind: '历史辨析', title: '“凯尔特人”不是一个单一、静止的民族', text: '古希腊和罗马作者曾使用相近名称描述北方人群，但考古学看到的是彼此联系又地方差异鲜明的社群。环形颈饰、武器与纹样在不同地点有不同含义。把“凯尔特”写成一个完全统一的古国，会抹去这种真实而丰富的差异。', sourceLabel: '大英博物馆：谁是凯尔特人？', sourceHref: 'https://www.britishmuseum.org/blog/who-were-celts' },
-        { kind: '传说与文学', title: '异界、精灵与海豹人：被讲述的世界', text: '爱尔兰、苏格兰、威尔士与马恩岛等地保存着多种口头故事传统，常见异界居民、海边变形者、森林与边界时刻。它们的版本会随着讲述者、语言和时代改变。网站将把这些故事作为“有出处的传说版本”逐步标注，而不是将其伪装为可考证的历史事件。', sourceLabel: '苏格兰故事中心：精灵、海豹人与水中生物', sourceHref: 'https://www.scottishstorytellingcentre.com/event-post/?eventid=14034' },
-        { kind: '威尔士原典 / 中世纪手稿', title: '《马比诺吉昂》：花朵女子、巨人与异界', text: '《里德赫白书》约抄写于14世纪中叶，保存了目前所知最早的一批《马比诺吉昂》故事文本。故事在成书前已经通过口述流传多个世代；其中既有四分支故事，也有人物变形、异界旅程、魔法与亚瑟传统。手稿年代不等于故事起源年代，这一差别是理解口述传统的关键。', sourceLabel: '威尔士国家图书馆：《里德赫白书》', sourceHref: 'https://www.library.wales/discover-learn/education/learning-resources/the-white-book-of-rhydderch' },
-        { kind: '爱尔兰英雄传说', title: '库丘林：从守门犬到乌尔斯特英雄', text: '爱尔兰传说中，少年塞坦塔杀死铁匠库兰的猛犬后，承诺代替它守卫，因而得名 Cú Chulainn——“库兰之犬”。他的故事属于乌尔斯特故事群，与《夺牛记》紧密相连。博物馆材料还展示了投球运动如何进入这一英雄叙事。', sourceLabel: '爱尔兰国家博物馆：投球运动与库丘林传说', sourceHref: 'https://www.museum.ie/en-IE/Museums/Decorative-Arts-History/Engage-And-Learn/Schools-Educational-Visits/Learning-Resources-%281%29/Virtual-Trail-Game%2C-Set%2C-Match-The-History-of-Spor/Hair-hurling-ball-or-sliotar-and-Caman%2C-Gallery-1' },
-        { kind: '威尔士与欧洲文学', title: '亚瑟：从早期威尔士武士到欧洲国王', text: '亚瑟形象并非一次完成。威尔士早期文学保留了神秘武士与英雄的线索；12世纪杰弗里·蒙茅斯的叙述以及后来的法语、英语传奇，则把他推向欧洲宫廷文学。追踪版本变化，比寻找一个唯一“真实亚瑟”更能说明传说如何塑造共同记忆。', sourceLabel: '威尔士国家图书馆：亚瑟与威尔士神话馆藏', sourceHref: 'https://www.library.wales/about-nlw/press-and-news/press-releases/2017-press-releases/arthur-and-cerys' }
-      ],
-      symbols: ['交织与螺旋线', '鹿角与树冠', '鸟、林地与守护者', '铜绿、苔藓与石质感'], productTitle: '从荒野室带走的藏品', sourceTitle: '继续阅读：文化来源'
+        { date: '树历 01 年', title: '第一棵树开始行走', text: '荒野从旧大陆剥离，朝月亮的方向迁徙。' },
+        { date: '树历 309 年', title: '空王座拒绝加冕', text: '七位候选人同时被藤蔓推下王座。' },
+        { date: '暮辉纪 427 年', title: '白树第九次含苞', text: '全境猎犬同时向黑城堡的方向低吼。' }
+      ], productTitle: '来自鹿冠荒野的遗物'
     },
     en: {
-      doorTitle: 'Celtic Wilds', title: 'Celtic Wilds', subtitle: 'From Iron Age pattern to the modern forest imagination: connected, changing, and never one frozen “ancient” label.',
-      summary: 'Celtic is not one people, one mythology, or a universal set of signs. It connects many communities, languages, and art traditions across Europe—and has been reimagined repeatedly.',
-      note: 'We use Celtic-inspired, not ancient Celtic artifact, for contemporary work drawing on forests, antlers, and interlace.',
+      name: 'The Stagcrown Wilds', epithet: 'Where forests move and names take root',
+      intro: 'The Wilds have no fixed border. Ancient trees migrate through fog, rivers choose their own source, and the wearer of the antler crown must return one name to the forest each year.',
+      legend: 'The White Tree is about to flower for the ninth time. On that night the forest chooses a new sovereign—one everyone else must forget.',
+      landmarks: [
+        { name: 'The White-Root Grove', text: 'Its roots lead toward everyone who has dreamed the same dream.' },
+        { name: 'The Empty Throne', text: 'Woven from living vines, it refuses every permanent master.' },
+        { name: 'Cat-Eye Fen', text: 'Hundreds of amber eyes keep watch beneath the water.' }
+      ],
+      factions: [
+        { name: 'Stagcrown Wardens', text: 'Keepers of the old covenant between settlements and the moving forest.' },
+        { name: 'The Nameless Hunt', text: 'Hunters who surrender their names to travel the roads beneath roots.' }
+      ],
       timeline: [
-        { date: 'c. 800–50 BCE', title: 'Iron Age networks', text: 'Across Europe, communities developed decorative languages often described as Celtic art. Archaeology stresses connection alongside real regional difference.' },
-        { date: 'After Roman expansion', title: 'Mixture and continuity at the edges', text: 'Roman power transformed daily and material life in many regions; places including Ireland and northern Scotland responded and continued local traditions in distinct ways.' },
-        { date: 'Medieval to modern', title: 'Interlace, manuscripts, and revival', text: 'Art traditions in Ireland, Scotland, Wales, and Cornwall continued through manuscripts, metalwork, and stone; later periods created many Celtic revivals.' }
-      ],
-      chapters: [
-        { eyebrow: 'THE LIVING LINE', title: 'Interlace is a line that keeps moving.', text: 'Loops, spirals, animal forms, and vegetal curves lead the eye onward. They need not be reduced to a single secret code: first, they are a sophisticated visual language of rhythm.' },
-        { eyebrow: 'THE WILD', title: 'The forest is a character, not scenery.', text: 'Antlers, tree canopies, birds, and guardians often meet in contemporary fantasy. We use them as a visual theme of wilderness and watchfulness, not as claims that a resin figure is a named historical deity.' },
-        { eyebrow: 'THE HONEST INSPIRATION', title: 'Inspiration deserves a clear origin.', text: 'DARK CASTLE forest figures, goddesses, and owls are contemporary blends of Celtic-inspired and folk-fantasy imagery. Keeping that line clear makes the history and the design stronger.' }
-      ],
-      archives: [
-        { kind: 'ARCHAEOLOGY / IRON AGE', title: 'Spirals, tendrils, and changing animals', text: 'After around 500 BCE, highly abstract decorative languages developed north of the Alps. Curving lines can read as tendrils, birds, or beasts as the viewer moves; this is visual play, not a universal secret-code chart.', sourceLabel: 'British Museum · Celtic art and identity', sourceHref: 'https://www.britishmuseum.org/blog/who-were-celts' },
-        { kind: 'HISTORICAL CAUTION', title: 'The Celts were not one static people', text: 'Classical writers applied related names to northern groups, while archaeology reveals connected communities with strong local difference. Treating Celtic as one fully unified ancient nation loses that richness.', sourceLabel: 'British Museum · Who were the Celts?', sourceHref: 'https://www.britishmuseum.org/blog/who-were-celts' },
-        { kind: 'LEGEND & LITERATURE', title: 'Otherworlds, fairies, and selkies', text: 'Ireland, Scotland, Wales, and the Isle of Man maintain many oral traditions of otherworldly beings, shapeshifters, forest, sea, and threshold times. Versions shift with teller, language, and era.', sourceLabel: 'Scottish Storytelling Centre', sourceHref: 'https://www.scottishstorytellingcentre.com/event-post/?eventid=14034' },
-        { kind: 'WELSH MANUSCRIPT', title: 'The Mabinogion: flower-women, giants, and otherworlds', text: 'The mid-fourteenth-century White Book of Rhydderch preserves the earliest known copies of many tales now grouped as the Mabinogion. The stories circulated orally for generations before being written.', sourceLabel: 'National Library of Wales · White Book', sourceHref: 'https://www.library.wales/discover-learn/education/learning-resources/the-white-book-of-rhydderch' },
-        { kind: 'IRISH HEROIC LEGEND', title: 'Cú Chulainn: from guard dog to Ulster hero', text: 'After killing Culann’s hound, the boy Setanta promises to guard in its place and becomes Cú Chulainn, “Hound of Culann.” His story belongs to the Ulster cycle and the Táin.', sourceLabel: 'National Museum of Ireland', sourceHref: 'https://www.museum.ie/en-IE/Museums/Decorative-Arts-History/Engage-And-Learn/Schools-Educational-Visits/Learning-Resources-%281%29/Virtual-Trail-Game%2C-Set%2C-Match-The-History-of-Spor/Hair-hurling-ball-or-sliotar-and-Caman%2C-Gallery-1' },
-        { kind: 'WELSH & EUROPEAN LITERATURE', title: 'Arthur: from Welsh warrior to European king', text: 'Arthur’s image was made in stages, from early Welsh literary appearances through Geoffrey of Monmouth and later courtly traditions. Version history is more revealing than one “true Arthur.”', sourceLabel: 'National Library of Wales · Arthurian collections', sourceHref: 'https://www.library.wales/about-nlw/press-and-news/press-releases/2017-press-releases/arthur-and-cerys' }
-      ],
-      symbols: ['Interlace and spirals', 'Antlers and canopy', 'Birds, woodland, guardians', 'Verdigris, moss, and stone'], productTitle: 'Objects from the wilds', sourceTitle: 'Read the sources'
-    },
-    sources: [{ label: 'British Museum · Who were the Celts?', href: 'https://www.britishmuseum.org/blog/who-were-celts' }, { label: 'British Museum · Celtic Britain and Ireland, AD 300–1100', href: 'https://www.britishmuseum.org/sites/default/files/2021-05/large_print_guide_room_41.pdf' }]
+        { date: 'Tree Year 01', title: 'The first walking tree', text: 'The Wilds break from the old continent and begin migrating toward the moon.' },
+        { date: 'Tree Year 309', title: 'The throne refuses a crown', text: 'Living vines throw all seven candidates to the ground.' },
+        { date: 'Gloaming 427', title: 'The ninth flowering', text: 'Every hound in the realm growls toward the Dark Castle.' }
+      ], productTitle: 'Relics of the Stagcrown Wilds'
+    }
   },
   {
-    slug: 'occult-cabinet', number: '03', tone: 'occult', productIds: ['DC-012', 'DC-013', 'DC-004'],
+    slug: 'gloam-archive', number: '03', tone: 'occult', glyph: '◉', position: { x: 44, y: 68 }, productIds: ['DC-013', 'DC-009', 'DC-012'],
     zh: {
-      doorTitle: '秘仪珍奇柜', title: '秘仪珍奇柜', subtitle: '从珍奇柜、降神会与舞台幻术，到现代流行文化中的仪式感陈设。',
-      summary: '“秘仪”在这里是一种观看方式：桌面被安排成一个小型舞台，蜡烛、书、玻璃、金属与象征物共同制造等待揭晓的气氛。',
-      note: '本展厅使用的是历史与流行文化中的“神秘学视觉语言”，不提供宗教、灵性或超自然效果的承诺。',
+      name: '微光秘库', epithet: '知识会反过来阅读它的读者',
+      intro: '这座城市没有街道，只有不断重排的书架。占星师用蜡烛保存梦，抄写员把危险的名字锁进玻璃，而秘库深处有一本正在书写所有来访者的书。',
+      legend: '每隔九十九年，秘库会熄灭全部灯火，让一段被删除的历史自行选择新的读者。今晚正是第九十九年。',
+      landmarks: [
+        { name: '倒置天文台', text: '望远镜朝向地底，观测尚未出生的星辰。' },
+        { name: '五烛花园', text: '黑玫瑰围绕五盏不会被风吹灭的灯生长。' },
+        { name: '无页书库', text: '书没有纸页，故事寄存在读者的影子里。' }
+      ],
+      factions: [
+        { name: '玻璃抄写员', text: '把名字、誓言和梦封存在可编号的容器中。' },
+        { name: '最后点灯人', text: '负责在知识开始反噬城市时逐层熄灯。' }
+      ],
       timeline: [
-        { date: '16–18 世纪', title: '收藏世界的柜子', text: '欧洲的珍奇柜把自然标本、艺术品、旅行物件与奇异器具并置；它们是私人收藏，也是展示“世界如何被分类”的舞台。' },
-        { date: '19 世纪', title: '降神会与现代媒介', text: '维多利亚时期的降神会、灵媒表演与反欺诈表演共同塑造了“看不见之物如何被呈现”的想象。神秘与娱乐常在同一间房间发生。' },
-        { date: '20 世纪至今', title: '符号成为流行视觉', text: '塔罗、蜡烛、五芒星、晶球与古书意象进入出版、电影、音乐与室内陈设；它们拥有多重历史含义，也被不断重新设计。' }
-      ],
-      chapters: [
-        { eyebrow: 'THE CABINET', title: '物件之间的关系，才是戏剧。', text: '一只托盘、一盏茶蜡、一本书与一枚象征物，单看都很安静；当它们被排列在一起，便像是某个故事暂停的瞬间。珍奇柜美学的核心不是堆满，而是选择与并置。' },
-        { eyebrow: 'THE LIGHT', title: '烛光让表面开始叙事。', text: '树脂的纹理、青铜色的起伏、玻璃的反光会在暖光下改变。我们的烛台与托盘并不宣称神秘功能，而是为室内营造有层次、有停顿的观看体验。' },
-        { eyebrow: 'THE SYMBOL', title: '符号有来处，也有今天的新读法。', text: '以五芒星、玫瑰、女巫之手等元素创作时，我们把它们当作现代暗黑幻想的视觉词汇，并鼓励读者继续追溯各符号在不同历史与社群中的复杂含义。' }
-      ],
-      archives: [
-        { kind: '收藏史 / 16–17 世纪', title: 'Kunstkammer：把已知世界放进一间房', text: '德语区的 Kunstkammer 或 Wunderkammer 常被译作“艺术与奇珍之室”。自然物、人工制品、仪器与旅行所得被并置收藏。它既反映求知欲，也反映权力、贸易与当时欧洲如何选择、命名和展示世界。现代“珍奇柜”美学借用其陈列方式，不应忽略这段复杂历史。', sourceLabel: '大都会艺术博物馆：Kunstkammer 的收藏史', sourceHref: 'https://www.metmuseum.org/pt/essays/collecting-for-the-kunstkammer' },
-        { kind: '历史档案 / 19 世纪', title: '灵媒、镜面与舞台：被记录的招魂会', text: '19世纪的灵性主义、催眠术、占星与灵媒表演留下大量书籍、笔记和图像。美国国会图书馆保存的霍克利手稿记录了水晶凝视、镜面与通灵实践；同时，胡迪尼等表演者和调查者也持续揭露欺诈。它是信念、媒介技术与表演彼此缠绕的历史，不是可以被现代网站验证的超自然事实。', sourceLabel: '美国国会图书馆：霍克利手稿与19世纪神秘学复兴', sourceHref: 'https://blogs.loc.gov/bibliomania/2023/10/31/the-mysterious-manuscripts-of-frederick-hockley/' },
-        { kind: '符号的多义性', title: '五芒星与玫瑰：不要只保留一种解释', text: '同一个几何图形或花卉图案能在宗教、民俗、政治、诗歌与当代亚文化中拥有不同含义。DARK CASTLE 采用它们时，明确定位为当代暗黑幻想的陈设语言；每一个符号的具体历史会在后续文章中按地域、年代与社群分开说明。', sourceLabel: '美国国会图书馆：神秘学、灵性主义与藏书档案', sourceHref: 'https://blogs.loc.gov/inside_adams/2014/10/harry-houdinis-rare-magic-books/' },
-        { kind: '纸牌史 / 15–19 世纪', title: '塔罗最初是一种游戏', text: '大都会艺术博物馆指出，现存资料把早期塔罗置于15世纪意大利北部的纸牌文化中；它是一种带有额外王牌的竞技游戏。塔罗与占卜、神秘学的广泛关联到19世纪才形成。这个时间差提醒我们：今天熟悉的“古老秘仪”有时其实是近代重新解释的结果。', sourceLabel: '大都会艺术博物馆：占卜以前的塔罗', sourceHref: 'https://www.metmuseum.org/pt/perspectives/tarot-2' },
-        { kind: '调查与表演 / 胡迪尼', title: '揭露灵媒的人，也成为招魂会的中心', text: '胡迪尼收藏了大量魔术、灵性主义、巫术与心理现象书籍，并长期揭露他认为利用悲伤获利的灵媒。去世后，他的妻子贝丝连续举行纪念性招魂会；1936年的最后一次以“没有收到信息”结束。这里呈现的，是怀疑、纪念与舞台仪式交错的现代故事。', sourceLabel: '美国国会图书馆：1936年胡迪尼招魂会', sourceHref: 'https://blogs.loc.gov/loc/2020/10/hollywood-houdini-and-the-halloween-seance-of-1936/' },
-        { kind: '档案阅读', title: '水晶球与镜子留下了什么证据？', text: '档案能够证明某些人写下、收藏或实践过水晶凝视，却不能仅凭记录证明其超自然解释成立。霍克利1850年代的笔记本可用于研究语言、信念网络、仪式形式与物质文化；历史学的任务是说明人们相信什么、如何行动，以及同时存在的质疑。', sourceLabel: '美国国会图书馆：水晶凝视原始记录', sourceHref: 'https://www.loc.gov/resource/rbc0001.2018houd14646v15/?sp=3&st=brief' }
-      ],
-      symbols: ['珍奇柜与玻璃器皿', '蜡烛与暖光', '书籍、托盘与桌面舞台', '玫瑰、几何与象征物'], productTitle: '从珍奇柜带走的藏品', sourceTitle: '继续阅读：文化来源'
+        { date: '秘库纪 01 年', title: '第一盏梦烛点燃', text: '一位无影之人将自己的童年封进火焰。' },
+        { date: '秘库纪 198 年', title: '书架第一次重排城市', text: '三条街道和四百名居民被移动到同一本书里。' },
+        { date: '暮辉纪 427 年', title: '大熄灯前夜', text: '一本空白书在封面写下黑城堡的名字。' }
+      ], productTitle: '来自微光秘库的遗物'
     },
     en: {
-      doorTitle: 'Occult Cabinet', title: 'Occult Cabinet', subtitle: 'From cabinets of curiosity, séances, and stage illusion to the ritual mood of modern popular culture.',
-      summary: 'Here, occult is a way of arranging attention: a tabletop becomes a small stage, where candles, books, glass, metal, and symbols create the feeling that something is about to be revealed.',
-      note: 'This room uses historical and popular visual languages of the occult. It makes no religious, spiritual, or supernatural claims.',
+      name: 'The Gloam Archive', epithet: 'Where knowledge reads its reader',
+      intro: 'The city has no streets, only shelves that rearrange themselves. Astrologers preserve dreams in candles, scribes lock dangerous names in glass, and one book writes every visitor into itself.',
+      legend: 'Every ninety-nine years every lamp is extinguished, allowing an erased history to choose a new reader. Tonight begins the ninety-ninth year.',
+      landmarks: [
+        { name: 'The Inverted Observatory', text: 'Its lenses face underground toward stars not yet born.' },
+        { name: 'The Five-Candle Garden', text: 'Black roses circle flames no wind can extinguish.' },
+        { name: 'The Pageless Library', text: 'Stories are stored inside the shadows of their readers.' }
+      ],
+      factions: [
+        { name: 'The Glass Scribes', text: 'They seal names, vows, and dreams inside numbered vessels.' },
+        { name: 'The Last Lamplighters', text: 'They darken the city floor by floor when knowledge begins to feed.' }
+      ],
       timeline: [
-        { date: '16th–18th c.', title: 'A cabinet for the world', text: 'European cabinets of curiosity placed natural specimens, art, travel objects, and unusual instruments together. They were private collections and stages for classifying the world.' },
-        { date: '19th c.', title: 'Séance and modern media', text: 'Victorian séances, mediumship performances, and anti-fraud stage acts shaped how the unseen could be presented. Mystery and entertainment often shared a room.' },
-        { date: '20th c. to now', title: 'Symbols enter popular visual culture', text: 'Tarot, candles, pentagrams, crystal spheres, and old books moved through publishing, film, music, and interiors. Their meanings are multiple and continually redesigned.' }
-      ],
-      chapters: [
-        { eyebrow: 'THE CABINET', title: 'The drama lives between objects.', text: 'A tray, a tealight, a book, and a symbol may be quiet alone. Arranged together, they feel like a paused scene. Cabinet aesthetics are not about crowding; they are about selection and juxtaposition.' },
-        { eyebrow: 'THE LIGHT', title: 'Candlelight lets surfaces narrate.', text: 'Resin texture, bronze-like relief, and glass reflections change under warm light. Our holders and trays do not claim occult function; they build a layered, deliberate experience of looking.' },
-        { eyebrow: 'THE SYMBOL', title: 'Symbols have histories—and new readings.', text: 'When working with pentagrams, roses, and witch hands, we use them as visual vocabulary for contemporary dark fantasy, while inviting further reading into their complex meanings across histories and communities.' }
-      ],
-      archives: [
-        { kind: 'COLLECTION HISTORY / 16th–17th c.', title: 'Kunstkammer: putting the known world in a room', text: 'Kunstkammer and Wunderkammer combined natural objects, artefacts, instruments, and travel acquisitions. They express curiosity, but also power, trade, and European choices about naming and displaying the world.', sourceLabel: 'The Met · Collecting for the Kunstkammer', sourceHref: 'https://www.metmuseum.org/pt/essays/collecting-for-the-kunstkammer' },
-        { kind: 'HISTORICAL ARCHIVE / 19th c.', title: 'Mediums, mirrors, and the stage', text: 'Nineteenth-century spiritualism, mesmerism, astrology, and mediumship left books, notebooks, and images. Hockley’s manuscripts record crystal gazing and mirrors, while Houdini and investigators also exposed deception. This is history of belief, media, and performance—not a modern proof of supernatural fact.', sourceLabel: 'Library of Congress · Frederick Hockley manuscripts', sourceHref: 'https://blogs.loc.gov/bibliomania/2023/10/31/the-mysterious-manuscripts-of-frederick-hockley/' },
-        { kind: 'MULTIPLE MEANINGS', title: 'Pentagram and rose: never one reading only', text: 'A geometry or flower can carry different meanings across religion, folklore, politics, poetry, and subculture. DARK CASTLE uses them as contemporary dark-fantasy décor and will identify specific history by place, period, and community.', sourceLabel: 'Library of Congress · Houdini’s magic books', sourceHref: 'https://blogs.loc.gov/inside_adams/2014/10/harry-houdinis-rare-magic-books/' },
-        { kind: 'CARD HISTORY / 15th–19th c.', title: 'Tarot began as a game', text: 'Early tarot belongs to fifteenth-century northern Italian card culture. Its broad occult and fortune-telling associations gained currency only in the nineteenth century.', sourceLabel: 'The Met · Tarot before fortune-telling', sourceHref: 'https://www.metmuseum.org/pt/perspectives/tarot-2' },
-        { kind: 'INVESTIGATION & PERFORMANCE', title: 'The medium debunker at the centre of a séance', text: 'Houdini collected magic and spiritualist books and challenged mediums. After his death, Bess Houdini held memorial séances; the final 1936 event ended without a message.', sourceLabel: 'Library of Congress · Houdini séance', sourceHref: 'https://blogs.loc.gov/loc/2020/10/hollywood-houdini-and-the-halloween-seance-of-1936/' },
-        { kind: 'READING ARCHIVES', title: 'What can crystal and mirror records prove?', text: 'An archive can show that people recorded and practised crystal gazing; it cannot by itself prove a supernatural explanation. It can reveal language, belief networks, ritual form, and contemporary doubt.', sourceLabel: 'Library of Congress · crystal-gazing record', sourceHref: 'https://www.loc.gov/resource/rbc0001.2018houd14646v15/?sp=3&st=brief' }
-      ],
-      symbols: ['Cabinets and glass vessels', 'Candles and warm light', 'Books, trays, tabletop theatre', 'Roses, geometry, and symbols'], productTitle: 'Objects from the cabinet', sourceTitle: 'Read the sources'
-    },
-    sources: [{ label: 'Wellcome Collection · Séances and spiritualism', href: 'https://wellcomecollection.org/concepts/ka57rk3z' }]
+        { date: 'Archive 01', title: 'The first dream candle', text: 'A shadowless visitor seals her childhood inside a flame.' },
+        { date: 'Archive 198', title: 'The shelves rearrange the city', text: 'Three streets and four hundred people move into the same book.' },
+        { date: 'Gloaming 427', title: 'Eve of the Great Extinguishing', text: 'A blank volume writes DARK CASTLE upon its own cover.' }
+      ], productTitle: 'Relics of the Gloam Archive'
+    }
   },
   {
-    slug: 'cosmic-abyss', number: '04', tone: 'cosmic', productIds: ['DC-008', 'DC-004', 'DC-005'],
+    slug: 'tideless-abyss', number: '04', tone: 'cosmic', glyph: '⌁', position: { x: 76, y: 68 }, productIds: ['DC-008', 'DC-004', 'DC-005'],
     zh: {
-      doorTitle: '宇宙深渊室', title: '宇宙深渊室', subtitle: '不是欧洲古代传说，而是 20 世纪美国怪诞文学留下的“宇宙恐怖”想象。',
-      summary: '克苏鲁风格的核心不在“怪物名称”，而在尺度：人类的知识、时间与空间忽然显得极其有限。它是一种现代文学想象，后来成为全球流行文化的视觉源头。',
-      note: '“克苏鲁”与相关角色属于文学虚构与后续创作传统；本展厅讨论其艺术影响，不把虚构设定当作真实神话。',
+      name: '无潮深渊', epithet: '大海沉睡在天空下面',
+      intro: '这里的海从不涨潮，因为月亮被锁在海底。沿岸居民用鲸骨建造房屋，梦见同一座沉没城市，并相信每个人出生前都曾在深海拥有另一个名字。',
+      legend: '第七码头收到一艘没有船员的黑船。船舱里只有一顶章鱼骨王冠，以及一张标着黑城堡位置的海图。',
+      landmarks: [
+        { name: '第七码头', text: '所有失踪的船最终都会回来，却从不带回原来的船员。' },
+        { name: '沉星海沟', text: '海底闪烁的不是鱼群，而是坠落后仍然燃烧的星。' },
+        { name: '梦盐城', text: '城市只在睡眠中完整，醒来后仅剩半座港口。' }
+      ],
+      factions: [
+        { name: '静潮领航员', text: '不用罗盘，只依靠共同梦境在黑海航行。' },
+        { name: '骨冠聆听者', text: '记录从深海骨骼内部传出的缓慢语言。' }
+      ],
       timeline: [
-        { date: '18–19 世纪', title: '怪诞小说的前史', text: '哥特小说与怪诞文学早已在处理未知、恐惧与不可言说之物；这为后来的宇宙恐怖提供了叙事土壤。' },
-        { date: '1920 年代', title: '尺度突然失衡', text: 'H. P. 洛夫克拉夫特在怪诞小说中发展“宇宙恐怖”观念：面对浩瀚时间与空间，人类并不是故事中心。《克苏鲁的呼唤》于 1928 年发表。' },
-        { date: '后来至今', title: '从纸页到共同视觉语汇', text: '触手、古老文字、深海、翼与异形头骨等元素被后来的作者、艺术家、游戏与电影不断扩展，形成一种可辨识的当代幻想美学。' }
-      ],
-      chapters: [
-        { eyebrow: 'THE SCALE', title: '恐惧来自“并不重要”。', text: '传统恐怖常让人担心门后的怪物；宇宙恐怖更进一步：门后也许没有为人类准备的答案。巨大的空白、陌生的纹理与无法分类的形体，因而比明确的解释更有力量。' },
-        { eyebrow: 'THE SHAPE', title: '异形，不等于随意。', text: '触手、骨甲、复眼、鳞片与翼的混合之所以有效，是因为它们让熟悉的生物结构发生轻微而持续的偏离。我们以这种“可识别又不完全可识别”的张力来设计雕像。' },
-        { eyebrow: 'THE FICTIONAL MYTH', title: '把虚构当作创作的宇宙。', text: '这一展厅不是在复述真实仪式，而是在欣赏现代怪诞文学如何创造一套可供阅读、绘画、雕塑与游戏不断再创作的共享想象。' }
-      ],
-      archives: [
-        { kind: '文学原典 / 1928', title: '《克苏鲁的呼唤》：一个明确可追溯的起点', text: '“克苏鲁”并非古老宗教中的神名，而是 H. P. 洛夫克拉夫特创作的虚构实体。《克苏鲁的呼唤》在美国通俗杂志《Weird Tales》1928年2月号发表。将这个出处写清楚，才能把文学创作与历史传说严格区分。', sourceLabel: 'H. P. Lovecraft Archive：发表资料', sourceHref: 'https://www.hplovecraft.com/writings/fiction/cc.aspx' },
-        { kind: '思想史 / 宇宙恐怖', title: '“宇宙恐怖”不是怪兽清单', text: '洛夫克拉夫特式恐怖把人类的无足轻重、深时间与广阔空间置于中心。恐惧来自认识尺度的崩塌：人类世界并非一切事物的尺度。它与哥特传统相连，但发展出更冷峻、更非人的叙事视野。', sourceLabel: 'H. P. Lovecraft Archive：宇宙恐怖与主要作品', sourceHref: 'https://www.hplovecraft.com/writings/sources/ccdt.aspx' },
-        { kind: '阅读的责任', title: '影响力与问题必须一起阅读', text: '布朗大学的馆藏与研究指出，洛夫克拉夫特作品中关于种族与文化差异的恐惧并非无关紧要的背景。文化宇宙会保留这种批判性语境：可以研究其形式、想象力和后世影响，也不能回避文本中的偏见与伤害。', sourceLabel: '布朗大学图书馆：洛夫克拉夫特的种族想象', sourceHref: 'https://library.brown.edu/create/lovecraftracialimaginaries/' },
-        { kind: '物证 / 作者手稿', title: '克苏鲁有一张作者亲手画的草图', text: '布朗大学保存洛夫克拉夫特1934年绘制的克苏鲁铅笔草图：带翼、触手面孔、蹲坐于刻字基座。它并不是“古代神像照片”，而是作者对自己虚构实体的视觉注释。现代雕塑家对克苏鲁形体的再设计，可以从这件明确有出处的创作物证开始比较。', sourceLabel: '布朗大学图书馆：克苏鲁原始草图', sourceHref: 'https://library.brown.edu/create/lovecraftracialimaginaries/' },
-        { kind: '手稿流传', title: '《超越时间之影》：失而复得的文本', text: '这篇作品的手稿一度被认为遗失；布朗大学记录其后来在私人材料中被发现并捐入馆藏。由于杂志刊本曾被编辑改动，手稿的重现让研究者第一次能准确比较作者文本与出版版本。这也是通俗杂志时代作者、编辑与档案共同塑造作品的例证。', sourceLabel: '布朗大学图书馆：失而复得的手稿', sourceHref: 'https://library.brown.edu/exhibits/archive/leaves/modern.html' },
-        { kind: '传播网络', title: '怪诞文学不是一位作者的孤岛', text: '洛夫克拉夫特通过书信、业余出版物与通俗杂志和其他作者交流；克拉克·阿什顿·史密斯等写作者也在这个网络中创作。后来所谓“神话体系”由多位作者、编辑与读者继续扩展。把它理解为协作传播史，比列出一张固定怪物表更接近事实。', sourceLabel: '布朗大学图书馆：怪诞小说与作者档案', sourceHref: 'https://library.brown.edu/exhibits/archive/leaves/modern.html' }
-      ],
-      symbols: ['深海与未知水域', '触手、翼与异形骨甲', '古文字与失落档案', '黑绿铜色与非自然轮廓'], productTitle: '从深渊带回的藏品', sourceTitle: '继续阅读：文化来源'
+        { date: '潮前 700 年', title: '月亮坠海', text: '最后一次潮汐抬起整座城市，又将它放回梦里。' },
+        { date: '潮前 01 年', title: '所有钟表停止', text: '海岸时间开始跟随睡眠而不是太阳。' },
+        { date: '暮辉纪 427 年', title: '黑船归港', text: '章鱼骨王冠第一次在无人佩戴时开口。' }
+      ], productTitle: '来自无潮深渊的遗物'
     },
     en: {
-      doorTitle: 'Cosmic Abyss', title: 'Cosmic Abyss', subtitle: 'Not an ancient European legend, but the legacy of 20th-century American weird fiction and cosmic horror.',
-      summary: 'The core of Lovecraftian style is not a monster name but scale: human knowledge, time, and space suddenly feel very limited. It is a modern literary imagination that became a global visual source.',
-      note: 'Cthulhu and related characters belong to literary fiction and later creative traditions. This room discusses artistic influence, not a real mythology.',
+      name: 'The Tideless Abyss', epithet: 'Where the sea sleeps beneath the sky',
+      intro: 'The sea never rises because the moon is chained below. Coastal people build with whale bone, dream of the same drowned city, and believe everyone carried another name before birth.',
+      legend: 'A crewless black ship returns to Pier Seven. Its hold contains an octopus-bone crown and a chart marked with the location of the Dark Castle.',
+      landmarks: [
+        { name: 'Pier Seven', text: 'Every lost ship returns here, but never with its former crew.' },
+        { name: 'The Fallen-Star Trench', text: 'The lights below are stars that kept burning after they drowned.' },
+        { name: 'Dreamsalt City', text: 'Whole in sleep, the city wakes as only half a harbour.' }
+      ],
+      factions: [
+        { name: 'Stilltide Navigators', text: 'They sail without compasses, following a dream shared by the crew.' },
+        { name: 'Listeners of the Bone Crown', text: 'They record the slow language spoken from inside deep-sea bones.' }
+      ],
       timeline: [
-        { date: '18th–19th c.', title: 'Before cosmic horror', text: 'Gothic and weird fiction were already working with the unknown, fear, and the unsayable. They prepared narrative ground for cosmic horror.' },
-        { date: '1920s', title: 'Scale becomes unsteady', text: 'H. P. Lovecraft developed cosmic horror in weird fiction: before vast time and space, humanity is not the centre of the story. The Call of Cthulhu appeared in 1928.' },
-        { date: 'Afterwards to now', title: 'From page to shared visual language', text: 'Tentacles, old scripts, deep water, wings, and alien skulls were expanded by later writers, artists, games, and film into a recognizable contemporary fantasy aesthetic.' }
-      ],
-      chapters: [
-        { eyebrow: 'THE SCALE', title: 'The fear is that it may not matter.', text: 'Traditional horror makes us fear a monster behind the door. Cosmic horror goes further: perhaps there is no answer made for us behind it. Vast blanks, unfamiliar texture, and unclassifiable forms can be more powerful than explanation.' },
-        { eyebrow: 'THE SHAPE', title: 'Alien does not mean arbitrary.', text: 'Tentacles, bone armour, compound eyes, scales, and wings work because familiar anatomy shifts slightly but persistently. Our figures work with that tension between recognition and uncertainty.' },
-        { eyebrow: 'THE FICTIONAL MYTH', title: 'Treat fiction as a creative universe.', text: 'This room does not retell real rites. It celebrates how modern weird literature created a shared imaginative field for reading, painting, sculpture, and games to remake.' }
-      ],
-      archives: [
-        { kind: 'LITERARY ORIGIN / 1928', title: 'The Call of Cthulhu: a traceable beginning', text: 'Cthulhu is not a deity from an ancient religion but a fictional entity created by H. P. Lovecraft. The story appeared in Weird Tales in February 1928; keeping the source clear separates literary invention from historical legend.', sourceLabel: 'H. P. Lovecraft Archive · publication record', sourceHref: 'https://www.hplovecraft.com/writings/fiction/cc.aspx' },
-        { kind: 'IDEA HISTORY / COSMIC HORROR', title: 'Cosmic horror is not a monster list', text: 'Lovecraftian horror centres human insignificance, deep time, and vast space. Fear comes from the collapse of human scale. It connects to Gothic but develops a colder, more nonhuman narrative view.', sourceLabel: 'H. P. Lovecraft Archive · cosmic horror', sourceHref: 'https://www.hplovecraft.com/writings/sources/ccdt.aspx' },
-        { kind: 'RESPONSIBLE READING', title: 'Influence and harm must be read together', text: 'Brown University’s archive and research make clear that Lovecraft’s fears around race and cultural difference are not incidental background. A cultural universe can study his forms and influence without erasing those biases.', sourceLabel: 'Brown University Library · racial imaginaries', sourceHref: 'https://library.brown.edu/create/lovecraftracialimaginaries/' },
-        { kind: 'AUTHORIAL OBJECT', title: 'Cthulhu has an author-drawn sketch', text: 'Brown holds Lovecraft’s 1934 pencil sketch: winged, tentacle-faced, crouched on an inscribed pedestal. It is a creator’s visual note, not a photograph of an ancient idol.', sourceLabel: 'Brown University · original Cthulhu sketch', sourceHref: 'https://library.brown.edu/create/lovecraftracialimaginaries/' },
-        { kind: 'MANUSCRIPT HISTORY', title: 'The Shadow Out of Time: a recovered text', text: 'The manuscript was long believed lost, then rediscovered in private papers and donated. Its return allows comparison between Lovecraft’s text and an altered magazine version.', sourceLabel: 'Brown University · recovered manuscript', sourceHref: 'https://library.brown.edu/exhibits/archive/leaves/modern.html' },
-        { kind: 'NETWORKS', title: 'Weird fiction was never one author’s island', text: 'Letters, amateur print, pulp magazines, and writers including Clark Ashton Smith formed a creative network. The later “mythos” grew through many authors, editors, and readers.', sourceLabel: 'Brown University · fantastic fiction archives', sourceHref: 'https://library.brown.edu/exhibits/archive/leaves/modern.html' }
-      ],
-      symbols: ['Deep water and unknown seas', 'Tentacles, wings, alien bone', 'Old scripts and lost archives', 'Black-green bronze and unnatural silhouettes'], productTitle: 'Objects returned from the abyss', sourceTitle: 'Read the sources'
-    },
-    sources: [{ label: 'H. P. Lovecraft Archive · The Call of Cthulhu (1928)', href: 'https://www.hplovecraft.com/writings/fiction/cc.aspx' }, { label: 'Lovecraft Archive · Cosmic horror and major works', href: 'https://www.hplovecraft.com/writings/sources/ccdt.aspx' }]
+        { date: '700 Before Tide', title: 'The moon falls', text: 'The last tide lifts a whole city and lowers it into a dream.' },
+        { date: '1 Before Tide', title: 'Every clock stops', text: 'Coastal time begins to follow sleep instead of the sun.' },
+        { date: 'Gloaming 427', title: 'The black ship returns', text: 'The octopus-bone crown speaks for the first time without a wearer.' }
+      ], productTitle: 'Relics of the Tideless Abyss'
+    }
   }
 ];
 
