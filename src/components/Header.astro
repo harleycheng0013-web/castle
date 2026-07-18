@@ -1,16 +1,52 @@
 ---
-import { copy, localePath, type Locale } from '../lib/site';
+import type { Locale } from '../lib/site';
 import ThemeToggle from './ThemeToggle.astro';
-const { locale = 'zh' } = Astro.props as { locale?: Locale }; const t = copy[locale]; const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const href = (path = '') => `${base}${localePath(locale, path)}` || '/'; const otherLocale = locale === 'zh' ? 'en' : 'zh'; const current = Astro.url.pathname;
+
+const { locale = 'zh' } = Astro.props as { locale?: Locale };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const languagePrefix = locale === 'en' ? '/en' : '';
+const href = (path = '') => `${base}${languagePrefix}${path || '/'}`;
+const otherLocale = locale === 'zh' ? 'en' : 'zh';
+const current = Astro.url.pathname;
+const relative = current.startsWith(base) ? current.slice(base.length) || '/' : current;
+const otherHref = locale === 'zh'
+  ? `${base}/en${relative === '/' ? '' : relative}`
+  : `${base}${relative.replace(/^\/en/, '') || '/'}`;
+
 const links = locale === 'zh' ? [
-  [href(), '宇宙', 'UNIVERSE'], [href('/culture'), '地区', 'REGIONS'], [href('/culture#stories'), '故事', 'STORIES'], [href('/catalog'), '遗物', 'RELICS']
+  [href(), '宇宙', 'UNIVERSE'],
+  [href('/culture'), '地区', 'REGIONS'],
+  [href('/culture#stories'), '故事', 'STORIES'],
+  [href('/culture#characters'), '人物', 'CHARACTERS'],
+  [href('/culture#chronology'), '纪年', 'CHRONICLE']
 ] : [
-  [href(), 'Universe', 'HOME'], [href('/culture'), 'Regions', 'ATLAS'], [href('/culture#stories'), 'Stories', 'FICTION'], [href('/catalog'), 'Relics', 'OBJECTS']
+  [href(), 'Universe', 'HOME'],
+  [href('/culture'), 'Regions', 'ATLAS'],
+  [href('/culture#stories'), 'Stories', 'FICTION'],
+  [href('/culture#characters'), 'People', 'CHARACTERS'],
+  [href('/culture#chronology'), 'Chronicle', 'TIMELINE']
 ];
 ---
 <header class="site-header dc-header-v3">
   <a class="brand" href={href()} aria-label="DARK CASTLE home"><i>DC</i><b>DARK <span>CASTLE</span></b><small>ORIGINAL UNIVERSE</small></a>
-  <nav aria-label="Primary navigation">{links.map(([url,label,sub]) => <a class:list={{ 'is-active': url !== href() ? current.includes(url.replace(base,'')) : current === `${base}/` }} href={url}><span>{label}</span><small>{sub}</small></a>)}</nav>
-  <div class="header-actions"><a class="language" href={`${base}${localePath(otherLocale)}?from=${locale}`} lang={otherLocale}>{otherLocale === 'zh' ? '中' : 'EN'}</a><a class="dc-mail" href={href('/#contact')}>{t.nav.contact}</a><ThemeToggle label={t.theme} /></div>
+  <nav aria-label="Primary navigation">
+    {links.map(([url, label, sub], index) => <a class:list={{ 'is-active': index === 0 ? current === `${base}/` || current === `${base}/en/` : index === 1 && current.includes('/culture') }} href={url}><span>{label}</span><small>{sub}</small></a>)}
+  </nav>
+  <div class="header-actions">
+    <button class="dc-motion" type="button" data-motion-toggle aria-label={locale === 'zh' ? '减少动态效果' : 'Reduce motion'}>◌</button>
+    <a class="language" href={otherHref} lang={otherLocale}>{otherLocale === 'zh' ? '中' : 'EN'}</a>
+    <ThemeToggle label={locale === 'zh' ? '切换主题' : 'Toggle theme'} />
+  </div>
 </header>
+<script>
+  const motionButton = document.querySelector<HTMLButtonElement>('[data-motion-toggle]');
+  const saved = localStorage.getItem('dc-motion');
+  if (saved === 'reduced') document.documentElement.dataset.motion = 'reduced';
+  motionButton?.setAttribute('aria-pressed', String(saved === 'reduced'));
+  motionButton?.addEventListener('click', () => {
+    const reduced = document.documentElement.dataset.motion !== 'reduced';
+    document.documentElement.dataset.motion = reduced ? 'reduced' : 'full';
+    localStorage.setItem('dc-motion', reduced ? 'reduced' : 'full');
+    motionButton.setAttribute('aria-pressed', String(reduced));
+  });
+</script>

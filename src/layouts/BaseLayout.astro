@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/universe-v3.css';
 import '../styles/atlas-art.css';
+import '../styles/iteration-lab.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site, type Locale } from '../lib/site';
@@ -19,6 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <script is:inline>document.documentElement.dataset.theme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');</script>
   </head>
   <body>
-    <div class="page-shell"><Header locale={locale} /><main><slot /></main><Footer locale={locale} /></div>
+    <a class="dc-skip" href="#main-content">{locale === 'zh' ? '跳到正文' : 'Skip to content'}</a>
+    <div class="page-shell"><Header locale={locale} /><main id="main-content"><slot /></main><Footer locale={locale} /></div>
   </body>
 </html>
