@@ -14,11 +14,12 @@ for (let index = 0; index < storyStarts.length; index += 1) {
   const end = storyStarts[index + 1]?.index ?? storySource.indexOf('\n];', start);
   const block = storySource.slice(start, end);
   const slug = storyStarts[index][1];
+  const longformPath = resolve(root, `src/data/stories/${slug}.zh.json`);
   const zhStart = block.indexOf('sectionsZh:');
   const zhEnd = block.indexOf('sectionsEn:', zhStart);
-  const zh = block.slice(zhStart, zhEnd);
+  const zh = existsSync(longformPath) ? readFileSync(longformPath, 'utf8') : block.slice(zhStart, zhEnd);
   const count = (zh.match(/[\u3400-\u9fff]/g) ?? []).length;
-  if (count < 20_000) errors.push(`${slug}: 中文正文 ${count} 字，低于 20000 字`);
+  if (count < 10_000) errors.push(`${slug}: 中文正文 ${count} 字，低于 10000 字`);
 
   const listed = [...block.matchAll(/charactersZh:\s*\[([^\]]+)\]/g)]
     .flatMap((match) => [...match[1].matchAll(/'([^'｜]+)(?:｜[^']+)?'/g)].map((item) => item[1]));

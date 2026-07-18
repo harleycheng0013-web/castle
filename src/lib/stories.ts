@@ -1,3 +1,5 @@
+import bellLongformZh from '../data/stories/the-bell-that-never-saw-dawn.zh.json';
+
 export type StorySection = { title: string; text: string[] };
 
 export type UniverseStory = {
@@ -20,19 +22,14 @@ export type UniverseStory = {
 export const universeStories: UniverseStory[] = [
   {
     slug: 'the-bell-that-never-saw-dawn', chamber: 'obsidian-court', featured: true,
-    image: '/images/universe/bell-never-dawn.webp', readTime: 9, productIds: [],
+    image: '/images/universe/bell-never-dawn.webp', readTime: 40, productIds: [],
     titleZh: '从未见过黎明的钟', titleEn: 'The Bell That Never Saw Dawn',
     dekZh: '当守钟人失踪，一名不会衰老的女孩必须在午夜前决定：敲响第十三口钟，还是让王庭永远停在同一天。',
     dekEn: 'When the bell keeper vanishes, an ageless girl must choose before midnight: ring the thirteenth bell, or trap the Court inside the same day forever.',
     categoryZh: '黑曜王庭纪事', categoryEn: 'OBSIDIAN COURT CHRONICLE', eraZh: '暮辉纪 427 年', eraEn: 'GLOAMING 427',
     quoteZh: '钟声不是用来告诉我们时间。它们是在提醒时间，不要忘记我们。', quoteEn: 'Bells do not tell us the time. They remind time not to forget us.',
     charactersZh: ['弥拉｜无龄见习守钟人', '奥德林｜失踪的第十三守钟人', '旧王｜沉睡在城下的名字'], charactersEn: ['Mira · ageless bell apprentice', 'Odren · missing thirteenth keeper', 'The Old King · a name beneath the city'],
-    sectionsZh: [
-      { title: '没有早晨的早晨', text: ['弥拉醒来时，窗外仍是那片铁蓝色的夜。黑曜王庭已经两百零一年没有真正的清晨，但城里的人依旧每天拉开窗帘，像是在执行一项比希望更古老的礼仪。', '十二口钟依次响过，唯独第十三座塔没有回应。弥拉跑上螺旋石阶，只在守钟人的桌面看见一杯尚有余温的茶，以及一根指向城堡裂隙的黑色羽毛。'] },
-      { title: '钟楼里的另一扇门', text: ['第十三座塔从外面只有七层，从里面却有十三层。弥拉在第八层第一次看见太阳：它被画在一面巨大的玻璃上，光从画后照来，温暖得让她想起自己早已忘记的童年。', '奥德林把留言刻在钟舌背面：每一次敲钟都会从世界取走一种可能。王庭没有黎明，并非太阳消失，而是旧王用十二声钟把“太阳升起”这个可能封存了。'] },
-      { title: '第十三种可能', text: ['午夜前，黑羽审判庭包围钟楼。他们命令弥拉保持沉默，因为第十三声将释放所有被封存的可能，也可能唤醒那位用自己换来永夜的旧王。', '弥拉终于明白奥德林去了哪里。他没有逃走，而是走进钟里，成为了最后一块缺失的金属。只要她敲下去，导师会消失，黎明却可能回来。'] },
-      { title: '第一束光', text: ['弥拉敲响了钟。声音没有传遍城市，而是向每个人心中最黑暗的地方坠落。玫瑰墓园先亮起来，随后是彩窗、屋顶与无数双不敢睁开的眼睛。', '太阳并未完整升起。地平线上只出现一线金光，像一扇刚刚开启的门。弥拉听见钟里传来奥德林最后的笑声：“足够了。明天再敲一次。”'] }
-    ],
+    sectionsZh: bellLongformZh,
     sectionsEn: [
       { title: 'A morning without morning', text: ['Mira woke beneath the same iron-blue night. The Court had known no dawn for two hundred and one years, yet every citizen still opened their curtains as if performing a ritual older than hope.', 'Twelve bells answered. The thirteenth tower stayed silent. On her master’s desk she found warm tea and a black feather pointing toward the world-rift.'] },
       { title: 'The other door in the tower', text: ['The tower had seven floors outside and thirteen within. On the eighth, Mira found a painted sun with real warmth behind its glass.', 'Odren had carved a warning into the bell: every chime removes one possibility from the world. The sun had not vanished. The Old King had sealed away the possibility of sunrise.'] },
