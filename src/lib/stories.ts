@@ -20,7 +20,7 @@ export type UniverseStory = {
 export const universeStories: UniverseStory[] = [
   {
     slug: 'the-bell-that-never-saw-dawn', chamber: 'obsidian-court', featured: true,
-    image: '/images/products/winged-angel-front.jpg', readTime: 9, productIds: ['DC-006', 'DC-007'],
+    image: '/images/universe/bell-never-dawn.webp', readTime: 9, productIds: [],
     titleZh: '从未见过黎明的钟', titleEn: 'The Bell That Never Saw Dawn',
     dekZh: '当守钟人失踪，一名不会衰老的女孩必须在午夜前决定：敲响第十三口钟，还是让王庭永远停在同一天。',
     dekEn: 'When the bell keeper vanishes, an ageless girl must choose before midnight: ring the thirteenth bell, or trap the Court inside the same day forever.',
@@ -42,7 +42,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-thirteenth-trial-of-the-winged-judge', chamber: 'obsidian-court',
-    image: '/images/products/ram-skull-front.jpg', readTime: 8, productIds: ['DC-006', 'DC-007'],
+    image: '/images/universe/winged-judge-trial.webp', readTime: 8, productIds: [],
     titleZh: '长翼审判官的第十三次审判', titleEn: 'The Winged Judge’s Thirteenth Trial',
     dekZh: '一位被雕成圣像的审判官醒来，发现自己必须审判两百年前的自己。', dekEn: 'A judge carved into a saint awakens and is ordered to pass sentence on the person he was two centuries ago.',
     categoryZh: '人物传记', categoryEn: 'CHARACTER STORY', eraZh: '暮辉纪 113—427 年', eraEn: 'GLOAMING 113–427',
@@ -63,7 +63,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-empty-throne-of-stagcrown', chamber: 'stagcrown-wilds', featured: true,
-    image: '/images/products/forest-guardian-front.jpg', readTime: 10, productIds: ['DC-002', 'DC-011'],
+    image: '/images/universe/stagcrown-empty-throne.webp', readTime: 10, productIds: [],
     titleZh: '鹿冠荒野的空王座', titleEn: 'The Empty Throne of Stagcrown',
     dekZh: '白树开花之夜，年轻猎人被森林选为新王；代价是世界将忘记她曾经存在。', dekEn: 'On the White Tree’s flowering night, a young hunter is chosen to rule. The price: the world must forget she ever existed.',
     categoryZh: '荒野史诗', categoryEn: 'WILDS EPIC', eraZh: '第九次花期', eraEn: 'THE NINTH FLOWERING',
@@ -84,7 +84,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-hound-beneath-the-white-tree', chamber: 'stagcrown-wilds',
-    image: '/images/products/garden-owl.jpg', readTime: 7, productIds: ['DC-011', 'DC-002'],
+    image: '/images/universe/white-tree-hound.webp', readTime: 7, productIds: [],
     titleZh: '白树下最后一只记名猎犬', titleEn: 'The Last Named Hound Beneath the White Tree',
     dekZh: '在名字会被森林吞下的国度，一只老猎犬替死去的主人守着最后两个音节。', dekEn: 'In a realm where the forest swallows names, an old hound guards the final two syllables of a dead master.',
     categoryZh: '荒野传说', categoryEn: 'WILDS LEGEND', eraZh: '王座远行后', eraEn: 'AFTER THE THRONE WALKED',
@@ -105,7 +105,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-last-lamp-of-the-glass-astrologer', chamber: 'gloam-archive', featured: true,
-    image: '/images/products/witch-hands-crystal.jpg', readTime: 9, productIds: ['DC-013', 'DC-009'],
+    image: '/images/universe/glass-astrologer-last-lamp.webp', readTime: 9, productIds: [],
     titleZh: '玻璃占星师的最后一盏灯', titleEn: 'The Glass Astrologer’s Last Lamp',
     dekZh: '大熄灯前夜，占星师发现星空并不在头顶，而是被囚禁在城市每一只玻璃器皿中。', dekEn: 'On the eve of the Great Extinguishing, an astrologer discovers that the stars are not above, but imprisoned inside the city’s glass vessels.',
     categoryZh: '秘库悬疑', categoryEn: 'ARCHIVE MYSTERY', eraZh: '第九十九次熄灯', eraEn: 'THE NINETY-NINTH EXTINGUISHING',
@@ -126,7 +126,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-garden-that-wrote-names', chamber: 'gloam-archive',
-    image: '/images/products/rose-pentagram-candles.jpg', readTime: 8, productIds: ['DC-009', 'DC-012'],
+    image: '/images/universe/garden-wrote-names.webp', readTime: 8, productIds: [],
     titleZh: '会书写名字的五烛花园', titleEn: 'The Five-Candle Garden That Wrote Names',
     dekZh: '黑玫瑰开始拼写尚未出生之人的名字，其中一个名字属于正在阅读花园的你。', dekEn: 'Black roses begin spelling the names of the unborn. One of those names belongs to the person reading the garden.',
     categoryZh: '秘库异闻', categoryEn: 'ARCHIVE ODDITY', eraZh: '大熄灯后三日', eraEn: 'THREE DAYS AFTER DARK',
@@ -147,7 +147,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-visitor-from-the-tideless-sea', chamber: 'tideless-abyss',
-    image: '/images/products/cthulhu-bust-green.jpg', readTime: 10, productIds: ['DC-008', 'DC-004'],
+    image: '/images/universe/tideless-sea-visitor.webp', readTime: 10, productIds: [],
     titleZh: '无潮海上的来客', titleEn: 'The Visitor from the Tideless Sea',
     dekZh: '一艘空船归港后，唯一的“幸存者”声称自己不是船员，而是那片海。', dekEn: 'When an empty ship returns, its only “survivor” claims not to be a sailor, but the sea itself.',
     categoryZh: '深渊航海志', categoryEn: 'ABYSSAL VOYAGE', eraZh: '黑船归港之夜', eraEn: 'THE NIGHT THE BLACK SHIP RETURNED',
@@ -168,7 +168,7 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-dream-of-the-octopus-bone-crown', chamber: 'tideless-abyss',
-    image: '/images/products/tentacle-skull-front.jpg', readTime: 8, productIds: ['DC-008', 'DC-005'],
+    image: '/images/universe/octopus-bone-crown-dream.webp', readTime: 8, productIds: [],
     titleZh: '章鱼骨王冠的梦', titleEn: 'The Dream of the Octopus-Bone Crown',
     dekZh: '王冠每晚选择一个新的梦者，并借他们的身体建造一座不可能存在于陆地上的宫殿。', dekEn: 'Each night the crown chooses another dreamer and borrows their body to build a palace that cannot exist on land.',
     categoryZh: '深渊梦录', categoryEn: 'ABYSSAL DREAM', eraZh: '骨冠苏醒后', eraEn: 'AFTER THE CROWN WOKE',
