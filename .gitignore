@@ -3,4 +3,6 @@ dist/
 .astro/
 .pnpm-store/
 .tools/
+.agents/
 .DS_Store
+*.log

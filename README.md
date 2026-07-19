@@ -1,50 +1,41 @@
-# 个人主页 / Personal Blog
+# DARK CASTLE 文化宇宙
 
-一个以 Astro 构建的中英双语静态个人博客，可部署至 GitHub Pages。
+DARK CASTLE 是一个以原创世界观、角色档案和长篇故事为核心的双语静态网站，使用 Astro 构建并通过 GitHub Pages 发布。
+
+## 云端项目
+
+本仓库保存网站源码、宇宙设定、人物图片和故事审阅稿。
+
+在其他设备登录同一个 GitHub 账号后，打开 `harleycheng0013-web/castle` 即可查看或下载项目。
+
+故事审阅稿位于 `drafts/`，可直接下载编辑，也可以在 GitHub 网页中编辑并保存。
+
+## 内容工作流
+
+1. 新故事和修改稿先写入 `drafts/`，不直接更新网站。
+2. 完成剧情、人物和文字审阅后，由作者确认最终版。
+3. 只有明确确认“可以发布”后，才把最终稿接入网站并触发 GitHub Pages 部署。
 
 ## 本地运行
 
-安装 Node.js 22 或更新的 LTS 版本后，在项目目录执行：
+需要 Node.js 22 或更新的 LTS 版本。
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
-构建生产版本：
+正式构建：
 
 ```bash
-npm run build
+pnpm run build
 ```
 
-## 替换个人资料
+## 主要目录
 
-在 `src/lib/site.ts` 中替换姓名、职位、邮箱、社交链接与站点描述。头像文件位于 `public/avatar.svg`，可替换为自己的图片；若使用图片，请同时更新 `avatar` 路径。
-
-## 发布文章
-
-在 `src/content/blog/` 新建 Markdown 文件，格式如下：
-
-```md
----
-title: 文章标题
-description: 用于文章列表和搜索引擎的简短摘要
-date: 2026-07-16
-tags: [标签一, 标签二]
-lang: zh # zh 或 en
-slug: url-slug
-translationId: shared-id # 可选；中英译文使用相同值
----
-
-正文内容……
-```
-
-同一篇文章的中英文版本应使用相同的 `translationId`，但必须使用各自唯一的 `slug`。没有译文时省略 `translationId` 即可。
-
-## 部署到 GitHub Pages
-
-1. 将项目推送到 GitHub 仓库的 `main` 分支。
-2. 在仓库的 **Settings → Pages** 中，将 Source 设为 **GitHub Actions**。
-3. 工作流会自动构建并发布站点。
-
-默认配置适用于项目站点（`https://用户名.github.io/仓库名/`）。如果仓库名是 `用户名.github.io`，请将 `.github/workflows/deploy.yml` 中的 `BASE_PATH` 改为 `/`。
+- `drafts/`：可编辑的故事审阅稿
+- `src/data/stories/`：网站正式故事数据
+- `src/lib/characters.ts`：人物档案与连续性设定
+- `docs/universe-bible.md`：宇宙圣经
+- `public/images/`：网站图片与人物肖像
+- `.github/workflows/`：GitHub Pages 自动部署配置
