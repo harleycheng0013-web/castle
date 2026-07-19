@@ -43,11 +43,28 @@ $parent = $ref.object.sha
 $parentCommit = & $gh api "repos/$Repository/git/commits/$parent" | ConvertFrom-Json
 if ($LASTEXITCODE -ne 0) { throw 'Unable to read the cloud parent commit.' }
 
+$remoteTree = & $gh api "repos/$Repository/git/trees/$($parentCommit.tree.sha)?recursive=1" | ConvertFrom-Json
+if ($LASTEXITCODE -ne 0) { throw 'Unable to read the cloud project tree.' }
+
+$localRelativePaths = @($files | ForEach-Object {
+  $_.FullName.Substring($root.Length + 1).Replace('\', '/')
+})
+
 $entries = foreach ($file in $files) {
   $relative = $file.FullName.Substring($root.Length + 1).Replace('\', '/')
   $content = [Convert]::ToBase64String([IO.File]::ReadAllBytes($file.FullName))
   $blob = Invoke-GhJson POST "repos/$Repository/git/blobs" @{ content = $content; encoding = 'base64' }
   @{ path = $relative; mode = '100644'; type = 'blob'; sha = $blob.sha }
+}
+
+$staleDrafts = @($remoteTree.tree | Where-Object {
+  $_.type -eq 'blob' -and
+  $_.path.StartsWith('drafts/') -and
+  $localRelativePaths -notcontains $_.path
+})
+
+foreach ($stale in $staleDrafts) {
+  $entries += @{ path = $stale.path; mode = '100644'; type = 'blob'; sha = $null }
 }
 
 $tree = Invoke-GhJson POST "repos/$Repository/git/trees" @{
