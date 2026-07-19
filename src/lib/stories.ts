@@ -23,13 +23,13 @@ export type UniverseStory = {
 export const universeStories: UniverseStory[] = [
   {
     slug: 'the-bell-that-never-saw-dawn', chamber: 'obsidian-court', featured: true,
-    image: '/images/universe/bell-never-dawn.webp', readTime: 40, productIds: [],
+    image: '/images/universe/bell-never-dawn.webp', readTime: 44, productIds: [],
     titleZh: '从未见过黎明的钟', titleEn: 'The Bell That Never Saw Dawn',
-    dekZh: '当守钟人失踪，一名不会衰老的女孩必须在午夜前决定：敲响第十三口钟，还是让王庭永远停在同一天。',
-    dekEn: 'When the bell keeper vanishes, an ageless girl must choose before midnight: ring the thirteenth bell, or trap the Court inside the same day forever.',
+    dekZh: '当第十三口钟抹掉弟弟的名字，弥拉必须与一名黑羽逃兵闯入钟塔，在午夜夺回整座城市选择明天的权利。',
+    dekEn: 'When the thirteenth bell erases her brother’s name, Mira and a Blackwing deserter must enter the tower before midnight and recover the city’s right to choose tomorrow.',
     categoryZh: '黑曜王庭纪事', categoryEn: 'OBSIDIAN COURT CHRONICLE', eraZh: '暮辉纪 427 年', eraEn: 'GLOAMING 427',
-    quoteZh: '钟声不是用来告诉我们时间。它们是在提醒时间，不要忘记我们。', quoteEn: 'Bells do not tell us the time. They remind time not to forget us.',
-    charactersZh: ['弥拉｜无龄见习守钟人', '奥德林｜失踪的第十三守钟人', '旧王｜沉睡在城下的名字', '黑羽首席｜黑羽审判庭首席'], charactersEn: ['Mira · ageless bell apprentice', 'Odren · missing thirteenth keeper', 'The Old King · a name beneath the city', 'First Blackwing · chief of the Blackwing Tribunal'],
+    quoteZh: '伙伴不是服从你的人。伙伴是在一家人吵到听不见时，仍肯说难听话的人。', quoteEn: 'A companion is not someone who obeys you, but someone who speaks when a family can no longer hear itself.',
+    charactersZh: ['弥拉｜无龄见习守钟人', '卡兰｜被钟选中的剧院少年', '莱温｜黑羽逃兵', '奥德林｜失踪的第十三守钟人', '旧王｜沉睡在城下的名字', '黑羽首席｜审判庭首席'], charactersEn: ['Mira · ageless bell apprentice', 'Kalan · theatre boy chosen by the bell', 'Levin · Blackwing deserter', 'Odren · missing thirteenth keeper', 'The Old King · a name beneath the city', 'First Blackwing · Tribunal chief'],
     sectionsZh: bellLongformZh,
     sectionsEn: [
       { title: 'A morning without morning', text: ['Mira woke beneath the same iron-blue night. The Court had known no dawn for two hundred and one years, yet every citizen still opened their curtains as if performing a ritual older than hope.', 'Twelve bells answered. The thirteenth tower stayed silent. On her master’s desk she found warm tea and a black feather pointing toward the world-rift.'] },
