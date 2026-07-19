@@ -28,7 +28,7 @@ export const universeStories: UniverseStory[] = [
     dekEn: 'When the bell keeper vanishes, an ageless girl must choose before midnight: ring the thirteenth bell, or trap the Court inside the same day forever.',
     categoryZh: '黑曜王庭纪事', categoryEn: 'OBSIDIAN COURT CHRONICLE', eraZh: '暮辉纪 427 年', eraEn: 'GLOAMING 427',
     quoteZh: '钟声不是用来告诉我们时间。它们是在提醒时间，不要忘记我们。', quoteEn: 'Bells do not tell us the time. They remind time not to forget us.',
-    charactersZh: ['弥拉｜无龄见习守钟人', '奥德林｜失踪的第十三守钟人', '旧王｜沉睡在城下的名字'], charactersEn: ['Mira · ageless bell apprentice', 'Odren · missing thirteenth keeper', 'The Old King · a name beneath the city'],
+    charactersZh: ['弥拉｜无龄见习守钟人', '奥德林｜失踪的第十三守钟人', '旧王｜沉睡在城下的名字', '黑羽首席｜黑羽审判庭首席'], charactersEn: ['Mira · ageless bell apprentice', 'Odren · missing thirteenth keeper', 'The Old King · a name beneath the city', 'First Blackwing · chief of the Blackwing Tribunal'],
     sectionsZh: bellLongformZh,
     sectionsEn: [
       { title: 'A morning without morning', text: ['Mira woke beneath the same iron-blue night. The Court had known no dawn for two hundred and one years, yet every citizen still opened their curtains as if performing a ritual older than hope.', 'Twelve bells answered. The thirteenth tower stayed silent. On her master’s desk she found warm tea and a black feather pointing toward the world-rift.'] },
