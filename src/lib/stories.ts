@@ -1,4 +1,5 @@
 import bellLongformZh from '../data/stories/the-bell-that-never-saw-dawn.zh.json';
+import wingedJudgeLongformZh from '../data/stories/the-thirteenth-trial-of-the-winged-judge.zh.json';
 
 export type StorySection = { title: string; text: string[] };
 
@@ -39,18 +40,13 @@ export const universeStories: UniverseStory[] = [
   },
   {
     slug: 'the-thirteenth-trial-of-the-winged-judge', chamber: 'obsidian-court',
-    image: '/images/universe/winged-judge-trial.webp', readTime: 8, productIds: [],
+    image: '/images/universe/winged-judge-trial.webp', readTime: 41, productIds: [],
     titleZh: '长翼审判官的第十三次审判', titleEn: 'The Winged Judge’s Thirteenth Trial',
     dekZh: '一位被雕成圣像的审判官醒来，发现自己必须审判两百年前的自己。', dekEn: 'A judge carved into a saint awakens and is ordered to pass sentence on the person he was two centuries ago.',
     categoryZh: '人物传记', categoryEn: 'CHARACTER STORY', eraZh: '暮辉纪 113—427 年', eraEn: 'GLOAMING 113–427',
     quoteZh: '石像最可怕的不是不会说话，而是只会重复别人写下的话。', quoteEn: 'The terror of a statue is not silence, but speaking only the words others wrote.',
-    charactersZh: ['赛勒斯｜长翼审判官', '薇尔｜石像修复师'], charactersEn: ['Caelis · the Winged Judge', 'Veyra · conservator of statues'],
-    sectionsZh: [
-      { title: '石头睁开眼睛', text: ['薇尔修复教堂圣像时，凿子下的石肤突然流出一滴黑色的血。长翼审判官赛勒斯低头看她，问今天是第几次审判。', '史书说赛勒斯两百年前自愿化作石像，但他记得的最后一刻，是审判庭强行把熔化的石膏灌进他的翅膀。'] },
-      { title: '被删掉的十二份判词', text: ['薇尔在像座中发现十二卷判词，每一卷都判赛勒斯有罪，罪名却各不相同：怜悯敌人、拒绝预言、记得太阳，甚至在梦里打开一扇门。', '第十三卷完全空白。纸的尽头印着今天的日期，以及薇尔的名字。'] },
-      { title: '审判自己', text: ['审判庭要求赛勒斯宣判过去的自己有罪，只有这样，王庭才会继续承认他的圣像。赛勒斯看着墙上那张被塑造成完美的脸，第一次觉得它比怪物更陌生。', '他写下的判词只有一句：被告因服从一个错误的世界而有罪。随后，他把羽翼从墙中拔出。'] },
-      { title: '飞离教堂的人', text: ['石翼无法飞翔，却能遮住整条街。当审判庭的箭雨落下，赛勒斯用翅膀护送薇尔离开。', '第二天，教堂只剩一块空白像座。人们开始把自己的秘密写在上面，因为他们相信，长翼审判官会在夜里回来，替所有不被允许的记忆作证。'] }
-    ],
+    charactersZh: ['赛勒斯｜长翼审判官', '薇尔｜圣像修复师', '主审执事｜审判庭代表'], charactersEn: ['Caelis · the Winged Judge', 'Veyra · conservator of statues', 'The Presiding Deacon · Tribunal representative'],
+    sectionsZh: wingedJudgeLongformZh,
     sectionsEn: [
       { title: 'Stone opens its eyes', text: ['While Veyra restored the cathedral saint, black blood welled beneath her chisel. Caelis looked down and asked which trial this was.', 'History claimed he chose to become stone. He remembered plaster being forced into his wings.'] },
       { title: 'Twelve erased verdicts', text: ['Inside the plinth were twelve verdicts, each finding him guilty of a different crime: mercy, refusing prophecy, remembering the sun.', 'The thirteenth page was blank except for today’s date and Veyra’s name.'] },
